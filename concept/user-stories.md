@@ -5,7 +5,8 @@
 ## Wer
 
 1 Wartende am Tram, Uber,
-2 ...
+2 notizzettel mit due date
+3 ...
 
 ## Was
 
@@ -15,7 +16,7 @@
 - pro notiz due date
 - pro notiz edit
 - notiz erfassen
-  - titel
+  - titel (länge?)
   - multiline text (sanitized?)
   - due date datum with date picker
   - due date sometime
@@ -27,7 +28,11 @@
 - filtern
   - alle
   - nicht abgeschlossene
-- theme change
+- theme change (light/dark)
+  - if no localstorage
+    - default by OS
+  - default overwritable by button click
+    - and store themename in local storage
 - Daten auf Server speichern
 
 ## Warum

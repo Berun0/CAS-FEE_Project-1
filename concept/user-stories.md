@@ -12,10 +12,13 @@
 
 - alle notizen listen
 - kann notizen nicht löschen
+  - andernfalls
+    - swipe to delete
+    - delete in edit mode
 - pro notiz check done mit done datum
 - pro notiz due date
 - pro notiz edit
-- notiz erfassen
+- notiz editieren
   - titel (länge?)
   - multiline text (sanitized?)
   - due date datum with date picker
@@ -30,9 +33,11 @@
   - nicht abgeschlossene
 - theme change (light/dark)
   - if no localstorage
-    - default by OS
-  - default overwritable by button click
-    - and store themename in local storage
+    - theme = theme by OS
+    - else theme = theme dark
+  - theme selectable by button click
+    - possible selection ≠ theme
+    - save theme to local storage
 - Daten auf Server speichern
 
 ## Warum

@@ -19,6 +19,7 @@ ol {
 }
 
 /* Themeing Variables */
+/* stylelint-disable */
 :root {
   --text: #fbfbfb;
   --app-bgrd: #19191a;
@@ -34,6 +35,7 @@ ol {
     radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
     no-repeat padding-box;
 }
+/* stylelint-enable */
 
 /* accessibility */
 .sr-only {

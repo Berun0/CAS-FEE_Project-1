@@ -1,3 +1,33 @@
+/* reset */
 * {
-    box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  line-height: 1;
+  border: none;
+  padding: 0;
 }
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+ul,
+ol {
+  list-style: none;
+}
+
+/* Themeing Variables */
+:root {
+--text: #FBFBFB;
+--app-bgrd: #19191A;
+--input-bgrd: 255, 255, 255, 0.95;
+--signal-1: 255, 214, 0, 1.0;
+--signal-2: 239, 3, 3, 0.66;
+--card-bgrd: 255, 255, 255;
+--card-text: #FBFBFB;
+--cta-outline: 255, 255, 255, 0.66;
+--placeholder: #A7A7A7;
+--cog_menurow-grad: 
+--window-grad:
+}
+

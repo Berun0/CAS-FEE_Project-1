@@ -1,15 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>DoNote App</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
-  <script src="scripts/index.js" type="module"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <title>DoNote App</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+      integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU="
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script src="scripts/index.js" type="module"></script>
 
-  <link rel="stylesheet" href="styles/index.css">
-</head>
-<body>
-<h1>Note App</h1>
-
-</body>
+    <link rel="stylesheet" href="styles/index.css" />
+  </head>
+  <body>
+    <section class="app">
+      <header>
+        <div class="settings" aria-hidden="true">
+          <button
+            class="settings"
+            aria-haspopup="true"
+            aria-expanded="false"
+            tabindex="0"
+            aria-label="Settings Menu."
+          >
+            <img src="./imgs/icon_cog.svg" alt="" />
+          </button>
+          <ul class="settingsMenu">
+            <li class="settingsMenu_item">
+              <a href="#" tabindex="0">
+                Light Mode <img src="./imgs/icon_sun.svg" alt="" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <main>
+        <h1 class="appTitle">DoNotes<span class="appTitle_count">(6)</span></h1>
+        <p class="status">Last modified: 5. May 2021 13:51</p>
+        <nav>
+          <select name="Sort" id="Sort" class="selection_sort">
+            <option value="Creationdate" class="sort_option">
+              Sort by Date Created
+            </option>
+            <option value="Duedate" class="sort_option">
+              Sort by Due Date
+            </option>
+            <option value="Priority" class="sort_option">
+              Sort by Note Priority
+            </option>
+          </select>
+          <input
+            type="checkbox"
+            aria-checked="false"
+            aria-label="Show done notes."
+          />
+          <a href="#newnote" class="sr-only">Create a new note.</a>
+        </nav>
+        <ul class="articleList">
+          <li class="articleList_row">
+            <div><img src="./imgs/icon_circle-outline.svg" alt="" /></div>
+          </li>
+          <li class="articleList_row"></li>
+          <li class="articleList_row"></li>
+          <li class="articleList_row"></li>
+        </ul>
+        <form>
+          <input
+            type="text"
+            id="newnote"
+            placeholder="Topic"
+            aria-label="Create Note"
+          /><button type="submit">Add</button>
+        </form>
+      </main>
+    </section>
+  </body>
 </html>

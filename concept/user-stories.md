@@ -56,6 +56,7 @@
     - possible selection ≠ theme
     - save theme to local storage
 - Notizen auf Server speichern
+- Notizen lokal speichern
 
 ## Warum
 

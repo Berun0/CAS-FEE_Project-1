@@ -7,10 +7,12 @@
   border: none;
   padding: 0;
 }
+
 a {
   color: inherit;
   text-decoration: inherit;
 }
+
 ul,
 ol {
   list-style: none;
@@ -18,26 +20,29 @@ ol {
 
 /* Themeing Variables */
 :root {
---text: #FBFBFB;
---app-bgrd: #19191A;
---input-bgrd: 255, 255, 255, 0.95;
---signal-1: 255, 214, 0, 1.0;
---signal-2: 239, 3, 3, 0.66;
---card-bgrd: 255, 255, 255;
---card-text: #FBFBFB;
---cta-outline: 255, 255, 255, 0.66;
---placeholder: #A7A7A7;
---cog_menurow-grad: 
---window-grad:
+  --text: #fbfbfb;
+  --app-bgrd: #19191a;
+  --input-bgrd: 255, 255, 255, 0.95;
+  --signal-1: 255, 214, 0, 1;
+  --signal-2: 239, 3, 3, 0.66;
+  --card-bgrd: 255, 255, 255;
+  --card-text: #fbfbfb;
+  --cta-outline: 255, 255, 255, 0.66;
+  --placeholder: #a7a7a7;
+  --cog_menurow-grad: #a7a7a7;
+  --text-window-grad: transparent
+    radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
+    no-repeat padding-box;
 }
 
 /* accessibility */
 .sr-only {
   position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0;
-	border: 0;
-	overflow: hidden;
-	clip: rect(0 0 0 0);}
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

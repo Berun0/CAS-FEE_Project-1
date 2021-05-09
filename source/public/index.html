@@ -1,79 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>DoNote App</title>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
-      integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU="
-      crossorigin="anonymous"
-      defer
-    ></script>
-    <script src="scripts/index.js" type="module"></script>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>DoNote App</title>
+		<!-- <script
+			src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+			integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU="
+			crossorigin="anonymous"
+			defer
+		></script> -->
+		<!-- <script src="scripts/index.js" type="module"></script> -->
+		<script src="scripts/index.js" defer></script>
 
-    <link rel="stylesheet" href="styles/index.css" />
-  </head>
-  <body>
-    <section class="app">
-      <header>
-        <div class="settings" aria-hidden="true">
-          <button
-            class="settings"
-            aria-haspopup="true"
-            aria-expanded="false"
-            tabindex="0"
-            aria-label="Settings Menu."
-          >
-            <img src="./imgs/icon_cog.svg" alt="" />
-          </button>
-          <ul class="settingsMenu">
-            <li class="settingsMenu_item">
-              <a href="#" tabindex="0">
-                Light Mode <img src="./imgs/icon_sun.svg" alt="" />
-              </a>
-            </li>
-          </ul>
-        </div>
-      </header>
-      <main>
-        <h1 class="appTitle">DoNotes<span class="appTitle_count">(6)</span></h1>
-        <p class="status">Last modified: 5. May 2021 13:51</p>
-        <nav>
-          <select name="Sort" id="Sort" class="selection_sort">
-            <option value="Creationdate" class="sort_option">
-              Sort by Date Created
-            </option>
-            <option value="Duedate" class="sort_option">
-              Sort by Due Date
-            </option>
-            <option value="Priority" class="sort_option">
-              Sort by Note Priority
-            </option>
-          </select>
-          <input
-            type="checkbox"
-            aria-checked="false"
-            aria-label="Show done notes."
-          />
-          <a href="#newnote" class="sr-only">Create a new note.</a>
-        </nav>
-        <ul class="articleList">
-          <li class="articleList_row">
-            <div><img src="./imgs/icon_circle-outline.svg" alt="" /></div>
-          </li>
-          <li class="articleList_row"></li>
-          <li class="articleList_row"></li>
-          <li class="articleList_row"></li>
-        </ul>
-        <form>
-          <input
-            type="text"
-            id="newnote"
-            placeholder="Topic"
-            aria-label="Create Note"
-          /><button type="submit">Add</button>
-        </form>
-      </main>
-    </section>
-  </body>
+		<link rel="stylesheet" href="styles/index.css" />
+	</head>
+	<body>
+		<section class="app">
+			<header>
+				<div class="settings" aria-hidden="true">
+					<button
+						class="settings"
+						aria-haspopup="true"
+						aria-expanded="false"
+						tabindex="0"
+						aria-label="Settings Menu."
+						onclick="openSettings()"
+					>
+						<svg
+							aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 22 22"
+						>
+							<path
+								d="M18.924,8.719a8.186,8.186,0,0,0-.707-1.713l1.367-2.875A11.109,11.109,0,0,0,17.87,2.416L14.994,3.783a8.229,8.229,0,0,0-1.713-.707L12.211.07a10.5,10.5,0,0,0-2.423,0L8.719,3.076a8.249,8.249,0,0,0-1.712.707L4.13,2.416A11.109,11.109,0,0,0,2.416,4.13L3.783,7.006a8.229,8.229,0,0,0-.707,1.713L.07,9.789a10.5,10.5,0,0,0,0,2.423l3.007,1.07a8.186,8.186,0,0,0,.707,1.713L2.417,17.87a11.049,11.049,0,0,0,1.715,1.715l2.875-1.367a8.229,8.229,0,0,0,1.713.707l1.07,3.007A11.305,11.305,0,0,0,11,22a11,11,0,0,0,1.211-.07l1.07-3.007a8.186,8.186,0,0,0,1.713-.707l2.875,1.367a11.049,11.049,0,0,0,1.715-1.715l-1.367-2.875a8.229,8.229,0,0,0,.707-1.713l3.007-1.07A11.305,11.305,0,0,0,22,11a11,11,0,0,0-.07-1.211ZM11,16.5A5.5,5.5,0,1,1,16.5,11,5.5,5.5,0,0,1,11,16.5ZM8.25,11A2.75,2.75,0,1,0,11,8.25,2.75,2.75,0,0,0,8.25,11Z"
+								fill="var(--c-text)"
+							/>
+						</svg>
+					</button>
+					<ul class="settingsMenu">
+						<li class="settingsMenu_item radio">
+							<div class="settingsMenu_radioWrapper">
+								<input
+									type="radio"
+									id="theme_a"
+									name="theme"
+									value="dark"
+									checked="checked"
+									tabindex="-1"
+								/>
+								<label for="theme_a">Dark Mode</label>
+							</div>
+							<div class="settingsMenu_radioWrapper">
+								<input
+									type="radio"
+									id="theme_b"
+									name="theme"
+									value="light"
+									tabindex="-1"
+								/>
+								<label for="theme_b">Light Mode</label>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<h1 class="appTitle">DoNotes<span class="appTitle_count">(6)</span></h1>
+				<p class="status">Last modified: 5. May 2021 13:51</p>
+			</header>
+			<main>
+				<nav class="filterRow">
+					<div class="btn_filter">
+						<span class="dropdownIcon" aria-hidden="true">&#9660;</span>
+						<select name="Sort" id="Sort">
+							<option value="Creationdate" class="sort_option">
+								Sort by Date Created
+							</option>
+							<option value="Duedate" class="sort_option">
+								Sort by Due Date
+							</option>
+							<option value="Priority" class="sort_option">
+								Sort by Note Priority
+							</option>
+						</select>
+					</div>
+					<div class="btn_filter">
+						<input id="chkCompleted" type="checkbox" />
+						<label for="chkCompleted" class="sideLabel sr-only"
+							>Add completed notes to List.</label
+						>
+					</div>
+					<a href="#newnote" class="sr-only" tabindex="-1"
+						>Create a new note.</a
+					>
+				</nav>
+				<ul class="articleList hideScrollbars" id="ArticleList">
+					<li class="articleList_row">
+						<div>
+							<img src="./imgs/icon_circle-outline.svg" alt="" />
+							<p class="articleDate">Today</p>
+						</div>
+					</li>
+					<li class="articleList_row">
+						<div>
+							<img src="./imgs/icon_check.svg" alt="" />
+							<p class="articleDate completed">7.5.2021</p>
+						</div>
+					</li>
+					<li class="articleList_row">
+						<div>
+							<img src="./imgs/icon_circle-outline.svg" alt="" />
+							<p class="articleDate">This Friday</p>
+						</div>
+					</li>
+					<li class="articleList_row">
+						<div>
+							<img src="./imgs/icon_circle-outline.svg" alt="" />
+							<p class="articleDate">26.6.2021</p>
+						</div>
+					</li>
+					<li class="articleList_row">
+						<div>
+							<img src="./imgs/icon_circle-outline.svg" alt="" />
+							<p class="articleDate">Today</p>
+						</div>
+					</li>
+					<li class="articleList_row">
+						<div>
+							<img src="./imgs/icon_circle-outline.svg" alt="" />
+							<p class="articleDate">Sometime</p>
+						</div>
+					</li>
+					<li class="articleList_row">
+						<div>
+							<img src="./imgs/icon_circle-outline.svg" alt="" />
+							<p class="articleDate">This Friday</p>
+						</div>
+					</li>
+					<li class="articleList_row">
+						<div>
+							<img src="./imgs/icon_circle-outline.svg" alt="" />
+							<p class="articleDate">26.6.2021</p>
+						</div>
+					</li>
+				</ul>
+				<form class="addItemRow">
+					<input
+						type="text"
+						id="newnote"
+						placeholder="Topic"
+						aria-label="Create Note"
+						autocomplete="off"
+						required="required"
+					/><button type="submit">Add</button>
+				</form>
+			</main>
+		</section>
+	</body>
 </html>

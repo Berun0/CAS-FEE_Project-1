@@ -1,14 +1,35 @@
-/* Themeing Variables */
 /* stylelint-disable */
+/* Grid Variables */
 :root {
-	/* colors */
+	--small: 4px;
+	--med: 10px;
+	--large: 24px;
+}
+/* Themeing Variables */
+body[theme="dark"] {
 	--c-text: #fbfbfb;
 	--c-app-bgrd: #19191a;
-	--c-input-bgrd: 255, 255, 255, 0.95;
-	--c-outline: rgba(255, 151, 101, 0.8);
+	--c-input-bgrd: #ffffffee;
+	--c-outline: #ff9765cc;
 	--c-signal-icon: #ffd600;
 	--c-signal-icon-contrast: #161616;
-	--c-signal-trash: 164, 9, 10; /* rgba value created in code */
+	--c-signal-trash: #a4090a;
+	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
+	--c-card-text: #fbfbfb;
+	--c-btn-border: #ffffff80;
+	--c-placeholder: #a7a7a7;
+	--c-browser-window-grad: transparent
+		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
+		no-repeat padding-box;
+}
+body[theme="light"] {
+	--c-text: #fbfbfb;
+	--c-app-bgrd: #19191a30;
+	--c-input-bgrd: #ffffffee;
+	--c-outline: #ff9765cc;
+	--c-signal-icon: #a4090aff;
+	--c-signal-icon-contrast: #fbfbfb;
+	--c-signal-trash: #a4090a;
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
 	--c-card-text: #fbfbfb;
 	--c-btn-border: rgba(255, 255, 255, 0.5);
@@ -16,10 +37,6 @@
 	--c-browser-window-grad: transparent
 		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
 		no-repeat padding-box;
-	/* grid */
-	--small: 4px;
-	--med: 10px;
-	--large: 24px;
 }
 
 /* RESETS */
@@ -73,7 +90,7 @@ button {
 }
 
 input[type="text"] {
-	background-color: rgba(var(--c-input-bgrd));
+	background-color: var(--c-input-bgrd);
 	padding: var(--small);
 }
 
@@ -114,7 +131,7 @@ body {
 	height: 100vh;
 }
 
-section.app {
+.main {
 	background: var(--c-app-bgrd);
 	color: var(--c-text);
 	padding: var(--large) 2vw;
@@ -134,6 +151,13 @@ section.app {
 
 .hideScrollbars::-webkit-scrollbar {
 	display: none; /* Chrome, Safari and Opera */
+}
+
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 
 /***** APP COMPONENTS *****/
@@ -167,8 +191,10 @@ button.settings {
 .settingsMenu {
 	display: inline-block;
 	position: absolute;
+	z-index: 1;
 	right: 0;
 	top: 30px;
+	width: 155px;
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.4s cubic-bezier(0.392, -0.547, 0.07, 4.535);
@@ -181,6 +207,8 @@ button.settings {
 
 .settingsMenu_item {
 	display: flex;
+	padding: calc(var(--med) + var(--small)) var(--large);
+	background-color: var(--c-signal-trash);
 }
 
 .settingsMenu_item.radio {
@@ -189,16 +217,9 @@ button.settings {
 
 .settingsMenu_radioWrapper {
 	display: flex;
-	background-color: rgb(var(--c-signal-trash));
-	padding: calc(var(--med) + var(--small)) var(--large);
-}
-
-.settingsMenu_radioWrapper > input {
-	margin-right: var(--med);
-}
-
-.settingsMenu_radioWrapper > label {
-	width: 80px;
+	justify-content: space-between;
+	align-items: center;
+	height: 1.5em;
 }
 
 /*
@@ -239,11 +260,10 @@ Filter
 Article List
 */
 .articleList {
-	max-height: 80vh;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 	padding: 2vw;
-	padding-bottom: calc(var(--large) * 4);
+	max-height: calc(100vh - var(--large) - 46px - 40px - 96px - 2vw);
 
 	/* extend boundingbox to allow for overflow of hover-scaled articleList_row
 	margin-left: -2vw;
@@ -256,10 +276,13 @@ Article List
 
 .articleList_row {
 	padding: var(--med);
-	margin: 0 0 calc(var(--med) * 2);
 	background-color: rgba(var(--c-card-bgrd), 0.16);
 	transition: transform 0.3s;
 	border-radius: var(--med);
+	display: flex;
+}
+li.articleList_row:not(:last-child) {
+	margin: 0 0 calc(var(--med) * 2);
 }
 
 .articleList_row:hover {
@@ -268,8 +291,23 @@ Article List
 	transform: scale(1.03);
 }
 
-.articleDate.completed {
+.articleList_meta {
+	width: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+	padding-right: var(--med);
+}
+
+.articleList_meta > input:checked ~ label {
 	color: var(--c-signal-icon);
+}
+
+.articleList_text {
+	width: calc(100% - 100px);
+	flex: 1 1 auto;
 }
 
 /*
@@ -327,15 +365,27 @@ input:focus + .sideLabel::before {
 	.settings {
 		margin-top: var(--small);
 	}
+
+	.articleList {
+		max-height: calc(100vh - var(--large) - 40px - 96px - 2vw);
+	}
 }
 
 /* > ipad portrait */
 @media screen and (min-width: 769px) {
-	section.app {
+	.main {
 		height: 90vh;
 	}
 
 	.articleList {
-		max-height: 66vh;
+		max-height: calc(90vh - var(--large) - 46px - 40px - 96px - 2vw);
+	}
+
+	.articleList_meta {
+		width: 20%;
+	}
+
+	.articleList_text {
+		width: 80%;
 	}
 }

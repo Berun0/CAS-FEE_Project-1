@@ -1,3 +1,6 @@
+// DOM Strings
+const bodyEl = document.body;
+
 function openSettings() {
 	// click on gear icon opens settings-menu and toggles tabindex of menu-items between -1 and 0
 	const settingsMenu = document.querySelector(".settingsMenu");
@@ -8,4 +11,9 @@ function openSettings() {
 			? c.setAttribute("tabindex", "0")
 			: c.setAttribute("tabindex", "-1");
 	});
+}
+
+function setTheme(inpEl) {
+	const theme = inpEl.value;
+	document.body.setAttribute("theme", theme);
 }

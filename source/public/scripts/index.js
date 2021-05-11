@@ -1,5 +1,4 @@
 // DOM Strings
-const bodyEl = document.body;
 
 function openSettings() {
 	// click on gear icon opens settings-menu and toggles tabindex of menu-items between -1 and 0

@@ -77,6 +77,7 @@ Architektur
     [ ] date printed DD.MM.YYYY
     [ ] hidden read only creation date
 - notiz hinzufügen
+
   - inputfield + add btn
     - opens edit mode with title filled in
   - btn done in edit mode
@@ -88,6 +89,7 @@ Architektur
   - btn cancel in edit mode
     - no save new note
     - closes edit mode - jumps back to list mode
+
 - theme change (light/dark) - if no localstorage - theme = theme by OS - else theme = theme dark - theme selectable by button click - possible selection ≠ theme - save theme to local storage
   [ ] Notizen auf Server speichern
   [ ] Notizen lokal speichern

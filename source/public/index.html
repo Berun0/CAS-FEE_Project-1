@@ -271,27 +271,42 @@
 								reprehenderit sunt vel sed, illo, autem neque nesciunt?
 								Architecto harum necessitatibus dolor suscipit.
 							</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-								vero eligendi sed, repellat illo, maxime dolores facere et
-								aspernatur iure reprehenderit harum ea debitis. Sit, non
-								repellat? Minus, earum consequatur!
-							</p>
+							<p class="articleTeaser"></p>
 						</div>
 					</li>
 				</ol>
-				<form class="addItemRow">
+
+				<form class="addItemRow" js-submitform>
 					<input
 						type="text"
 						id="newnote"
 						placeholder="Topic"
 						aria-label="Create Note"
 						autocomplete="off"
-						required="required"
 					/><button type="submit">Add</button>
 				</form>
 			</section>
 		</main>
-		<aside class="modal"></aside>
+		<aside class="modal main hidden">
+			<form action="">
+				<label for="">Title</label>
+				<input type="text" js-modalField-title />
+				<label for="">Description</label>
+				<textarea name="" cols="30" rows="10"></textarea>
+				<p>Importance</p>
+				<label for="">none</label>
+				<input type="radio" name="prio" />
+				<label for="">1</label>
+				<input type="radio" name="prio" />
+				<label for="">2</label>
+				<input type="radio" name="prio" />
+				<label for="">3</label>
+				<input type="radio" name="prio" />
+				<label for="datepicker">Date</label>
+				<input type="date" placeholder="sometime" name="datepicker" />
+				<button class="btnCancel">Cancel</button>
+				<button type="submit" class="btnSave">Save</button>
+			</form>
+		</aside>
 	</body>
 </html>

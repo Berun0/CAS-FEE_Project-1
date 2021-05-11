@@ -62,14 +62,8 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-button {
-	background: transparent;
-}
-
 textarea,
-input[type="text"],
-input[type="button"],
-input[type="submit"],
+input,
 select,
 option,
 label,
@@ -89,14 +83,23 @@ button {
 	color: inherit;
 }
 
-input[type="text"] {
-	background-color: var(--c-input-bgrd);
-	padding: var(--small);
+button {
+	background: transparent;
+	padding: var(--med);
+	font: normal var(--large) / 1.4 sans-serif;
 }
 
-input[type="text"]:focus,
-input[type="button"]:focus,
-input[type="submit"]:focus,
+input[type="checkbox"],
+input[type="radio"],
+input[type="text"],
+input[type="date"],
+textarea {
+	background-color: var(--c-input-bgrd);
+	padding: var(--small);
+	color: var(--c-signal-icon-contrast);
+}
+
+input:focus,
 textarea:focus,
 button:focus,
 select:focus,
@@ -129,6 +132,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	overflow: hidden; /* to ease-in the modal */
 }
 
 .main {
@@ -160,6 +164,10 @@ body {
 	width: 100%;
 }
 
+.hidden {
+	display: none;
+}
+
 /***** APP COMPONENTS *****/
 
 .appTitle {
@@ -186,6 +194,7 @@ button.settings {
 	height: 6vw;
 	max-width: var(--large);
 	max-height: var(--large);
+	padding: 0;
 }
 
 .settingsMenu {
@@ -333,18 +342,42 @@ Add Item Bar
 	border-bottom-left-radius: calc(var(--med) - 2px);
 	width: 60%;
 	max-width: 400px;
-	color: var(--c-signal-icon-contrast);
 }
 
 .addItemRow button {
-	padding: var(--med);
 	border-top-right-radius: calc(var(--med) - 2px);
 	border-bottom-right-radius: calc(var(--med) - 2px);
 	color: var(--c-signal-icon-contrast);
 	background-color: var(--c-signal-icon);
 }
 
+/*
+MODAL
+*/
+.modal {
+	transition: 2s ease;
+	transform: translateY(0);
+}
+.modal.hidden {
+	transform: translateY(100vh);
+}
+
+.btnCancel {
+	border-top-left-radius: calc(var(--med) - 2px);
+	border-bottom-left-radius: calc(var(--med) - 2px);
+	background-color: var(--c-input-bgrd);
+	color: var(--c-signal-icon-contrast);
+}
+
+.btnSave {
+	border-top-right-radius: calc(var(--med) - 2px);
+	border-bottom-right-radius: calc(var(--med) - 2px);
+	background-color: var(--c-signal-icon);
+	color: var(--c-signal-icon-contrast);
+}
+
 /* Custom Checkboxes */
+/* ... */
 
 /* keyboard-focus for checkboxes */
 input:focus + .sideLabel::before {

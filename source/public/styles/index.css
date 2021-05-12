@@ -290,6 +290,7 @@ Article List
 	border-radius: var(--med);
 	display: flex;
 }
+
 li.articleList_row:not(:last-child) {
 	margin: 0 0 calc(var(--med) * 2);
 }
@@ -355,21 +356,24 @@ Add Item Bar
 MODAL
 */
 .modal {
-	transition: 2s ease;
-	transform: translateY(0);
-}
-.modal.hidden {
-	transform: translateY(100vh);
+	transition: transform 0.3s ease;
+	transform: translateY(300px);
+	display: none;
 }
 
-.btnCancel {
+.modal.open {
+	transform: translateY(0px);
+	display: block;
+}
+
+.btn_cancel {
 	border-top-left-radius: calc(var(--med) - 2px);
 	border-bottom-left-radius: calc(var(--med) - 2px);
 	background-color: var(--c-input-bgrd);
 	color: var(--c-signal-icon-contrast);
 }
 
-.btnSave {
+.btn_save {
 	border-top-right-radius: calc(var(--med) - 2px);
 	border-bottom-right-radius: calc(var(--med) - 2px);
 	background-color: var(--c-signal-icon);
@@ -377,6 +381,7 @@ MODAL
 }
 
 /* Custom Checkboxes */
+
 /* ... */
 
 /* keyboard-focus for checkboxes */

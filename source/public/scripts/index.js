@@ -28,11 +28,6 @@ function setTheme(inpEl) {
 function modalOpen(e) {
 	e.preventDefault();
 	main.classList.toggle("hidden");
-	modal.classList.toggle("hidden");
+	modal.classList.toggle("open");
 	modalFieldTitle.value = addForm.querySelector("input").value;
 }
-/*
-	// slide up modal
-	// disable main
-	// e.preventDefault();
-*/

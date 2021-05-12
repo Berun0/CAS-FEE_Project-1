@@ -1,3 +1,5 @@
+<!-- @format -->
+
 # User Stories /index.html
 
 = wer will warum was erreichen
@@ -93,10 +95,8 @@ Architektur
 - theme change (light/dark) - if no localstorage - theme = theme by OS - else theme = theme dark - theme selectable by button click - possible selection ≠ theme - save theme to local storage
   [ ] Notizen auf Server speichern
   [ ] Notizen lokal speichern
-  <<<<<<< HEAD
-  =======
+
 - ? kann notizen nicht löschen - andernfalls - pro listed notiz swipe to reveal delete button - delete in edit mode
-  > > > > > > > 0ca3b63c2f49a96fe4327b94533a9397ff44744d
 
 # Interaktionen
 

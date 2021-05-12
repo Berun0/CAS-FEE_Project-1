@@ -283,29 +283,35 @@
 						placeholder="Topic"
 						aria-label="Create Note"
 						autocomplete="off"
+						aria-required="true"
 					/><button type="submit">Add</button>
 				</form>
 			</section>
 		</main>
-		<aside class="modal main hidden">
+		<aside class="modal main">
 			<form action="">
 				<label for="">Title</label>
-				<input type="text" js-modalField-title />
+				<input type="text" js-modalField-title aria-required="true" />
 				<label for="">Description</label>
-				<textarea name="" cols="30" rows="10"></textarea>
+				<textarea name="" cols="30" rows="10" aria-required="false"></textarea>
 				<p>Importance</p>
 				<label for="">none</label>
-				<input type="radio" name="prio" />
+				<input type="radio" name="prio" aria-required="false" />
 				<label for="">1</label>
-				<input type="radio" name="prio" />
+				<input type="radio" name="prio" aria-required="false" />
 				<label for="">2</label>
-				<input type="radio" name="prio" />
+				<input type="radio" name="prio" aria-required="false" />
 				<label for="">3</label>
-				<input type="radio" name="prio" />
+				<input type="radio" name="prio" aria-required="false" />
 				<label for="datepicker">Date</label>
-				<input type="date" placeholder="sometime" name="datepicker" />
-				<button class="btnCancel">Cancel</button>
-				<button type="submit" class="btnSave">Save</button>
+				<input
+					type="date"
+					placeholder="sometime"
+					name="datepicker"
+					aria-required="false"
+				/>
+				<button class="btn_cancel">Cancel</button>
+				<button type="submit" class="btn_save">Save</button>
 			</form>
 		</aside>
 	</body>

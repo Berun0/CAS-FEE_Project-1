@@ -1,10 +1,14 @@
+/** @format */
+
 // DOM elements
 const settingsMenu = document.querySelector(".settingsMenu");
 const settingsInp = settingsMenu.querySelectorAll("input");
 const main = document.querySelector("main");
 const modal = document.querySelector("aside");
-const addForm = document.querySelector("[js-submitform]");
-const modalFieldTitle = document.querySelector("[js-modalField-title]");
+const addForm = document.querySelector("[js-submitAddItem]");
+const modalForm = document.querySelector("[js-modalform]");
+const modalFieldTitle = modalForm.querySelector("[js-modalField-title]");
+const modalSubmitBtn = modalForm.querySelector("button[type='submit']");
 
 // DOM events
 addForm.addEventListener("submit", modalOpen);
@@ -30,4 +34,5 @@ function modalOpen(e) {
 	main.classList.toggle("hidden");
 	modal.classList.toggle("open");
 	modalFieldTitle.value = addForm.querySelector("input").value;
+	modalSubmitBtn.focus();
 }

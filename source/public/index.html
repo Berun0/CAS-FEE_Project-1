@@ -6,6 +6,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta property= “og:image” content =
+		“https://brunobuergi.com/images/og_home.jpg”/>
 		<title>DoNote App</title>
 		<!-- <script
 			src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
@@ -19,8 +21,14 @@
 		<link rel="stylesheet" href="styles/index.css" />
 	</head>
 	<body theme="dark">
-		<main class="main">
+		<main class="main container">
 			<header>
+				<div>
+					<h1 class="appTitle">
+						DoNotes<span class="appTitle_count">(6)</span>
+					</h1>
+					<p class="status">Last modified: 5. May 2021 13:51</p>
+				</div>
 				<div class="settings" aria-hidden="true">
 					<button
 						class="settings"
@@ -68,15 +76,13 @@
 						</li>
 					</ul>
 				</div>
-				<h1 class="appTitle">DoNotes<span class="appTitle_count">(6)</span></h1>
-				<p class="status">Last modified: 5. May 2021 13:51</p>
 			</header>
 			<section>
 				<h2 class="sr-only">Panel with all notes listed:</h2>
 				<nav class="filterRow">
-					<h3 class="sr-only">Sort options for list:</h3>
-					<div class="btn_filter">
+					<div class="btn btn_filter">
 						<span class="dropdownIcon" aria-hidden="true">&#9660;</span>
+						<h3 class="sr-only">Sort options for list:</h3>
 						<select name="Sort" id="Sort">
 							<option value="Creationdate" class="sort_option">
 								Sort by Date Created
@@ -89,7 +95,7 @@
 							</option>
 						</select>
 					</div>
-					<div class="btn_filter">
+					<div class="btn btn_filter">
 						<h3 class="sr-only">Filter option for list:</h3>
 						<input
 							id="chkCompleted"
@@ -281,7 +287,7 @@
 					</li>
 				</ol>
 
-				<form class="addItemRow" js-submitAddItem>
+				<form class="ctaRow container" js-submitAddItem>
 					<input
 						type="text"
 						id="newnote"
@@ -289,11 +295,11 @@
 						aria-label="Input Title of new Note."
 						autocomplete="off"
 						aria-required="true"
-					/><button type="submit">Add</button>
+					/><button type="submit" class="btn btn_add">Add</button>
 				</form>
 			</section>
 		</main>
-		<aside class="modal main">
+		<aside class="modal main container">
 			<form action="" js-modalform class="noteEditForm">
 				<div class="formInputs scrollable hideScrollbars">
 					<label class="title"
@@ -375,7 +381,7 @@
 					/>
 				</div>
 
-				<div class="ctaRow">
+				<div class="ctaRow container">
 					<button class="btn_cancel" tabindex="6">Cancel</button>
 					<button autofocus type="submit" class="btn_save" tabindex="1">
 						Save

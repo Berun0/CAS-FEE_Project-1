@@ -1,9 +1,10 @@
 /** @format */
 
 :root {
-	--small: 4px;
-	--med: 10px;
-	--large: 24px;
+	--small: 0.25em;
+	--med: 0.625em;
+	--large: 1.5em;
+	--ctaRow-height: 4.5rem;
 }
 /* stylelint-disable */
 
@@ -14,8 +15,8 @@ body[theme="dark"] {
 	--c-input-bgrd: #ffffff79;
 	--c-input-contrast: #161616;
 	--c-outline: #ff9765cc;
-	--c-signal-icon: #a4090aff;
-	--c-signal-icon-contrast: #fbfbfb;
+	--c-signal-icon: #7fffd4;
+	--c-signal-icon-contrast: #161616;
 	--c-signal-trash: #a4090a;
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
 	--c-card-text: #fbfbfb;
@@ -24,11 +25,12 @@ body[theme="dark"] {
 	--c-browser-window-grad: transparent
 		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
 		no-repeat padding-box;
+	--c-cta-row: #19191a;
 }
 body[theme="light"] {
 	--c-text: #fbfbfb;
 	--c-app-bgrd: #19191a30;
-	--c-input-bgrd: #ffffffee;
+	--c-input-bgrd: #ffffff94;
 	--c-input-contrast: #161616;
 	--c-outline: #ff9765cc;
 	--c-signal-icon: #ffd600;
@@ -37,17 +39,18 @@ body[theme="light"] {
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
 	--c-card-text: #fbfbfb;
 	--c-btn-border: rgba(255, 255, 255, 0.5);
-	--c-placeholder: #fbfbfb;
+	--c-placeholder: #333333;
 	--c-browser-window-grad: transparent
 		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
 		no-repeat padding-box;
+	--c-cta-row: #053680;
 }
 
 /* RESETS */
 * {
 	margin: 0;
 	box-sizing: border-box;
-	font-family: sans-serif;
+	font-family: inherit;
 	line-height: 1;
 	border: none;
 	padding: 0;
@@ -56,9 +59,6 @@ body[theme="light"] {
 a {
 	color: inherit;
 	text-decoration: inherit;
-}
-h1 {
-	margin-left: -0.04em;
 }
 
 html {
@@ -86,22 +86,55 @@ button {
 	font-family: inherit;
 	font-size: 100%;
 	color: inherit;
+	font-weight: inherit;
 }
 
 /* BASE STYLES */
-button {
-	background: transparent;
-	padding: var(--med) 1em;
-	font: normal var(--large) / 1 sans-serif;
-	border-radius: 20px;
+@font-face {
+	font-family: "nunito sans";
+	src: url("../fonts/nunito-sans-400.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: auto;
+}
+@font-face {
+	font-family: "nunito sans";
+	src: url("../fonts/nunito-sans-800.woff") format("woff");
+	font-weight: 800;
+	font-style: normal;
+	font-display: auto;
+}
+@font-face {
+	font-family: "nunito sans";
+	src: url("../fonts/nunito-sans-300.woff") format("woff");
+	font-weight: 300;
+	font-style: normal;
+	font-display: auto;
+}
+
+html {
+	font-size: 16px;
+	font-family: "nunito sans", sans-serif;
+	font-weight: 300;
+}
+
+h1,
+h2 {
+	margin-left: -0.04em;
+	font-size: 1.4em;
+	font-weight: 700;
+}
+h1 {
+	font-weight: 300;
 }
 
 input,
 textarea {
 	background-color: var(--c-input-bgrd);
 	border-radius: 20px;
-	padding: var(--med) 1em;
-	border: 1px solid var(--c-placeholder);
+	padding: 0.5em 1em;
+	border: 1px solid var(--c-btn-border);
+	color: var(--c-placeholder);
 }
 
 input[type="date"] {
@@ -113,7 +146,7 @@ input[type="date"] {
 
 input[type="checkbox"],
 input[type="radio"] {
-	padding: 0.7em;
+	padding: 0.6em;
 }
 
 input[type="checkbox"]:checked,
@@ -132,7 +165,6 @@ input[type="radio"]:checked::after {
 	font-size: 1.5em;
 	position: absolute;
 	left: 0.15em;
-	right: 0;
 }
 
 input:focus,
@@ -169,21 +201,28 @@ ol {
 /* APP SCAFFOLDING */
 body {
 	background: var(--c-browser-window-grad);
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	height: 100vh;
 	overflow: hidden; /* to ease-in the modal */
+	display: flex;
+}
+
+header,
+nav {
+	height: 4rem;
+	padding: 0 2vw;
+	display: flex;
+	align-items: center;
+}
+
+.container {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 .main {
 	background: var(--c-app-bgrd);
 	color: var(--c-text);
-	padding: var(--large) 2vw;
-	width: 100%;
-	max-width: 800px;
-	height: 100%;
-	max-height: 1400px;
 	position: relative; /* eg for Add Item Bar */
 	overflow: hidden;
 }
@@ -216,14 +255,50 @@ body {
 
 /***** APP COMPONENTS *****/
 
-.appTitle {
-	font-size: calc(var(--large) + var(--small));
-	margin-bottom: var(--small);
+.status {
+	font-size: 0.75em;
 }
 
-.status {
-	font-size: calc(var(--med) + var(--small));
-	margin: 0 0 var(--med);
+/*
+Buttons
+*/
+
+button,
+.btn {
+	background: transparent;
+	font: normal 1em / 1 sans-serif;
+	border-radius: 20px;
+	padding: 0 1em;
+	height: 2.2em;
+}
+
+.btn_cancel {
+	background-color: var(--c-input-bgrd);
+	color: var(--c-input-contrast);
+}
+
+.btn_save {
+	background-color: var(--c-signal-icon);
+	color: var(--c-signal-icon-contrast);
+	border: 1px solid var(--c-placeholder);
+}
+.btn_add {
+	background-color: var(--c-signal-icon);
+	color: var(--c-cta-row);
+	margin: 0 2px;
+}
+
+.btn_filter {
+	border: 1px solid var(--c-btn-border);
+	border-radius: calc(var(--med) - 2px);
+	margin-right: var(--med);
+	transition: transform 0.3s;
+	display: flex;
+	align-items: center;
+}
+
+.btn_filter:hover {
+	transform: scale(1.1);
 }
 
 /*
@@ -236,7 +311,6 @@ Settings
 
 button.settings {
 	position: static;
-	width: 6vw;
 	height: 100%;
 	min-width: 20px;
 	max-width: var(--large);
@@ -251,8 +325,8 @@ button.settings {
 	position: absolute;
 	z-index: 1;
 	right: 0;
-	top: 30px;
-	width: 165px;
+	top: 2rem;
+	width: 10.1rem;
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.4s cubic-bezier(0.392, -0.547, 0.07, 4.535);
@@ -285,28 +359,9 @@ button.settings {
 Filter
 */
 .filterRow {
+	border-top: 1px solid rgba(var(--c-card-bgrd), 0.16);
+	background-color: rgba(var(--c-card-bgrd), 0.05);
 	display: flex;
-	justify-content: flex-end;
-	margin-bottom: calc(var(--med) + var(--small));
-}
-
-.btn_filter {
-	padding: 0 var(--med);
-	border: 1px solid var(--c-btn-border);
-	border-radius: calc(var(--med) - 2px);
-	margin-left: var(--med);
-	transition: transform 0.3s;
-	display: flex;
-	align-items: center;
-}
-
-.btn_filter:hover {
-	transform: scale(1.1);
-}
-
-.btn_filter select,
-.btn_filter label {
-	line-height: 2.4em;
 }
 
 /* awkward solution to a themeable (=svg or font in html) caret down icon in the sort option list: */
@@ -319,8 +374,8 @@ Filter
 Article List
 */
 .articleList {
-	padding: 2vw;
-	max-height: calc(100vh - var(--large) - 46px - 40px - 96px - 2vw);
+	height: calc(100vh - 8rem - var(--ctaRow-height));
+	padding: 0.5em 2vw;
 	background-color: rgba(var(--c-card-bgrd), 0.05);
 	border-radius: calc(var(--small));
 }
@@ -333,7 +388,7 @@ Article List
 	display: flex;
 }
 
-li.articleList_row:not(:last-child) {
+li.articleList_row {
 	margin: 0 0 calc(var(--med) * 2);
 }
 
@@ -344,13 +399,18 @@ li.articleList_row:not(:last-child) {
 }
 
 .articleList_meta {
-	width: 100px;
+	min-width: 8rem;
 	align-self: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
 	padding-right: var(--med);
+}
+
+.articleList_text {
+	align-self: center;
+	width: calc(100% - 9rem);
 }
 
 .articleList_meta input {
@@ -361,12 +421,6 @@ li.articleList_row:not(:last-child) {
 	color: var(--c-signal-icon);
 }
 
-.articleList_text {
-	align-self: center;
-	width: calc(100% - 100px);
-	flex: 1 1 auto;
-}
-
 .articleList_text > h2 {
 	margin-bottom: var(--small);
 }
@@ -374,76 +428,53 @@ li.articleList_row:not(:last-child) {
 /*
 Add Item Bar
 */
-.addItemRow {
-	position: absolute;
+.ctaRow {
+	position: fixed;
 	bottom: 0;
 	left: 0; /* take the whole width of .app for a clean drop-shadow */
 	right: 0;
 	z-index: 2; /* just above .articleList_row:hover */
-	background-color: var(--c-app-bgrd);
-	box-shadow: 0 -16px 17px #19191a45;
-	padding: var(--large) 2vw; /* l/r same as .app */
+	height: var(--ctaRow-height);
+	background-color: var(--c-cta-row);
+	padding: 0 2vw; /* l/r same as .app */
 	display: flex;
 	justify-content: center;
-	font: normal var(--large) / 1.4 sans-serif;
-}
-
-.addItemRow input {
-	padding: var(--med);
-	width: 60%;
-	max-width: 400px;
-	border-bottom-right-radius: 0;
-	border-top-right-radius: 0;
-}
-
-.addItemRow button {
-	padding: var(--med) calc(var(--large) - var(--small)) var(--med) var(--med);
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-	color: var(--c-signal-icon-contrast);
-	background-color: var(--c-signal-icon);
+	align-items: center;
+	font: normal 1rem / 1 sans-serif;
 }
 
 /*
 MODAL
 */
 .modal {
-	transition: transform 0.3s ease;
-	transform: translateY(300px);
+	/* transition: transform 0.3s ease;
+	transform: translateY(300px); */
 	display: none;
 }
 
 .modal.open {
-	transform: translateY(0);
+	/* transform: translateY(0); */
 	display: block;
 }
 
-.modal .noteEditForm {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
-}
-
-.noteEditForm {
+.noteEditForm .formInputs {
+	margin-top: var(--large);
+	height: calc(100vh - var(--large) - var(--ctaRow-height));
+	max-height: 700px;
 	max-width: 640px;
 	margin: 0 auto;
-}
-
-.noteEditForm .formInputs {
 	display: grid;
 	align-content: start;
-	grid-template-columns: 1fr 110px 210px;
+	grid-template-columns: 1fr 6.125rem 13.125rem;
 	gap: var(--large) 0;
 	grid-template-areas:
 		"Title Title Title"
 		"Description Description Description"
 		"empty Label_1 Content_1"
 		"empty Label_2 Content_2";
-	padding: 2vw;
+	padding: var(--large) 2vw;
 	background-color: rgba(var(--c-card-bgrd), 0.05);
 	border-radius: calc(var(--small));
-	font-size: 1.3rem;
 }
 
 .noteEditForm .title {
@@ -490,6 +521,7 @@ MODAL
 
 .noteEditForm .content_1 input::before {
 	position: absolute;
+	top: 0.2em;
 	font-size: 90%;
 	font-weight: bold;
 	content: attr(value);
@@ -509,70 +541,52 @@ MODAL
 	grid-area: Content_2;
 }
 
-.noteEditForm .ctaRow {
-	display: flex;
-	justify-content: space-between;
-	position: relative;
-	z-index: 1;
-	box-shadow: 0 -16px 17px #19191a45;
-	padding: var(--large) 0;
+/*
+MEDIA QUERIES
+*/
+
+/* root size */
+@media screen and (min-width: 401px) {
+	html {
+		font-size: 4vw;
+	}
 }
 
-.btn_cancel {
-	background-color: var(--c-input-bgrd);
-	color: var(--c-input-contrast);
-}
-
-.btn_save {
-	background-color: var(--c-signal-icon);
-	color: var(--c-signal-icon-contrast);
-	border: 1px solid var(--c-placeholder);
-}
-
-/* Custom Checkboxes */
-
-/* ... */
-
-/* keyboard-focus for checkboxes */
-input:focus + .sideLabel::before {
-	outline: var(--small) solid var(--c-outline);
+@media screen and (min-width: 501px) {
+	html {
+		font-size: 20px;
+	}
 }
 
 /* small landscape devices */
-@media (max-width: 768px) and (orientation: landscape) {
-	.appTitle,
-	.status {
-		display: none;
-	}
-
-	.filterRow {
-		justify-content: flex-start;
-	}
-
-	.settings {
-		margin-top: var(--small);
+@media screen and (min-aspect-ratio: 2/1) and (max-height: 639px) {
+	header {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		border: 0;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
 	}
 
 	.articleList {
-		max-height: calc(100vh - var(--large) - 40px - 96px - 2vw);
+		height: calc(100vh - 4rem - var(--ctaRow-height));
 	}
 }
 
-/* > ipad portrait */
-@media screen and (min-width: 769px) {
-	.main {
-		height: 90vh;
+/* limit app height for very high screens */
+@media screen and (min-height: 1300px) {
+	body {
+		align-items: center;
+	}
+
+	.ctaRow {
+		position: static;
 	}
 
 	.articleList {
-		max-height: calc(90vh - var(--large) - 46px - 40px - 96px - 2vw);
-	}
-
-	.articleList_meta {
-		width: 20%;
-	}
-
-	.articleList_text {
-		width: 80%;
+		height: calc(1300px - 8rem - var(--ctaRow-height));
 	}
 }

@@ -11,7 +11,7 @@
 body[theme="dark"] {
 	--c-text: #fbfbfb;
 	--c-app-bgrd: #19191a;
-	--c-input-bgrd: #ffffffef;
+	--c-input-bgrd: #ffffff79;
 	--c-input-contrast: #161616;
 	--c-outline: #ff9765cc;
 	--c-signal-icon: #a4090aff;
@@ -20,7 +20,7 @@ body[theme="dark"] {
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
 	--c-card-text: #fbfbfb;
 	--c-btn-border: #ffffff80;
-	--c-placeholder: #a7a7a7;
+	--c-placeholder: #fbfbfb;
 	--c-browser-window-grad: transparent
 		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
 		no-repeat padding-box;
@@ -37,7 +37,7 @@ body[theme="light"] {
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
 	--c-card-text: #fbfbfb;
 	--c-btn-border: rgba(255, 255, 255, 0.5);
-	--c-placeholder: #a7a7a7;
+	--c-placeholder: #fbfbfb;
 	--c-browser-window-grad: transparent
 		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
 		no-repeat padding-box;
@@ -73,10 +73,10 @@ select,
 option,
 label,
 button {
-	/* -moz-appearance: none;
+	-moz-appearance: none;
 	-webkit-appearance: none;
 	-ms-appearance: none;
-	appearance: none; */
+	appearance: none;
 	border: none;
 	outline: 0;
 	padding: 0;
@@ -88,20 +88,51 @@ button {
 	color: inherit;
 }
 
+/* BASE STYLES */
 button {
 	background: transparent;
-	padding: var(--med);
-	font: normal var(--large) / 1.4 sans-serif;
+	padding: var(--med) 1em;
+	font: normal var(--large) / 1 sans-serif;
+	border-radius: 20px;
+}
+
+input,
+textarea {
+	background-color: var(--c-input-bgrd);
+	border-radius: 20px;
+	padding: var(--med) 1em;
+	border: 1px solid var(--c-placeholder);
+}
+
+input[type="date"] {
+	appearance: auto;
+	-moz-appearance: auto;
+	-webkit-appearance: auto;
+	min-height: 2.1em; /* Safari mobile */
 }
 
 input[type="checkbox"],
-input[type="radio"],
-input[type="text"],
-input[type="date"],
-textarea {
-	background-color: var(--c-input-bgrd);
-	padding: var(--small);
-	color: var(--c-input-contrast);
+input[type="radio"] {
+	padding: 0.7em;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+	background-color: var(--c-signal-icon);
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	position: relative;
+}
+
+input[type="checkbox"]:checked::after,
+input[type="radio"]:checked::after {
+	color: var(--c-signal-icon-contrast);
+	content: "✔";
+	font-size: 1.5em;
+	position: absolute;
+	left: 0.15em;
+	right: 0;
 }
 
 input:focus,
@@ -115,6 +146,11 @@ a:focus {
 ul,
 ol {
 	list-style: none;
+}
+
+::placeholder {
+	color: var(--c-placeholder);
+	opacity: 1;
 }
 /* stylelint-enable */
 
@@ -162,6 +198,11 @@ body {
 	display: none; /* Chrome, Safari and Opera */
 }
 
+.scrollable {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
 .ellipsis {
 	white-space: nowrap;
 	overflow: hidden;
@@ -196,10 +237,13 @@ Settings
 button.settings {
 	position: static;
 	width: 6vw;
-	height: 6vw;
+	height: 100%;
+	min-width: 20px;
 	max-width: var(--large);
-	max-height: var(--large);
 	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .settingsMenu {
@@ -208,7 +252,7 @@ button.settings {
 	z-index: 1;
 	right: 0;
 	top: 30px;
-	width: 155px;
+	width: 165px;
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.4s cubic-bezier(0.392, -0.547, 0.07, 4.535);
@@ -234,7 +278,7 @@ button.settings {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 1.5em;
+	line-height: 2;
 }
 
 /*
@@ -247,7 +291,7 @@ Filter
 }
 
 .btn_filter {
-	padding: var(--med);
+	padding: 0 var(--med);
 	border: 1px solid var(--c-btn-border);
 	border-radius: calc(var(--med) - 2px);
 	margin-left: var(--med);
@@ -275,16 +319,8 @@ Filter
 Article List
 */
 .articleList {
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
 	padding: 2vw;
 	max-height: calc(100vh - var(--large) - 46px - 40px - 96px - 2vw);
-
-	/* extend boundingbox to allow for overflow of hover-scaled articleList_row
-	margin-left: -2vw;
-	width: calc(100% + 4vw); */
-
-	/* instead: let the list be in its own visual container and hover-scale within */
 	background-color: rgba(var(--c-card-bgrd), 0.05);
 	border-radius: calc(var(--small));
 }
@@ -309,12 +345,16 @@ li.articleList_row:not(:last-child) {
 
 .articleList_meta {
 	width: 100px;
+	align-self: center;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
 	align-items: center;
 	text-align: center;
 	padding-right: var(--med);
+}
+
+.articleList_meta input {
+	margin-bottom: 0.3em;
 }
 
 .articleList_meta > input:checked ~ label {
@@ -322,6 +362,7 @@ li.articleList_row:not(:last-child) {
 }
 
 .articleList_text {
+	align-self: center;
 	width: calc(100% - 100px);
 	flex: 1 1 auto;
 }
@@ -340,7 +381,7 @@ Add Item Bar
 	right: 0;
 	z-index: 2; /* just above .articleList_row:hover */
 	background-color: var(--c-app-bgrd);
-	box-shadow: 0 -16px 17px #00000045;
+	box-shadow: 0 -16px 17px #19191a45;
 	padding: var(--large) 2vw; /* l/r same as .app */
 	display: flex;
 	justify-content: center;
@@ -349,15 +390,16 @@ Add Item Bar
 
 .addItemRow input {
 	padding: var(--med);
-	border-top-left-radius: calc(var(--med) - 2px);
-	border-bottom-left-radius: calc(var(--med) - 2px);
 	width: 60%;
 	max-width: 400px;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .addItemRow button {
-	border-top-right-radius: calc(var(--med) - 2px);
-	border-bottom-right-radius: calc(var(--med) - 2px);
+	padding: var(--med) calc(var(--large) - var(--small)) var(--med) var(--med);
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 	color: var(--c-signal-icon-contrast);
 	background-color: var(--c-signal-icon);
 }
@@ -376,27 +418,115 @@ MODAL
 	display: block;
 }
 
-.modal form {
+.modal .noteEditForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.noteEditForm {
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.noteEditForm .formInputs {
 	display: grid;
-	grid-auto-columns: 1fr;
-	grid-column-gap: 0;
-	grid-row-gap: 16px;
-	grid-template-columns: minmax(100px, 200px) minmax(200px, auto);
-	grid-template-rows: auto auto;
+	align-content: start;
+	grid-template-columns: 1fr 110px 210px;
+	gap: var(--large) 0;
+	grid-template-areas:
+		"Title Title Title"
+		"Description Description Description"
+		"empty Label_1 Content_1"
+		"empty Label_2 Content_2";
+	padding: 2vw;
+	background-color: rgba(var(--c-card-bgrd), 0.05);
+	border-radius: calc(var(--small));
+	font-size: 1.3rem;
+}
+
+.noteEditForm .title {
+	grid-area: Title;
+}
+
+.noteEditForm .title input {
+	width: 100%;
+}
+
+.noteEditForm .description {
+	grid-area: Description;
+}
+
+.noteEditForm .description textarea {
+	width: 100%;
+	resize: none;
+}
+
+.noteEditForm .label_1 {
+	grid-area: Label_1;
+	align-self: center;
+}
+
+.noteEditForm .content_1 {
+	grid-area: Content_1;
+	justify-self: end;
+}
+
+.noteEditForm .content_1 label {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: var(--small);
+}
+
+.noteEditForm .content_1 input {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.noteEditForm .content_1 input::before {
+	position: absolute;
+	font-size: 90%;
+	font-weight: bold;
+	content: attr(value);
+	color: var(--c-placeholder);
+}
+
+.noteEditForm .content_1 input:checked::before {
+	content: "";
+}
+
+.noteEditForm .label_2 {
+	grid-area: Label_2;
+	align-self: center;
+}
+
+.noteEditForm .content_2 {
+	grid-area: Content_2;
+}
+
+.noteEditForm .ctaRow {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	z-index: 1;
+	box-shadow: 0 -16px 17px #19191a45;
+	padding: var(--large) 0;
 }
 
 .btn_cancel {
-	border-top-left-radius: calc(var(--med) - 2px);
-	border-bottom-left-radius: calc(var(--med) - 2px);
 	background-color: var(--c-input-bgrd);
 	color: var(--c-input-contrast);
 }
 
 .btn_save {
-	border-top-right-radius: calc(var(--med) - 2px);
-	border-bottom-right-radius: calc(var(--med) - 2px);
 	background-color: var(--c-signal-icon);
 	color: var(--c-signal-icon-contrast);
+	border: 1px solid var(--c-placeholder);
 }
 
 /* Custom Checkboxes */

@@ -34,6 +34,7 @@
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 22 22"
+							style="width: 100%"
 						>
 							<path
 								d="M18.924,8.719a8.186,8.186,0,0,0-.707-1.713l1.367-2.875A11.109,11.109,0,0,0,17.87,2.416L14.994,3.783a8.229,8.229,0,0,0-1.713-.707L12.211.07a10.5,10.5,0,0,0-2.423,0L8.719,3.076a8.249,8.249,0,0,0-1.712.707L4.13,2.416A11.109,11.109,0,0,0,2.416,4.13L3.783,7.006a8.229,8.229,0,0,0-.707,1.713L.07,9.789a10.5,10.5,0,0,0,0,2.423l3.007,1.07a8.186,8.186,0,0,0,.707,1.713L2.417,17.87a11.049,11.049,0,0,0,1.715,1.715l2.875-1.367a8.229,8.229,0,0,0,1.713.707l1.07,3.007A11.305,11.305,0,0,0,11,22a11,11,0,0,0,1.211-.07l1.07-3.007a8.186,8.186,0,0,0,1.713-.707l2.875,1.367a11.049,11.049,0,0,0,1.715-1.715l-1.367-2.875a8.229,8.229,0,0,0,.707-1.713l3.007-1.07A11.305,11.305,0,0,0,22,11a11,11,0,0,0-.07-1.211ZM11,16.5A5.5,5.5,0,1,1,16.5,11,5.5,5.5,0,0,1,11,16.5ZM8.25,11A2.75,2.75,0,1,0,11,8.25,2.75,2.75,0,0,0,8.25,11Z"
@@ -43,11 +44,10 @@
 					</button>
 					<ul class="settingsMenu">
 						<li class="settingsMenu_item radio">
-							<label for="theme_a" class="settingsMenu_radioWrapper"
+							<label class="settingsMenu_radioWrapper"
 								>Dark Mode
 								<input
 									type="radio"
-									id="theme_a"
 									name="theme"
 									value="dark"
 									checked="checked"
@@ -55,11 +55,10 @@
 									onchange="setTheme(this)"
 								/>
 							</label>
-							<label for="theme_b" class="settingsMenu_radioWrapper"
+							<label class="settingsMenu_radioWrapper"
 								>Light Mode
 								<input
 									type="radio"
-									id="theme_b"
 									name="theme"
 									value="light"
 									tabindex="-1"
@@ -82,7 +81,7 @@
 							<option value="Creationdate" class="sort_option">
 								Sort by Date Created
 							</option>
-							<option value="Duedate" class="sort_option">
+							<option value="Duedate" class="sort_option" selected>
 								Sort by Due Date
 							</option>
 							<option value="Priority" class="sort_option">
@@ -92,7 +91,11 @@
 					</div>
 					<div class="btn_filter">
 						<h3 class="sr-only">Filter option for list:</h3>
-						<input id="chkCompleted" type="checkbox" />
+						<input
+							id="chkCompleted"
+							type="checkbox"
+							title="Add completed notes to List."
+						/>
 						<label for="chkCompleted" class="sideLabel sr-only"
 							>Add completed notes to List.</label
 						>
@@ -101,7 +104,7 @@
 						>Create a new note.</a
 					>
 				</nav>
-				<ol class="articleList hideScrollbars" id="ArticleList">
+				<ol class="articleList scrollable hideScrollbars" id="ArticleList">
 					<li class="articleList_row">
 						<div class="articleList_meta">
 							<input type="checkbox" />
@@ -283,7 +286,7 @@
 						type="text"
 						id="newnote"
 						placeholder="Topic"
-						aria-label="Create Note"
+						aria-label="Input Title of new Note."
 						autocomplete="off"
 						aria-required="true"
 					/><button type="submit">Add</button>
@@ -291,37 +294,93 @@
 			</section>
 		</main>
 		<aside class="modal main">
-			<form action="" js-modalform>
-				<label for="">Title</label>
-				<input type="text" js-modalField-title aria-required="true" />
-				<label for="">Description</label>
-				<textarea name="" cols="30" rows="10" aria-required="false"></textarea>
+			<form action="" js-modalform class="noteEditForm">
+				<div class="formInputs scrollable hideScrollbars">
+					<label class="title"
+						><span class="sr-only">Title</span>
+						<input
+							type="text"
+							js-modalField-title
+							aria-required="true"
+							placeholder="Title"
+							tabindex="2"
+						/>
+					</label>
+					<label class="description"
+						><span class="sr-only">Description</span>
+						<textarea
+							name=""
+							rows="10"
+							wrap="hard"
+							aria-required="false"
+							placeholder="Description"
+							tabindex="3"
+						></textarea>
+					</label>
 
-				<p>Importance</p>
-				<div>
-					<label for="">none</label>
+					<p class="label_1">Importance</p>
+					<div class="content_1">
+						<label
+							><span class="sr-only">0</span>
+							<input
+								type="radio"
+								name="prio"
+								aria-required="false"
+								checked="checked"
+								tabindex="4"
+								value="0"
+							/>
+						</label>
+						<label
+							><span class="sr-only">1</span>
+							<input
+								type="radio"
+								name="prio"
+								aria-required="false"
+								tabindex="4"
+								value="1"
+							/>
+						</label>
+						<label
+							><span class="sr-only">2</span>
+							<input
+								type="radio"
+								name="prio"
+								aria-required="false"
+								tabindex="4"
+								value="2"
+							/>
+						</label>
+						<label
+							><span class="sr-only">3</span>
+							<input
+								type="radio"
+								name="prio"
+								aria-required="false"
+								tabindex="4"
+								value="3"
+							/>
+						</label>
+					</div>
+					<label for=""></label>
+					<label for="datepicker" class="label_2">Date </label>
 					<input
-						type="radio"
-						name="prio"
+						id="datepicker"
+						type="date"
+						placeholder="sometime"
+						name="datepicker"
 						aria-required="false"
-						checked="checked"
+						class="content_2"
+						tabindex="5"
 					/>
-					<label for="">1</label>
-					<input type="radio" name="prio" aria-required="false" />
-					<label for="">2</label>
-					<input type="radio" name="prio" aria-required="false" />
-					<label for="">3</label>
-					<input type="radio" name="prio" aria-required="false" />
 				</div>
-				<label for="datepicker">Date</label>
-				<input
-					type="date"
-					placeholder="sometime"
-					name="datepicker"
-					aria-required="false"
-				/>
-				<button class="btn_cancel">Cancel</button>
-				<button autofocus type="submit" class="btn_save">Save</button>
+
+				<div class="ctaRow">
+					<button class="btn_cancel" tabindex="6">Cancel</button>
+					<button autofocus type="submit" class="btn_save" tabindex="1">
+						Save
+					</button>
+				</div>
 			</form>
 		</aside>
 	</body>

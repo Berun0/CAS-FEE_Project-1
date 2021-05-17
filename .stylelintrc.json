@@ -2,6 +2,8 @@
 	"extends": "stylelint-config-standard",
 	"rules": {
 		"indentation": "tab",
-		"no-duplicate-selectors": true
+		"no-duplicate-selectors": null,
+		"no-descending-specificity": null,
+		"declaration-block-trailing-semicolon": null
 	}
 }

@@ -4,7 +4,9 @@
 	--small: 0.25em;
 	--med: 0.625em;
 	--large: 1.5em;
-	--ctaRow-height: 4.5rem;
+	--header-hgt: 5.5rem;
+	--cta-hgt: 4.5rem;
+	--nav-hgt: 2rem;
 }
 /* stylelint-disable */
 
@@ -15,7 +17,7 @@ body[theme="dark"] {
 	--c-input-bgrd: #ffffff79;
 	--c-input-contrast: #161616;
 	--c-outline: #ff9765cc;
-	--c-signal-icon: #7fffd4;
+	--c-signal-icon: #6ddab5;
 	--c-signal-icon-contrast: #161616;
 	--c-signal-trash: #a4090a;
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
@@ -47,11 +49,12 @@ body[theme="light"] {
 }
 
 /* RESETS */
+
 * {
 	margin: 0;
 	box-sizing: border-box;
-	font-family: inherit;
-	line-height: 1;
+	font: inherit;
+	line-height: inherit;
 	border: none;
 	padding: 0;
 }
@@ -77,16 +80,11 @@ button {
 	-webkit-appearance: none;
 	-ms-appearance: none;
 	appearance: none;
-	border: none;
 	outline: 0;
-	padding: 0;
 	text-decoration: none;
-	background: none;
+	background-color: transparent;
 	border-radius: 0;
-	font-family: inherit;
-	font-size: 100%;
 	color: inherit;
-	font-weight: inherit;
 }
 
 /* BASE STYLES */
@@ -113,25 +111,26 @@ button {
 }
 
 html {
-	font-size: 16px;
-	font-family: "nunito sans", sans-serif;
-	font-weight: 300;
+	font: 300 16px/1.2 "nunito sans", sans-serif;
 }
 
 h1,
 h2 {
-	margin-left: -0.04em;
-	font-size: 1.4em;
-	font-weight: 700;
+	margin-left: -0.03em;
 }
 h1 {
+	font-size: 1.4em;
 	font-weight: 300;
+}
+h2 {
+	font-size: 1.2em;
+	font-weight: 700;
 }
 
 input,
 textarea {
 	background-color: var(--c-input-bgrd);
-	border-radius: 20px;
+	border-radius: var(--large);
 	padding: 0.5em 1em;
 	border: 1px solid var(--c-btn-border);
 	color: var(--c-placeholder);
@@ -209,12 +208,12 @@ body {
 	display: flex;
 }
 
-header,
-nav {
-	height: 4rem;
-	padding: 0 2vw;
+.header {
+	height: var(--header-hgt);
+	padding: 0 2vw 1em;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .container {
@@ -224,7 +223,7 @@ nav {
 }
 
 .main {
-	background: var(--c-app-bgrd);
+	background-color: var(--c-app-bgrd);
 	color: var(--c-text);
 	position: relative; /* eg for Add Item Bar */
 	overflow: hidden;
@@ -260,6 +259,7 @@ nav {
 
 .status {
 	font-size: 0.75em;
+	opacity: 0.75;
 }
 
 /*
@@ -270,7 +270,7 @@ button,
 .btn {
 	background: transparent;
 	font: normal 1em / 1 sans-serif;
-	border-radius: 20px;
+	border-radius: var(--large);
 	padding: 0 1em;
 	height: 2.2em;
 }
@@ -285,6 +285,7 @@ button,
 	color: var(--c-signal-icon-contrast);
 	border: 1px solid var(--c-placeholder);
 }
+
 .btn_add {
 	background-color: var(--c-signal-icon);
 	color: var(--c-cta-row);
@@ -292,9 +293,9 @@ button,
 }
 
 .btn_filter {
+	background-color: var(--c-cta-row);
 	border: 1px solid var(--c-btn-border);
-	border-radius: calc(var(--med) - 2px);
-	margin-right: var(--med);
+	border-radius: var(--large);
 	transition: transform 0.3s;
 	display: flex;
 	align-items: center;
@@ -308,11 +309,10 @@ button,
 Settings
 */
 .settings {
-	position: absolute;
-	right: 2vw;
+	position: relative;
 }
 
-button.settings {
+.btn_settings {
 	position: static;
 	height: 100%;
 	min-width: 20px;
@@ -365,26 +365,36 @@ Filter
 	border-top: 1px solid rgba(var(--c-card-bgrd), 0.16);
 	background-color: rgba(var(--c-card-bgrd), 0.05);
 	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	height: var(--nav-hgt);
+	padding: 0 2vw calc(var(--nav-hgt) - 1em);
 }
 
 /* awkward solution to a themeable (=svg or font in html) custom caret down icon in the sort option list: */
 .dropdownIcon {
-	color: var(--c-text);
+	color: var(--c-input-bgrd);
 	margin-right: calc(var(--med) - 2px);
+}
+
+.select {
+	font: 300 1em/1.2 "nunito sans", sans-serif;
 }
 
 /*
 Article List
 */
 .articleList {
-	height: calc(100vh - 8rem - var(--ctaRow-height));
-	padding: 0.5em 2vw;
+	height: calc(100vh - var(--header-hgt) - var(--nav-hgt) - var(--cta-hgt));
+	padding: 0 2vw;
+	padding-top: var(--med); /* allow for card hover */
 	background-color: rgba(var(--c-card-bgrd), 0.05);
 	border-radius: calc(var(--small));
 }
 
 .articleList_row {
-	padding: var(--med);
+	padding: var(--large);
+	padding-left: var(--med);
 	background-color: rgba(var(--c-card-bgrd), 0.16);
 	transition: transform 0.3s;
 	border-radius: var(--med);
@@ -399,10 +409,13 @@ li.articleList_row {
 	background-color: rgba(var(--c-card-bgrd), 0.4);
 	border: 1px solid var(--c-btn-border);
 	transform: scale(1.03);
+	position: relative;
+	z-index: 10;
 }
 
 .articleList_meta {
-	min-width: 8rem;
+	font-size: 85%;
+	min-width: 7rem;
 	align-self: center;
 	display: flex;
 	flex-direction: column;
@@ -413,11 +426,11 @@ li.articleList_row {
 
 .articleList_text {
 	align-self: center;
-	width: calc(100% - 9rem);
+	width: calc(100% - 7rem);
 }
 
 .articleList_meta input {
-	margin-bottom: 0.3em;
+	margin-bottom: 0.375em;
 }
 
 .articleList_meta > input:checked ~ label {
@@ -426,6 +439,8 @@ li.articleList_row {
 
 .articleList_text > h2 {
 	margin-bottom: var(--small);
+	color: var(--c-signal-icon);
+	opacity: 0.85;
 }
 
 /*
@@ -437,7 +452,7 @@ Add Item Bar
 	left: 0; /* take the whole width of .app for a clean drop-shadow */
 	right: 0;
 	z-index: 2; /* just above .articleList_row:hover */
-	height: var(--ctaRow-height);
+	height: var(--cta-hgt);
 	background-color: var(--c-cta-row);
 	padding: 0 2vw; /* l/r same as .app */
 	display: flex;
@@ -453,16 +468,20 @@ MODAL
 	/* transition: transform 0.3s ease;
 	transform: translateY(300px); */
 	display: none;
+	padding-top: var(--large);
 }
 
 .modal.open {
 	/* transform: translateY(0); */
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: var(--cta-hgt);
 }
 
 .noteEditForm .formInputs {
 	margin-top: var(--large);
-	height: calc(100vh - var(--large) - var(--ctaRow-height));
+	height: calc(100vh - var(--large) - var(--cta-hgt));
 	max-height: 700px;
 	max-width: 640px;
 	margin: 0 auto;
@@ -473,8 +492,8 @@ MODAL
 	grid-template-areas:
 		"Title Title Title"
 		"Description Description Description"
-		"empty Label_1 Content_1"
-		"empty Label_2 Content_2";
+		"empty Importance_lbl Importance_select"
+		"empty Datepicker_lbl Datepicker_select";
 	padding: var(--large) 2vw;
 	background-color: rgba(var(--c-card-bgrd), 0.05);
 	border-radius: calc(var(--small));
@@ -497,17 +516,17 @@ MODAL
 	resize: none;
 }
 
-.noteEditForm .label_1 {
-	grid-area: Label_1;
+.noteEditForm .importance_lbl {
+	grid-area: Importance_lbl;
 	align-self: center;
 }
 
-.noteEditForm .content_1 {
-	grid-area: Content_1;
+.noteEditForm .importance_select {
+	grid-area: Importance_select;
 	justify-self: end;
 }
 
-.noteEditForm .content_1 label {
+.noteEditForm .importance_select label {
 	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
@@ -515,14 +534,14 @@ MODAL
 	margin-right: var(--small);
 }
 
-.noteEditForm .content_1 input {
+.noteEditForm .importance_select input {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.noteEditForm .content_1 input::before {
+.noteEditForm .importance_select input::before {
 	position: absolute;
 	display: inline-flex;
 	flex-direction: column;
@@ -533,24 +552,24 @@ MODAL
 	color: var(--c-placeholder);
 }
 
-.noteEditForm .content_1 input:checked::before {
+.noteEditForm .importance_select input:checked::before {
 	content: "";
 }
 
-.noteEditForm .label_2 {
-	grid-area: Label_2;
+.noteEditForm .datepicker_lbl {
+	grid-area: Datepicker_lbl;
 	align-self: center;
 }
 
-.noteEditForm .content_2 {
-	grid-area: Content_2;
+.noteEditForm .datepicker_select {
+	grid-area: Datepicker_select;
 }
 
 /*
 MEDIA QUERIES
 */
 
-/* root size */
+/* rem size */
 @media screen and (min-width: 401px) {
 	html {
 		font-size: 4vw;
@@ -577,7 +596,7 @@ MEDIA QUERIES
 	}
 
 	.articleList {
-		height: calc(100vh - 4rem - var(--ctaRow-height));
+		height: calc(100vh - var(--header-hgt) - var(--cta-hgt));
 	}
 }
 
@@ -592,6 +611,6 @@ MEDIA QUERIES
 	}
 
 	.articleList {
-		height: calc(1300px - 8rem - var(--ctaRow-height));
+		height: calc(1300px - var(--header-hgt) - var(--nav-hgt) - var(--cta-hgt));
 	}
 }

@@ -22,16 +22,16 @@
 	</head>
 	<body theme="dark">
 		<main class="main container">
-			<header>
+			<header class="header">
 				<div>
 					<h1 class="appTitle">
-						DoNotes<span class="appTitle_count">(6)</span>
+						DoNotes<span class="appTitle_count">(10)</span>
 					</h1>
-					<p class="status">Last modified: 5. May 2021 13:51</p>
+					<p class="status">Last modified: 19. May 2021 13:51</p>
 				</div>
 				<div class="settings" aria-hidden="true">
 					<button
-						class="settings"
+						class="btn_settings"
 						aria-haspopup="true"
 						aria-expanded="false"
 						tabindex="0"
@@ -39,14 +39,15 @@
 						onclick="openSettings()"
 					>
 						<svg
-							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 22 22"
-							style="width: 100%"
+							width="7"
+							height="27"
+							viewBox="0 0 7 27"
 						>
 							<path
-								d="M18.924,8.719a8.186,8.186,0,0,0-.707-1.713l1.367-2.875A11.109,11.109,0,0,0,17.87,2.416L14.994,3.783a8.229,8.229,0,0,0-1.713-.707L12.211.07a10.5,10.5,0,0,0-2.423,0L8.719,3.076a8.249,8.249,0,0,0-1.712.707L4.13,2.416A11.109,11.109,0,0,0,2.416,4.13L3.783,7.006a8.229,8.229,0,0,0-.707,1.713L.07,9.789a10.5,10.5,0,0,0,0,2.423l3.007,1.07a8.186,8.186,0,0,0,.707,1.713L2.417,17.87a11.049,11.049,0,0,0,1.715,1.715l2.875-1.367a8.229,8.229,0,0,0,1.713.707l1.07,3.007A11.305,11.305,0,0,0,11,22a11,11,0,0,0,1.211-.07l1.07-3.007a8.186,8.186,0,0,0,1.713-.707l2.875,1.367a11.049,11.049,0,0,0,1.715-1.715l-1.367-2.875a8.229,8.229,0,0,0,.707-1.713l3.007-1.07A11.305,11.305,0,0,0,22,11a11,11,0,0,0-.07-1.211ZM11,16.5A5.5,5.5,0,1,1,16.5,11,5.5,5.5,0,0,1,11,16.5ZM8.25,11A2.75,2.75,0,1,0,11,8.25,2.75,2.75,0,0,0,8.25,11Z"
-								fill="var(--c-text)"
+								d="M-1418,1399.5a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1399.5Zm0-10a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1389.5Zm0-10a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1379.5Z"
+								transform="translate(1418 -1376)"
+								fill="#fff"
 							/>
 						</svg>
 					</button>
@@ -83,7 +84,7 @@
 					<div class="btn btn_filter">
 						<span class="dropdownIcon" aria-hidden="true">&#9660;</span>
 						<h3 class="sr-only">Sort options for list:</h3>
-						<select name="Sort">
+						<select name="Sort" class="select">
 							<option value="Creationdate" class="sort_option">
 								Sort by Date Created
 							</option>
@@ -324,8 +325,8 @@
 						></textarea>
 					</label>
 
-					<p class="label_1">Importance</p>
-					<div class="content_1">
+					<p class="importance_lbl">Importance</p>
+					<div class="importance_select">
 						<label
 							><span class="sr-only">0</span>
 							<input
@@ -368,15 +369,14 @@
 							/>
 						</label>
 					</div>
-					<label for=""></label>
-					<label for="datepicker" class="label_2">Date </label>
+					<label for="datepicker" class="datepicker_lbl">Date </label>
 					<input
 						id="datepicker"
 						type="date"
 						placeholder="sometime"
 						name="datepicker"
 						aria-required="false"
-						class="content_2"
+						class="datepicker_select"
 						tabindex="5"
 					/>
 				</div>

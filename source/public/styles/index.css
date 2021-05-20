@@ -4,9 +4,9 @@
 	--small: 0.25em;
 	--med: 0.625em;
 	--large: 1.5em;
-	--header-hgt: 5.5rem;
+	--header-hgt: 8rem;
 	--cta-hgt: 4.5rem;
-	--nav-hgt: 2rem;
+	--padding: 2vw;
 }
 /* stylelint-disable */
 
@@ -204,15 +204,28 @@ ol {
 body {
 	background: var(--c-browser-window-grad);
 	height: 100vh;
+	max-height: -webkit-fill-available; /* iOS 100vh viewport bug fix */
 	overflow: hidden; /* to ease-in the modal */
 	display: flex;
 }
 
+.main {
+	background-color: var(--c-app-bgrd);
+	color: var(--c-text);
+}
+
+.holygrail {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
 .header {
 	height: var(--header-hgt);
-	padding: 0 2vw 1em;
+	padding-top: 1em;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 	justify-content: space-between;
 }
 
@@ -220,13 +233,6 @@ body {
 	width: 100%;
 	max-width: 800px;
 	margin: 0 auto;
-}
-
-.main {
-	background-color: var(--c-app-bgrd);
-	color: var(--c-text);
-	position: relative; /* eg for Add Item Bar */
-	overflow: hidden;
 }
 
 /* HELPERs */
@@ -308,6 +314,14 @@ button,
 /*
 Settings
 */
+
+.settingsRow {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0 var(--padding);
+}
+
 .settings {
 	position: relative;
 }
@@ -328,7 +342,7 @@ Settings
 	position: absolute;
 	z-index: 1;
 	right: 0;
-	top: 2rem;
+	top: 50px;
 	width: 10.1rem;
 	max-height: 0;
 	overflow: hidden;
@@ -364,11 +378,12 @@ Filter
 .filterRow {
 	border-top: 1px solid rgba(var(--c-card-bgrd), 0.16);
 	background-color: rgba(var(--c-card-bgrd), 0.05);
+	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
-	height: var(--nav-hgt);
-	padding: 0 2vw calc(var(--nav-hgt) - 1em);
+	height: 1.5em;
+	padding: 0 var(--padding) 0.5em;
 }
 
 /* awkward solution to a themeable (=svg or font in html) custom caret down icon in the sort option list: */
@@ -377,18 +392,22 @@ Filter
 	margin-right: calc(var(--med) - 2px);
 }
 
-.select {
+.select,
+.select option {
 	font: 300 1em/1.2 "nunito sans", sans-serif;
 }
 
 /*
 Article List
 */
-.articleList {
-	height: calc(100vh - var(--header-hgt) - var(--nav-hgt) - var(--cta-hgt));
-	padding: 0 2vw;
-	padding-top: var(--med); /* allow for card hover */
+.articleList_wrapper {
+	/* iOS elastic band background */
 	background-color: rgba(var(--c-card-bgrd), 0.05);
+}
+
+.articleList {
+	padding: 0 var(--padding);
+	padding-top: var(--med); /* allow for card hover */
 	border-radius: calc(var(--small));
 }
 
@@ -440,25 +459,20 @@ li.articleList_row {
 .articleList_text > h2 {
 	margin-bottom: var(--small);
 	color: var(--c-signal-icon);
-	opacity: 0.85;
+	filter: grayscale(0.5);
 }
 
 /*
 Add Item Bar
 */
 .ctaRow {
-	position: fixed;
-	bottom: 0;
-	left: 0; /* take the whole width of .app for a clean drop-shadow */
-	right: 0;
-	z-index: 2; /* just above .articleList_row:hover */
-	height: var(--cta-hgt);
+	min-height: var(--cta-hgt);
 	background-color: var(--c-cta-row);
-	padding: 0 2vw; /* l/r same as .app */
+	padding: 0 var(--padding); /* l/r same as .app */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font: normal 1rem / 1 sans-serif;
+	width: 100%;
 }
 
 /*
@@ -468,7 +482,6 @@ MODAL
 	/* transition: transform 0.3s ease;
 	transform: translateY(300px); */
 	display: none;
-	padding-top: var(--large);
 }
 
 .modal.open {
@@ -476,15 +489,12 @@ MODAL
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-bottom: var(--cta-hgt);
 }
 
-.noteEditForm .formInputs {
-	margin-top: var(--large);
-	height: calc(100vh - var(--large) - var(--cta-hgt));
+.formInputs {
+	margin: 0 auto;
 	max-height: 700px;
 	max-width: 640px;
-	margin: 0 auto;
 	display: grid;
 	align-content: start;
 	grid-template-columns: 1fr 6.125rem 13.125rem;
@@ -494,39 +504,39 @@ MODAL
 		"Description Description Description"
 		"empty Importance_lbl Importance_select"
 		"empty Datepicker_lbl Datepicker_select";
-	padding: var(--large) 2vw;
+	padding: var(--large) var(--padding);
 	background-color: rgba(var(--c-card-bgrd), 0.05);
 	border-radius: calc(var(--small));
 }
 
-.noteEditForm .title {
+.formInputs .title {
 	grid-area: Title;
 }
 
-.noteEditForm .title input {
+.formInputs .title input {
 	width: 100%;
 }
 
-.noteEditForm .description {
+.formInputs .description {
 	grid-area: Description;
 }
 
-.noteEditForm .description textarea {
+.formInputs .description textarea {
 	width: 100%;
 	resize: none;
 }
 
-.noteEditForm .importance_lbl {
+.formInputs .importance_lbl {
 	grid-area: Importance_lbl;
 	align-self: center;
 }
 
-.noteEditForm .importance_select {
+.formInputs .importance_select {
 	grid-area: Importance_select;
 	justify-self: end;
 }
 
-.noteEditForm .importance_select label {
+.formInputs .importance_select label {
 	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
@@ -534,14 +544,14 @@ MODAL
 	margin-right: var(--small);
 }
 
-.noteEditForm .importance_select input {
+.formInputs .importance_select input {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.noteEditForm .importance_select input::before {
+.formInputs .importance_select input::before {
 	position: absolute;
 	display: inline-flex;
 	flex-direction: column;
@@ -552,16 +562,16 @@ MODAL
 	color: var(--c-placeholder);
 }
 
-.noteEditForm .importance_select input:checked::before {
+.formInputs .importance_select input:checked::before {
 	content: "";
 }
 
-.noteEditForm .datepicker_lbl {
+.formInputs .datepicker_lbl {
 	grid-area: Datepicker_lbl;
 	align-self: center;
 }
 
-.noteEditForm .datepicker_select {
+.formInputs .datepicker_select {
 	grid-area: Datepicker_select;
 }
 
@@ -574,11 +584,19 @@ MEDIA QUERIES
 	html {
 		font-size: 4vw;
 	}
+
+	.modal {
+		padding-top: var(--large);
+	}
 }
 
 @media screen and (min-width: 501px) {
 	html {
 		font-size: 20px;
+	}
+
+	.formInputs {
+		margin: var(--large) auto 0 auto;
 	}
 }
 
@@ -594,23 +612,11 @@ MEDIA QUERIES
 		overflow: hidden;
 		clip: rect(0 0 0 0);
 	}
-
-	.articleList {
-		height: calc(100vh - var(--header-hgt) - var(--cta-hgt));
-	}
 }
 
 /* limit app height for very high screens */
 @media screen and (min-height: 1300px) {
 	body {
 		align-items: center;
-	}
-
-	.ctaRow {
-		position: static;
-	}
-
-	.articleList {
-		height: calc(1300px - var(--header-hgt) - var(--nav-hgt) - var(--cta-hgt));
 	}
 }

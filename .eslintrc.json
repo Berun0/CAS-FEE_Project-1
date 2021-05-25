@@ -22,6 +22,8 @@
 		"prefer-const": 1,
 		"no-tabs": "off",
 		"no-confusing-arrow": ["error", { "allowParens": true }],
-		"arrow-body-style": ["error", "always"]
+		"arrow-body-style": ["error", "always"],
+		"no-unused-expressions": ["error", { "allowTernary": true }],
+		"no-nested-ternary": "off"
 	}
 }

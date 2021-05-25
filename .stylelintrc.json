@@ -4,6 +4,7 @@
 		"indentation": "tab",
 		"no-duplicate-selectors": null,
 		"no-descending-specificity": null,
-		"declaration-block-trailing-semicolon": null
+		"declaration-block-trailing-semicolon": null,
+		"declaration-colon-newline-after": null
 	}
 }

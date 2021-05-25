@@ -1,5 +1,3 @@
-<!-- @format -->
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -26,9 +24,11 @@
 				<div class="settingsRow">
 					<div>
 						<h1 class="appTitle">
-							DoNotes<span class="appTitle_count">(10)</span>
+							DoNotes<span class="appTitle_visItemsCount"></span>
 						</h1>
-						<p class="status">Last modified: 19. May 2021 13:51</p>
+						<p class="status">
+							Last modified: <span class="appTitle_modDate"></span>
+						</p>
 					</div>
 					<div class="settings" aria-hidden="true">
 						<button
@@ -83,14 +83,14 @@
 					<div class="btn btn_filter">
 						<span class="dropdownIcon" aria-hidden="true">&#9660;</span>
 						<h3 class="sr-only">Sort options for list:</h3>
-						<select name="Sort" class="select">
-							<option value="Creationdate" class="sort_option">
+						<select name="Sort" class="select" onchange="setSort(this)">
+							<option value="creationdate" class="sort_option">
 								Sort by Date Created
 							</option>
-							<option value="Duedate" class="sort_option" selected>
+							<option value="duedate" class="sort_option">
 								Sort by Due Date
 							</option>
-							<option value="Priority" class="sort_option">
+							<option value="priority" class="sort_option">
 								Sort by Note Priority
 							</option>
 						</select>
@@ -100,7 +100,9 @@
 						<input
 							id="chkCompleted"
 							type="checkbox"
+							checked
 							title="Add completed notes to List."
+							onchange="setFilter(this)"
 						/>
 						<label for="chkCompleted" class="sideLabel sr-only"
 							>Add completed notes to List.</label
@@ -111,182 +113,23 @@
 					>
 				</nav>
 			</header>
-			<section class="articleList_wrapper holygrail scrollable hideScrollbars">
+			<section class="articleList_wrapper scrollable hideScrollbars">
 				<h2 class="sr-only">Panel with all notes listed:</h2>
 				<ol class="articleList" id="ArticleList">
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>Today</label>
-						</div>
-						<div class="articleList_text">
-							<h2>Titel</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-								vero eligendi sed, repellat illo, maxime dolores facere et
-								aspernatur iure reprehenderit harum ea debitis. Sit, non
-								repellat? Minus, earum consequatur!
-							</p>
-						</div>
-					</li>
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>Sometime</label>
-						</div>
-						<div class="articleList_text">
-							<h2 class="ellipsis">
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-								Aperiam quidem qui fugiat unde quam temporibus quis, aspernatur
-								reprehenderit sunt vel sed, illo, autem neque nesciunt?
-								Architecto harum necessitatibus dolor suscipit.
-							</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-								vero eligendi sed, repellat illo.
-							</p>
-						</div>
-					</li>
-
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>31.12.2021</label>
-						</div>
-						<div class="articleList_text">
-							<h2 class="ellipsis">Lorem ipsum, dolor.</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam!
-							</p>
-						</div>
-					</li>
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>This Saturday</label>
-						</div>
-						<div class="articleList_text">
-							<h2 class="ellipsis">
-								Kuchen ipsum, dolor sit amet consectetur adipisicing elit.
-								Aperiam quidem qui fugiat unde quam temporibus quis, aspernatur
-								reprehenderit sunt vel sed, illo, autem neque nesciunt?
-								Architecto harum necessitatibus dolor suscipit. Lorem ipsum,
-							</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-								vero eligendi sed, repellat illo, maxime dolores facere et dolor
-								sit amet consectetur adipisicing elit. Aperiam quidem qui fugiat
-								unde quam temporibus quis, aspernatur reprehenderit sunt vel
-								sed, illo, autem neque nesciunt? Architecto harum necessitatibus
-								dolor suscipit. aspernatur iure reprehenderit harum ea debitis.
-								Sit, non repellat? Minus, earum consequatur!
-							</p>
-						</div>
-					</li>
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>This Thursday</label>
-						</div>
-						<div class="articleList_text">
-							<h2 class="ellipsis">
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-								Aperiam quidem qui fugiat unde quam temporibus quis, aspernatur
-								reprehenderit sunt vel sed, illo, autem neque nesciunt?
-								Architecto harum necessitatibus dolor suscipit.
-							</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-								vero eligendi sed, repellat illo, maxime dolores facere et
-								aspernatur iure reprehenderit harum ea debitis. Sit, non
-								repellat? Minus, earum consequatur!
-							</p>
-						</div>
-					</li>
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>Today</label>
-						</div>
-						<div class="articleList_text">
-							<h2>Titel</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-								vero eligendi sed, repellat illo, maxime dolores facere et
-								aspernatur iure reprehenderit harum ea debitis. Sit, non
-								repellat? Minus, earum consequatur!
-							</p>
-						</div>
-					</li>
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>Sometime</label>
-						</div>
-						<div class="articleList_text">
-							<h2 class="ellipsis">
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-								Aperiam quidem qui fugiat unde quam temporibus quis, aspernatur
-								reprehenderit sunt vel sed, illo, autem neque nesciunt?
-								Architecto harum necessitatibus dolor suscipit.
-							</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-								vero eligendi sed, repellat illo.
-							</p>
-						</div>
-					</li>
-
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>31.12.2021</label>
-						</div>
-						<div class="articleList_text">
-							<h2 class="ellipsis">Lorem ipsum, dolor.</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam!
-							</p>
-						</div>
-					</li>
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>This Saturday</label>
-						</div>
-						<div class="articleList_text">
-							<h2 class="ellipsis">
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-								Aperiam quidem qui fugiat unde quam temporibus quis, aspernatur
-								reprehenderit sunt vel sed, illo, autem neque nesciunt?
-								Architecto harum necessitatibus dolor suscipit. Lorem ipsum,
-								dolor sit amet consectetur adipisicing elit. Aperiam quidem qui
-								fugiat unde quam temporibus quis, aspernatur reprehenderit sunt
-								vel sed, illo, autem neque nesciunt? Architecto harum
-								necessitatibus dolor suscipit.
-							</h2>
-							<p class="articleTeaser">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-								vero eligendi sed, repellat illo, maxime dolores facere et
-								aspernatur iure reprehenderit harum ea debitis. Sit, non
-								repellat? Minus, earum consequatur!
-							</p>
-						</div>
-					</li>
-					<li class="articleList_row">
-						<div class="articleList_meta">
-							<input type="checkbox" />
-							<label>This Thursday</label>
-						</div>
-						<div class="articleList_text">
-							<h2 class="ellipsis">
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-								Aperiam quidem qui fugiat unde quam temporibus quis, aspernatur
-								reprehenderit sunt vel sed, illo, autem neque nesciunt?
-								Architecto harum necessitatibus dolor suscipit.
-							</h2>
-							<p class="articleTeaser"></p>
-						</div>
+					<!-- flat hierarchy to allow for css driven list changes when checked -->
+					<li class="articleList_item" data-id="-1">
+						<input type="checkbox" checked aria-checked="true" />
+						<label>Today</label>
+						<h2 class="articleList_itemTitle">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
+							vero eligendi sed, repellat illo.
+						</h2>
+						<p class="articleList_itemText">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
+							vero eligendi sed, repellat illo, maxime dolores facere et
+							aspernatur iure reprehenderit harum ea debitis. Sit, non repellat?
+							Minus, earum consequatur!
+						</p>
 					</li>
 				</ol>
 			</section>
@@ -337,6 +180,7 @@
 								type="radio"
 								name="prio"
 								aria-required="false"
+								aria-checked="true"
 								checked="checked"
 								tabindex="4"
 								value="0"
@@ -381,6 +225,7 @@
 						aria-required="false"
 						class="datepicker_select"
 						tabindex="5"
+						onchange="getDatepicker(this)"
 					/>
 				</div>
 

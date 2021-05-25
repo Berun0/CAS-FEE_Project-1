@@ -4,8 +4,6 @@
 	--small: 0.25em;
 	--med: 0.625em;
 	--large: 1.5em;
-	--header-hgt: 8rem;
-	--cta-hgt: 4.5rem;
 	--padding: 2vw;
 }
 /* stylelint-disable */
@@ -111,7 +109,7 @@ button {
 }
 
 html {
-	font: 300 16px/1.2 "nunito sans", sans-serif;
+	font: 300 14px/1.2 "nunito sans", sans-serif;
 }
 
 h1,
@@ -222,7 +220,6 @@ body {
 }
 
 .header {
-	height: var(--header-hgt);
 	padding-top: 1em;
 	display: flex;
 	flex-direction: column;
@@ -261,6 +258,15 @@ body {
 	display: none;
 }
 
+.emptyApp {
+	/* no display:flex stuff, as it is messing with list scroll */
+	text-align: center;
+	min-width: 200px;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
 /***** APP COMPONENTS *****/
 
 .status {
@@ -278,7 +284,7 @@ button,
 	font: normal 1em / 1 sans-serif;
 	border-radius: var(--large);
 	padding: 0 1em;
-	height: 2.2em;
+	height: 2em;
 }
 
 .btn_cancel {
@@ -320,10 +326,12 @@ Settings
 	justify-content: space-between;
 	width: 100%;
 	padding: 0 var(--padding);
+	margin-bottom: var(--small);
 }
 
 .settings {
 	position: relative;
+	z-index: 2;
 }
 
 .btn_settings {
@@ -376,14 +384,21 @@ Settings
 Filter
 */
 .filterRow {
-	border-top: 1px solid rgba(var(--c-card-bgrd), 0.16);
-	background-color: rgba(var(--c-card-bgrd), 0.05);
+	background: linear-gradient(
+		0deg,
+		rgba(var(--c-card-bgrd), 0.05) 0%,
+		rgba(var(--c-card-bgrd), 0.05) 50%,
+		rgba(var(--c-card-bgrd), 0.16) 50%,
+		rgba(var(--c-card-bgrd), 0.16) 53%,
+		transparent 53%,
+		transparent 100%
+	);
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
-	height: 1.5em;
-	padding: 0 var(--padding) 0.5em;
+	padding: 0 var(--padding) 0.25em;
+	z-index: 1;
 }
 
 /* awkward solution to a themeable (=svg or font in html) custom caret down icon in the sort option list: */
@@ -403,28 +418,52 @@ Article List
 .articleList_wrapper {
 	/* iOS elastic band background */
 	background-color: rgba(var(--c-card-bgrd), 0.05);
+	flex: 1;
+	display: flex;
 }
 
 .articleList {
 	padding: 0 var(--padding);
 	padding-top: var(--med); /* allow for card hover */
 	border-radius: calc(var(--small));
+	margin: 0 auto;
 }
 
-.articleList_row {
+.articleList_item {
 	padding: var(--large);
 	padding-left: var(--med);
 	background-color: rgba(var(--c-card-bgrd), 0.16);
 	transition: transform 0.3s;
 	border-radius: var(--med);
-	display: flex;
-}
-
-li.articleList_row {
 	margin: 0 0 calc(var(--med) * 2);
+	width: 100%; /* fill the surrounding ol flex*/
+	display: grid;
+	grid-template-columns: 8em 1fr;
+	gap: 0.5em 1em;
+	grid-template-areas:
+		"Checkbox Title"
+		"Date Text";
 }
 
-.articleList_row:hover {
+.articleList input {
+	grid-area: Checkbox;
+	place-self: center;
+}
+
+.articleList_itemTitle {
+	grid-area: Title;
+}
+
+.articleList label {
+	grid-area: Date;
+	justify-self: center;
+}
+
+.articleList_itemText {
+	grid-area: Text;
+}
+
+.articleList_item:hover {
 	background-color: rgba(var(--c-card-bgrd), 0.4);
 	border: 1px solid var(--c-btn-border);
 	transform: scale(1.03);
@@ -432,32 +471,23 @@ li.articleList_row {
 	z-index: 10;
 }
 
-.articleList_meta {
-	font-size: 85%;
-	min-width: 7rem;
-	align-self: center;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	padding-right: var(--med);
-}
-
-.articleList_text {
-	align-self: center;
-	width: calc(100% - 7rem);
-}
-
-.articleList_meta input {
-	margin-bottom: 0.375em;
-}
-
-.articleList_meta > input:checked ~ label {
+.articleList_item input:checked ~ label {
 	color: var(--c-signal-icon);
 }
 
-.articleList_text > h2 {
-	margin-bottom: var(--small);
+.articleList_item input:checked ~ .articleList_itemText {
+	height: 0;
+	overflow: hidden;
+}
+
+.articleList_item input:checked ~ .articleList_itemTitle {
+	text-decoration: line-through;
+	/* span over 1st and second row */
+	grid-area: 1 / 2 / span 2 / 2; /* row/column */
+	align-self: center;
+}
+
+.articleList_itemTitle {
 	color: var(--c-signal-icon);
 	filter: grayscale(0.5);
 }
@@ -466,9 +496,8 @@ li.articleList_row {
 Add Item Bar
 */
 .ctaRow {
-	min-height: var(--cta-hgt);
 	background-color: var(--c-cta-row);
-	padding: 0 var(--padding); /* l/r same as .app */
+	padding: 0.35em var(--padding); /* l/r same as .app */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -597,6 +626,10 @@ MEDIA QUERIES
 
 	.formInputs {
 		margin: var(--large) auto 0 auto;
+	}
+
+	.settingsRow {
+		margin-bottom: 0;
 	}
 }
 

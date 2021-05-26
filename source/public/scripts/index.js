@@ -95,18 +95,16 @@ Functions
 function createListHTML(listObj) {
 	// OBJ -> HTML-String
 	if (listObj) {
-		return listObj
-			.map((listItem) => {
-				let check = "";
-				if (listItem.donedate) {
-					check = "checked";
-				}
-				return `<li class="articleList_item" data-id="${listItem.id}">
+		return listObj.map((listItem) => {
+			let check = "";
+			if (listItem.donedate) {
+				check = "checked";
+			}
+			return `<li class="articleList_item" data-id="${listItem.id}">
 				<input type="checkbox" ${check} aria-checked="${Boolean(check)}"/>
-				<label>${
-					listItem.donedate
-						? listItem.donedate
-						: listItem.duedate
+				<label>${listItem.donedate
+					? listItem.donedate
+					: listItem.duedate
 						? listItem.duedate
 						: "sometime" // empty due date = sometime
 				}</label>
@@ -117,7 +115,7 @@ function createListHTML(listObj) {
 				${listItem.description}
 				</p>
 				</li>`;
-			})
+		})
 			.join("");
 	} // if (listObj)
 	return "<p class='emptyApp'>This list is empty.<br>Time to hammer-in some Topics:</p>";
@@ -128,14 +126,15 @@ function renderList(arr = LISTARR, sortKey = LISTSORT, showDone = SHOWDONE) {
 	articleList.innerHTML = ""; // safer than .innerHTML ?
 	// if "done"-Filter is not pressed filter arr to only uncompleted notes
 	if (!showDone) {
+		// eslint-disable-next-line no-param-reassign
 		arr = arr.filter((current) => {
-			return current["donedate"] === "";
+			return current.donedate === "";
 		});
 	}
 	// render the html using sorted arr
 	articleList.insertAdjacentHTML(
 		"beforeend",
-		createListHTML(sortArrayOfObjects(arr, sortKey))
+		createListHTML(sortArrayOfObjects(arr, sortKey)),
 	);
 	updateAppTitle(arr.length);
 }
@@ -165,9 +164,8 @@ function toggleDone(e) {
 }
 
 function editItem(e) {
-	const hotArea =
-		e.target.classList.contains("articleList_itemTitle") ||
-		e.target.classList.contains("articleList_itemText");
+	const hotArea = e.target.classList.contains("articleList_itemTitle")
+		|| e.target.classList.contains("articleList_itemText");
 	if (hotArea) {
 		const currentID = +e.target.closest(".articleList_item").dataset.id;
 		const currentItem = LISTARR[currentID];
@@ -180,13 +178,14 @@ function renderModal(listItem) {
 	if (listItem) {
 		console.log("renderModal_ListItem:");
 		console.log(listItem);
-		modalTitle.value = listItem["title"];
-		modalDescription.value = listItem["description"];
-		priority = listItem["priority"];
+		modalTitle.value = listItem.title;
+		modalDescription.value = listItem.description;
+		const { priority } = listItem;
 		radio[priority].checked = true;
-		modalDatepicker.value = listItem["duedate"];
+		modalDatepicker.value = listItem.duedate;
 		// store id of listItem in modal head
-		modal.setAttribute("data-id", listItem["id"]);
+		// modal.setAttribute("data-id", listItem["id"]);
+		modal.dataset.id = listItem.id;
 	}
 }
 
@@ -213,6 +212,7 @@ function updateListItem(e) {
 	const description = modalDescription.value;
 	const duedate = modalDatepicker.value;
 	let creationdate = 0;
+	let donedate = 0;
 	// if modal shows an item, which is not in LISTARR
 	if (!currentItem) {
 		// set new creation- & donedates
@@ -220,8 +220,8 @@ function updateListItem(e) {
 		donedate = "";
 	} else {
 		// else don't alter creation- & donedates
-		creationdate = currentItem["creationdate"];
-		donedate = currentItem["donedate"];
+		creationdate = currentItem.creationdate;
+		donedate = currentItem.donedate;
 	}
 	const priority = +radio.filter((c) => {
 		// returns an array with all radios that are checked
@@ -262,8 +262,8 @@ function newListItem(e) {
 	// initialize default listItem
 	const id = NEWID;
 	NEWID++;
-	let input = addItemForm.querySelector("input").value;
-	const title = input ? input.match(/[a-z]/gi).join("") : ""; // set the title to empty or a regex filtered value of the input-field
+	const input = addItemForm.querySelector("input").value;
+	const title = input ? input.match(/[a-z, 0-9]/gi).join("") : ""; // set the title to empty or a regex filtered value of the input-field
 	const description = "";
 	const priority = 0;
 	const duedate = "";
@@ -304,7 +304,7 @@ function sortArrayOfObjects(myArray, sortKey = "title") {
 				return sa > sb ? 1 : sa < sb ? -1 : 0;
 			},
 			number: (a, b) => {
-				console.log("sorting numbers");
+				console.log("sorting biggest to smallest numbers");
 				return b - a;
 			},
 		};
@@ -321,9 +321,8 @@ function sortArrayOfObjects(myArray, sortKey = "title") {
 function getTodayUS() {
 	// returns current date in YYYY-MM-DD
 	const currentDate = new Date();
-	return `${currentDate.getFullYear()}-${
-		currentDate.getMonth() + 1
-	}-${currentDate.getDate()}`;
+	return `${currentDate.getFullYear()}-${currentDate.getMonth() + 1
+		}-${currentDate.getDate()}`;
 }
 
 function updateAppTitle(listLen) {
@@ -345,11 +344,7 @@ renderList();
 
 /*
 
-
-
 dabbles
-
-
 
 */
 function openSettings() {

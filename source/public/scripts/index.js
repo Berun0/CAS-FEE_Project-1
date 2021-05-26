@@ -285,7 +285,10 @@ function newListItem(e) {
 
 function sortArrayOfObjects(myArray, sortKey = "title") {
 	// returns a sorted array of objects
+<<<<<<< HEAD
 	// sortKey can be
+=======
+>>>>>>> fa42d6284d6a09c62f6c2766914d8a3a09091aa7
 	if (myArray.length > 0) {
 		console.log(`sorting according: ${sortKey}`);
 		const sortFunction = {

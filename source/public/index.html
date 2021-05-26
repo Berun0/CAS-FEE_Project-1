@@ -119,17 +119,9 @@
 					<!-- flat hierarchy to allow for css driven list changes when checked -->
 					<li class="articleList_item" data-id="-1">
 						<input type="checkbox" checked aria-checked="true" />
-						<label>Today</label>
-						<h2 class="articleList_itemTitle">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-							vero eligendi sed, repellat illo.
-						</h2>
-						<p class="articleList_itemText">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-							vero eligendi sed, repellat illo, maxime dolores facere et
-							aspernatur iure reprehenderit harum ea debitis. Sit, non repellat?
-							Minus, earum consequatur!
-						</p>
+						<label>...</label>
+						<h2 class="articleList_itemTitle">...</h2>
+						<p class="articleList_itemText">...</p>
 					</li>
 				</ol>
 			</section>
@@ -142,21 +134,23 @@
 						aria-label="Input Title of new Note."
 						autocomplete="off"
 						aria-required="true"
+						required
 					/><button type="submit" class="btn btn_add">Add</button>
 				</form>
 			</footer>
 		</main>
 		<aside class="main modal container">
-			<form action="" js-modalform class="holygrail container">
-				<div class="formInputs scrollable hideScrollbars">
+			<form action="" class="holygrail container">
+				<div class="formContent scrollable hideScrollbars">
 					<label class="title"
 						><span class="sr-only">Title</span>
 						<input
 							type="text"
-							js-modalField-title
 							aria-required="true"
 							placeholder="Title"
 							tabindex="2"
+							data-js="modaltitle"
+							required
 						/>
 					</label>
 					<label class="description"
@@ -169,21 +163,22 @@
 							aria-required="false"
 							placeholder="Description"
 							tabindex="3"
+							data-js="modaldescription"
 						></textarea>
 					</label>
 
-					<p class="importance_lbl">Importance</p>
-					<div class="importance_select">
+					<p class="priority_lbl">Priority</p>
+					<div class="priority_select">
 						<label
 							><span class="sr-only">0</span>
 							<input
 								type="radio"
 								name="prio"
 								aria-required="false"
-								aria-checked="true"
-								checked="checked"
+								aria-checked="false"
 								tabindex="4"
 								value="0"
+								data-js-radio="0"
 							/>
 						</label>
 						<label
@@ -194,6 +189,7 @@
 								aria-required="false"
 								tabindex="4"
 								value="1"
+								data-js-radio="1"
 							/>
 						</label>
 						<label
@@ -204,6 +200,7 @@
 								aria-required="false"
 								tabindex="4"
 								value="2"
+								data-js-radio="2"
 							/>
 						</label>
 						<label
@@ -214,6 +211,7 @@
 								aria-required="false"
 								tabindex="4"
 								value="3"
+								data-js-radio="3"
 							/>
 						</label>
 					</div>
@@ -225,7 +223,6 @@
 						aria-required="false"
 						class="datepicker_select"
 						tabindex="5"
-						onchange="getDatepicker(this)"
 					/>
 				</div>
 

@@ -39,16 +39,15 @@ const LISTARR = [
 /*
 // global variables
 */
-const ID = LISTARR.length;
+let NEWID = LISTARR.length;
 const LOCALE = "de-CH";
 let THEME = "dark";
 let LISTSORT = "creationdate";
 let SHOWDONE = true;
 
 /*
-DOMStrings
+DOM elements
 */
-
 //
 // AppTitle Area
 const visItemsCount = document.querySelector(".appTitle_visItemsCount");
@@ -61,25 +60,37 @@ const settingsInp = settingsMenu.querySelectorAll("input");
 // modal
 const main = document.querySelector("main");
 const modal = document.querySelector("aside");
-const modalForm = document.querySelector("[js-modalform]");
-const modalFieldTitle = modalForm.querySelector("[js-modalField-title]");
-const modalSubmitBtn = modalForm.querySelector("button[type='submit']");
+
+const modalTitle = modal.querySelector("[data-js='modaltitle']");
+const modalDescription = modal.querySelector("[data-js='modaldescription']");
+const radio = new Array(4);
+radio[0] = modal.querySelector("[data-js-radio='0']");
+radio[1] = modal.querySelector("[data-js-radio='1']");
+radio[2] = modal.querySelector("[data-js-radio='2']");
+radio[3] = modal.querySelector("[data-js-radio='3']");
+const modalDatepicker = modal.querySelector("#datepicker");
+const modalCancelBtn = modal.querySelector(".btn_cancel");
+const modalSaveBtn = modal.querySelector("button[type='submit']");
 
 // addItem below list
-const addForm = document.querySelector("[js-submitAddItem]");
+const addItemForm = document.querySelector("[js-submitAddItem]");
 
 // the List - outputting DATALIST
+// get to the stuff inside via bubbling
 const articleList = document.querySelector("#ArticleList");
 
 /*
 DOM events
 */
-addForm.addEventListener("submit", modalOpen);
+addItemForm.addEventListener("submit", newListItem);
+articleList.addEventListener("change", toggleDone);
+articleList.addEventListener("click", editItem);
+modalCancelBtn.addEventListener("click", updateListItem);
+modalSaveBtn.addEventListener("click", updateListItem);
 
 /*
 Functions
 */
-function isItChecked(date) {}
 
 function createListHTML(listObj) {
 	// OBJ -> HTML-String
@@ -109,17 +120,19 @@ function createListHTML(listObj) {
 			})
 			.join("");
 	} // if (listObj)
-	return '<p class="emptyApp">This list is empty.<br>Time to hammer-in some ToDos:</p>';
+	return "<p class='emptyApp'>This list is empty.<br>Time to hammer-in some Topics:</p>";
 }
 
 function renderList(arr = LISTARR, sortKey = LISTSORT, showDone = SHOWDONE) {
 	// OBJ -> sort -> HTML-String
 	articleList.innerHTML = ""; // safer than .innerHTML ?
+	// if "done"-Filter is not pressed filter arr to only uncompleted notes
 	if (!showDone) {
 		arr = arr.filter((current) => {
 			return current["donedate"] === "";
 		});
 	}
+	// render the html using sorted arr
 	articleList.insertAdjacentHTML(
 		"beforeend",
 		createListHTML(sortArrayOfObjects(arr, sortKey))
@@ -129,8 +142,8 @@ function renderList(arr = LISTARR, sortKey = LISTSORT, showDone = SHOWDONE) {
 
 // do something with checkbox interaction
 function toggleDone(e) {
-	const btnCheckbox = e.target.type;
-	if (btnCheckbox) {
+	const hotArea = e.target.type; // checkbox is assumed to be only element with a type attribute
+	if (hotArea) {
 		const currentItem = e.target.closest(".articleList_item");
 		// set checkbox attribute to checked if not existing
 		currentItem.toggleAttribute("checked");
@@ -143,27 +156,137 @@ function toggleDone(e) {
 		currentItem.setAttribute("aria-checked", ariaValue);
 
 		// toggle donedate of current item in LISTARR
-		const currentID = currentItem.dataset.id;
+		const currentID = +currentItem.dataset.id;
 		let doneValue;
-		LISTARR[currentID].donedate ? (doneValue = "") : (doneValue = today());
+		LISTARR[currentID].donedate ? (doneValue = "") : (doneValue = getTodayUS());
 		LISTARR[currentID].donedate = doneValue;
 		renderList();
 	}
 }
 
-function editItem() {}
+function editItem(e) {
+	const hotArea =
+		e.target.classList.contains("articleList_itemTitle") ||
+		e.target.classList.contains("articleList_itemText");
+	if (hotArea) {
+		const currentID = +e.target.closest(".articleList_item").dataset.id;
+		const currentItem = LISTARR[currentID];
+		renderModal(currentItem);
+		modalToggleVisibility(e);
+	}
+}
 
-function addItem() {}
+function renderModal(listItem) {
+	if (listItem) {
+		console.log("renderModal_ListItem:");
+		console.log(listItem);
+		modalTitle.value = listItem["title"];
+		modalDescription.value = listItem["description"];
+		priority = listItem["priority"];
+		radio[priority].checked = true;
+		modalDatepicker.value = listItem["duedate"];
+		// store id of listItem in modal head
+		modal.setAttribute("data-id", listItem["id"]);
+	}
+}
 
-function attachListEvents() {
-	articleList.addEventListener("change", toggleDone);
-	articleList.addEventListener("click", editItem);
+function updateListItem(e) {
+	e.preventDefault(); // do not reload page from form
+	// get id of listItem displayed in modal
+	const id = +modal.dataset.id; // cast to number
+	// get out if cancel has been clicked
+	if (e.currentTarget.classList.contains("btn_cancel")) {
+		// if modal shows an item, which has not been in LISTARR
+		// decrement NEWID
+		if (NEWID > LISTARR.length) {
+			NEWID--;
+		}
+		modalToggleVisibility(e);
+		return;
+	}
+	const currentItem = LISTARR[id];
+	console.log("updateListItem_currentItem:");
+	console.log(currentItem);
+	// else target is save button
+	// read all elements in modal form
+	const title = modalTitle.value;
+	const description = modalDescription.value;
+	const duedate = modalDatepicker.value;
+	let creationdate = 0;
+	// if modal shows an item, which is not in LISTARR
+	if (!currentItem) {
+		// set new creation- & donedates
+		creationdate = Date.now(); // sets it in [ms]
+		donedate = "";
+	} else {
+		// else don't alter creation- & donedates
+		creationdate = currentItem["creationdate"];
+		donedate = currentItem["donedate"];
+	}
+	const priority = +radio.filter((c) => {
+		// returns an array with all radios that are checked
+		return c.checked;
+	})[0].value; // get the value from the first in array (there is only one, anyway)
+
+	const listItem = {
+		id,
+		title,
+		description,
+		priority,
+		duedate,
+		donedate,
+		creationdate,
+	};
+	console.log("updateListItem_listItem:");
+	console.log(listItem);
+
+	// if we're editing a item in LISTARR,
+	// don't just push the new one at the end of LISTARR. Replace instead.
+	if (currentItem) {
+		// replace listItem in LISTARR
+		console.log("this is editing a current item");
+		LISTARR[id] = listItem;
+	} else {
+		// add listItem at the end of LISTARR
+		LISTARR.push(listItem);
+	}
+	console.log(LISTARR);
+
+	// render the list
+	renderList();
+	// close the modal
+	modalToggleVisibility(e);
+}
+function newListItem(e) {
+	e.preventDefault(); // do not reload page from form
+	// initialize default listItem
+	const id = NEWID;
+	NEWID++;
+	let input = addItemForm.querySelector("input").value;
+	const title = input ? input.match(/[a-z]/gi).join("") : ""; // set the title to empty or a regex filtered value of the input-field
+	const description = "";
+	const priority = 0;
+	const duedate = "";
+	const donedate = "";
+	const creationdate = "";
+
+	const newItem = {
+		id,
+		title,
+		description,
+		priority,
+		duedate,
+		creationdate,
+		donedate,
+	};
+	renderModal(newItem);
+	modalToggleVisibility(e);
 }
 
 function sortArrayOfObjects(myArray, sortKey = "title") {
+	// returns a sorted array of objects
 	if (myArray.length > 0) {
 		console.log(`sorting according: ${sortKey}`);
-		console.log(`myArray: ${myArray}`);
 		const sortFunction = {
 			string: (a, b) => {
 				// do not consider uppercase
@@ -192,7 +315,7 @@ function sortArrayOfObjects(myArray, sortKey = "title") {
 	} // if (myArray)
 }
 
-function today() {
+function getTodayUS() {
 	// returns current date in YYYY-MM-DD
 	const currentDate = new Date();
 	return `${currentDate.getFullYear()}-${
@@ -202,13 +325,20 @@ function today() {
 
 function updateAppTitle(listLen) {
 	visItemsCount.textContent = ` (${listLen})`;
-	let d = new Date();
-	modDate.textContent = d.toUTCString();
+	const d = new Date();
+	modDate.textContent = d.toLocaleDateString(LOCALE, {
+		weekday: "long",
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+		hour: "numeric",
+		minute: "numeric",
+		second: "numeric",
+	});
 }
 
 // init
 renderList();
-attachListEvents();
 
 /*
 
@@ -247,14 +377,9 @@ function setFilter(inpEl) {
 	renderList();
 }
 
-function modalOpen(e) {
-	e.preventDefault();
+function modalToggleVisibility(e) {
+	e.preventDefault(); // do not reload page from form
+
 	main.classList.toggle("hidden");
 	modal.classList.toggle("open");
-	modalFieldTitle.value = addForm.querySelector("input").value;
-	modalSubmitBtn.focus();
-}
-
-function getDatepicker(inpEl) {
-	console.log(inpEl.value);
 }

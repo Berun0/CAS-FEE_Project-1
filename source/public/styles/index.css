@@ -519,7 +519,7 @@ MODAL
 	justify-content: center;
 }
 
-.formInputs {
+.formContent {
 	margin: 0 auto;
 	max-height: 700px;
 	max-width: 640px;
@@ -530,41 +530,41 @@ MODAL
 	grid-template-areas:
 		"Title Title Title"
 		"Description Description Description"
-		"empty Importance_lbl Importance_select"
+		"empty priority_lbl priority_select"
 		"empty Datepicker_lbl Datepicker_select";
 	padding: var(--large) var(--padding);
 	background-color: rgba(var(--c-card-bgrd), 0.05);
 	border-radius: calc(var(--small));
 }
 
-.formInputs .title {
+.formContent .title {
 	grid-area: Title;
 }
 
-.formInputs .title input {
+.formContent .title input {
 	width: 100%;
 }
 
-.formInputs .description {
+.formContent .description {
 	grid-area: Description;
 }
 
-.formInputs .description textarea {
+.formContent .description textarea {
 	width: 100%;
 	resize: none;
 }
 
-.formInputs .importance_lbl {
-	grid-area: Importance_lbl;
+.formContent .priority_lbl {
+	grid-area: priority_lbl;
 	align-self: center;
 }
 
-.formInputs .importance_select {
-	grid-area: Importance_select;
+.formContent .priority_select {
+	grid-area: priority_select;
 	justify-self: end;
 }
 
-.formInputs .importance_select label {
+.formContent .priority_select label {
 	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
@@ -572,14 +572,14 @@ MODAL
 	margin-right: var(--small);
 }
 
-.formInputs .importance_select input {
+.formContent .priority_select input {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.formInputs .importance_select input::before {
+.formContent .priority_select input::before {
 	position: absolute;
 	display: inline-flex;
 	flex-direction: column;
@@ -590,16 +590,16 @@ MODAL
 	color: var(--c-placeholder);
 }
 
-.formInputs .importance_select input:checked::before {
+.formContent .priority_select input:checked::before {
 	content: "";
 }
 
-.formInputs .datepicker_lbl {
+.formContent .datepicker_lbl {
 	grid-area: Datepicker_lbl;
 	align-self: center;
 }
 
-.formInputs .datepicker_select {
+.formContent .datepicker_select {
 	grid-area: Datepicker_select;
 }
 
@@ -623,7 +623,7 @@ MEDIA QUERIES
 		font-size: 20px;
 	}
 
-	.formInputs {
+	.formContent {
 		margin: var(--large) auto 0 auto;
 	}
 

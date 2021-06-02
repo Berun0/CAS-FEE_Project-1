@@ -14,7 +14,7 @@ body[theme="dark"] {
 	--c-input-contrast: #161616;
 	--c-outline: #ff9765cc;
 	--c-signal-icon: #6ddab5;
-	--c-signal-icon-contrast: #161616;
+	--c-signal-icon-contrast: #19191a;
 	--c-signal-trash: #a4090a;
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
 	--c-card-text: #fbfbfb;
@@ -159,7 +159,7 @@ input[type="radio"]:checked::after {
 	top: 0;
 	right: 0;
 	bottom: 0;
-	left: 0;
+	left: 2px;
 	display: inline-flex;
 	flex-direction: column;
 	justify-content: center;

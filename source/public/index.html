@@ -1,238 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta property= “og:image” content =
-		“https://brunobuergi.com/images/og_home.jpg”/>
-		<title>DoNote App</title>
-		<!-- <script
-			src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
-			integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU="
-			crossorigin="anonymous"
-			defer
-		></script> -->
-		<!-- <script src="scripts/index.js" type="module"></script> -->
-		<script src="scripts/index.js" defer></script>
 
-		<link rel="stylesheet" href="styles/index.css" />
-	</head>
-	<body theme="dark">
-		<main class="main container holygrail">
-			<header class="header">
-				<div class="settingsRow">
-					<div>
-						<h1 class="appTitle">
-							DoNotes<span class="appTitle_visItemsCount"></span>
-						</h1>
-						<p class="status">
-							Last modified: <span class="appTitle_modDate"></span>
-						</p>
-					</div>
-					<div class="settings" aria-hidden="true">
-						<button
-							class="btn_settings"
-							aria-haspopup="true"
-							aria-expanded="false"
-							tabindex="0"
-							aria-label="Settings Menu."
-							onclick="openSettings()"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="7"
-								height="27"
-								viewBox="0 0 7 27"
-							>
-								<path
-									d="M-1418,1399.5a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1399.5Zm0-10a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1389.5Zm0-10a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1379.5Z"
-									transform="translate(1418 -1376)"
-									fill="#fff"
-								/>
-							</svg>
-						</button>
-						<ul class="settingsMenu">
-							<li class="settingsMenu_item radio">
-								<label class="settingsMenu_radioWrapper"
-									>Dark Mode
-									<input
-										type="radio"
-										name="theme"
-										value="dark"
-										checked="checked"
-										tabindex="-1"
-										onchange="setTheme(this)"
-									/>
-								</label>
-								<label class="settingsMenu_radioWrapper"
-									>Light Mode
-									<input
-										type="radio"
-										name="theme"
-										value="light"
-										tabindex="-1"
-										onchange="setTheme(this)"
-									/>
-								</label>
-							</li>
-						</ul>
-					</div>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta property=“og:image” content=“https://brunobuergi.com/images/og_home.jpg” />
+	<title>DoNote App</title>
+
+	<script src="js/utils.js" defer></script>
+	<script src="js/controllers/app-controller.js" type="module"></script>
+
+	<link rel="stylesheet" href="styles/index.css" />
+</head>
+
+<body theme="dark">
+	<main class="main container holygrail">
+		<header class="header">
+			<div class="settingsRow">
+				<div>
+					<h1 class="appTitle">
+						DoNotes<span class="appTitle_visItemsCount"></span>
+					</h1>
+					<p class="status">
+						Last modified: <span class="appTitle_modDate"></span>
+					</p>
 				</div>
-				<nav class="filterRow">
-					<div class="btn btn_filter">
-						<span class="dropdownIcon" aria-hidden="true">&#9660;</span>
-						<h3 class="sr-only">Sort options for list:</h3>
-						<select name="Sort" class="select" onchange="setSort(this)">
-							<option value="creationdate" class="sort_option">
-								Sort by Date Created
-							</option>
-							<option value="duedate" class="sort_option">
-								Sort by Due Date
-							</option>
-							<option value="priority" class="sort_option">
-								Sort by Note Priority
-							</option>
-						</select>
-					</div>
-					<div class="btn btn_filter">
-						<h3 class="sr-only">Filter option for list:</h3>
-						<input
-							id="chkCompleted"
-							type="checkbox"
-							checked
-							title="Add completed notes to List."
-							onchange="setFilter(this)"
-						/>
-						<label for="chkCompleted" class="sideLabel sr-only"
-							>Add completed notes to List.</label
-						>
-					</div>
-					<a href="#newnote" class="sr-only" tabindex="-1"
-						>Create a new note.</a
-					>
-				</nav>
-			</header>
-			<section class="articleList_wrapper scrollable hideScrollbars">
-				<h2 class="sr-only">Panel with all notes listed:</h2>
-				<ol class="articleList" id="ArticleList">
-					<!-- flat hierarchy to allow for css driven list changes when checked -->
-					<li class="articleList_item" data-id="-1">
-						<input type="checkbox" checked aria-checked="true" />
-						<label>...</label>
-						<h2 class="articleList_itemTitle">...</h2>
-						<p class="articleList_itemText">...</p>
-					</li>
-				</ol>
-			</section>
-			<footer>
-				<form class="ctaRow container" js-submitAddItem>
-					<input
-						type="text"
-						id="newnote"
-						placeholder="Topic"
-						aria-label="Input Title of new Note."
-						autocomplete="off"
-						aria-required="true"
-						required
-					/><button type="submit" class="btn btn_add">Add</button>
-				</form>
-			</footer>
-		</main>
-		<aside class="main modal container">
-			<form action="" class="holygrail container">
-				<div class="formContent scrollable hideScrollbars">
-					<label class="title"
-						><span class="sr-only">Title</span>
-						<input
-							type="text"
-							aria-required="true"
-							placeholder="Title"
-							tabindex="2"
-							data-js="modaltitle"
-							required
-						/>
-					</label>
-					<label class="description"
-						><span class="sr-only">Description</span>
-						<textarea
-							name="description"
-							rows="10"
-							cols="33"
-							wrap="hard"
-							aria-required="false"
-							placeholder="Description"
-							tabindex="3"
-							data-js="modaldescription"
-						></textarea>
-					</label>
-
-					<p class="priority_lbl">Priority</p>
-					<div class="priority_select">
-						<label
-							><span class="sr-only">0</span>
-							<input
-								type="radio"
-								name="prio"
-								aria-required="false"
-								aria-checked="false"
-								tabindex="4"
-								value="0"
-								data-js-radio="0"
-							/>
-						</label>
-						<label
-							><span class="sr-only">1</span>
-							<input
-								type="radio"
-								name="prio"
-								aria-required="false"
-								tabindex="4"
-								value="1"
-								data-js-radio="1"
-							/>
-						</label>
-						<label
-							><span class="sr-only">2</span>
-							<input
-								type="radio"
-								name="prio"
-								aria-required="false"
-								tabindex="4"
-								value="2"
-								data-js-radio="2"
-							/>
-						</label>
-						<label
-							><span class="sr-only">3</span>
-							<input
-								type="radio"
-								name="prio"
-								aria-required="false"
-								tabindex="4"
-								value="3"
-								data-js-radio="3"
-							/>
-						</label>
-					</div>
-					<label for="datepicker" class="datepicker_lbl">Date </label>
-					<input
-						id="datepicker"
-						type="date"
-						name="datepicker"
-						aria-required="false"
-						class="datepicker_select"
-						tabindex="5"
-					/>
-				</div>
-
-				<div class="ctaRow">
-					<button class="btn_cancel" tabindex="6">Cancel</button>
-					<button autofocus type="submit" class="btn_save" tabindex="1">
-						Save
+				<div class="settings" aria-hidden="true">
+					<button class="btn_settings" aria-haspopup="true" aria-expanded="false" tabindex="0"
+						aria-label="Settings Menu.">
+						<svg xmlns=" http://www.w3.org/2000/svg" width="7" height="27" viewBox="0 0 7 27">
+							<path
+								d="M-1418,1399.5a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1399.5Zm0-10a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1389.5Zm0-10a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1379.5Z"
+								transform="translate(1418 -1376)" fill="#fff" />
+						</svg>
 					</button>
+					<ul class="settingsMenu">
+						<li class="settingsMenu_item radio">
+							<label class="settingsMenu_radioWrapper">Dark Mode
+								<input type="radio" name="theme" value="dark" checked="checked" tabindex="-1" />
+							</label>
+							<label class="settingsMenu_radioWrapper">Light Mode
+								<input type="radio" name="theme" value="light" tabindex="-1" />
+							</label>
+						</li>
+					</ul>
 				</div>
+			</div>
+			<nav class="filterRow">
+				<div class="btn btn_filter">
+					<span class="dropdownIcon" aria-hidden="true">&#9660;</span>
+					<h3 class="sr-only">Sort options for list:</h3>
+					<select name="Sort" class="select" data-js="orderBy_btn">
+						<option value="creationdate" class="sort_option">
+							Sort by Date Created
+						</option>
+						<option value="duedate" class="sort_option">
+							Sort by Due Date
+						</option>
+						<option value="priority" class="sort_option">
+							Sort by Note Priority
+						</option>
+					</select>
+				</div>
+				<div class="btn btn_filter">
+					<h3 class="sr-only">Filter option for list:</h3>
+					<input id="chkCompleted" type="checkbox" checked title="Add completed notes to List." />
+					<label for="chkCompleted" class="sideLabel sr-only">Add completed notes to List.</label>
+				</div>
+				<a href="#newnote" class="sr-only" tabindex="-1">Create a new note.</a>
+			</nav>
+		</header>
+		<section class="articleList_wrapper scrollable hideScrollbars">
+			<h2 class="sr-only">Panel with all notes listed:</h2>
+			<ol class="articleList" id="ArticleList">
+				<!-- flat hierarchy to allow for css driven list changes when checked -->
+				<li class="articleList_item" data-id="-1">
+					<input type="checkbox" checked aria-checked="true" />
+					<label>...</label>
+					<h2 class="articleList_itemTitle">...</h2>
+					<p class="articleList_itemText">...</p>
+				</li>
+			</ol>
+		</section>
+		<footer>
+			<form class="ctaRow container" js-submitAddItem>
+				<input type="text" id="newnote" placeholder="Topic" aria-label="Input Title of new Note." autocomplete="off"
+					aria-required="true" required /><button type="submit" class="btn btn_add">Add</button>
 			</form>
-		</aside>
-	</body>
+		</footer>
+	</main>
+	<aside class="main modal container">
+		<form action="" class="holygrail container">
+			<div class="formContent scrollable hideScrollbars">
+				<label class="title"><span class="sr-only">Title</span>
+					<input type="text" aria-required="true" placeholder="Title" tabindex="2" data-js="modaltitle" required />
+				</label>
+				<label class="description"><span class="sr-only">Description</span>
+					<textarea name="description" rows="10" cols="33" wrap="hard" aria-required="false" placeholder="Description"
+						tabindex="3" data-js="modaldescription"></textarea>
+				</label>
+
+				<p class="priority_lbl">Priority</p>
+				<div class="priority_select">
+					<label><span class="sr-only">0</span>
+						<input type="radio" name="prio" aria-required="false" aria-checked="false" tabindex="4" value="0"
+							data-js-radio="0" />
+					</label>
+					<label><span class="sr-only">1</span>
+						<input type="radio" name="prio" aria-required="false" tabindex="4" value="1" data-js-radio="1" />
+					</label>
+					<label><span class="sr-only">2</span>
+						<input type="radio" name="prio" aria-required="false" tabindex="4" value="2" data-js-radio="2" />
+					</label>
+					<label><span class="sr-only">3</span>
+						<input type="radio" name="prio" aria-required="false" tabindex="4" value="3" data-js-radio="3" />
+					</label>
+				</div>
+				<label for="datepicker" class="datepicker_lbl">Date </label>
+				<input id="datepicker" type="date" name="datepicker" aria-required="false" class="datepicker_select"
+					tabindex="5" />
+			</div>
+
+			<div class="ctaRow">
+				<button class="btn_cancel" tabindex="6">Cancel</button>
+				<button autofocus type="submit" class="btn_save" tabindex="1">
+					Save
+				</button>
+			</div>
+		</form>
+	</aside>
+</body>
+
 </html>

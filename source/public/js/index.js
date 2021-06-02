@@ -69,6 +69,9 @@ radio[1] = modal.querySelector("[data-js-radio='1']");
 radio[2] = modal.querySelector("[data-js-radio='2']");
 radio[3] = modal.querySelector("[data-js-radio='3']");
 const modalDatepicker = modal.querySelector("#datepicker");
+// try to overwrite todays date in safari
+// modalDatepicker.value = null;
+// modalDatepicker.placeholder = "yyyy-mm-dd";
 const modalCancelBtn = modal.querySelector(".btn_cancel");
 const modalSaveBtn = modal.querySelector("button[type='submit']");
 

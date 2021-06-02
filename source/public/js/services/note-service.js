@@ -68,6 +68,7 @@ export class NoteService {
         return compareFunction(firstItem[sortKey], secondItem[sortKey]);
       }); // z.B. firstItem["price"], secondItem["price"]
     } // if (myArray)
+    // if myArray has no length property, give an array back
     return [];
   }
 

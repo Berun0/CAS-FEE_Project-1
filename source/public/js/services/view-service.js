@@ -18,7 +18,7 @@ export class ListView {
     // OBJ -> HTML-String
     if (notes) {
       notes = notes.map((currentNote) => {
-        let check = "";
+        let check = ""; // if note is unchecked, [checked] will not be rendered
         if (currentNote.donedate) {
           check = "checked";
         }
@@ -44,10 +44,8 @@ export class ListView {
       })
         .join("");
     }
-    // notes could be empty, if all are done and done notes should not be shown
-    if (notes) { return notes; }
-    // if no notes
-    return "<p class='emptyApp'>This list is empty.<br>Time to hammer-in some Topics:</p>";
+    // notes could be empty if all are done. and done notes should not be shown
+    return notes || "<p class='emptyApp'>This list is empty.<br>Time to hammer-in some Topics:</p>";
   }
 
   renderAppTitle(listLen, countElem, dateElem) {
@@ -66,7 +64,6 @@ export class ListView {
 }
 
 export class EditView {
-  // renderEditView(theNote, modal, modalTitle, modalDescription, modalRadio, modalDatepicker) {
   renderEditView(theNote, modalObj) {
     const { modalParent, modalTitle, modalDescription, modalRadio, modalDatepicker } = modalObj;
     if (theNote) {

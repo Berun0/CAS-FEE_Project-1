@@ -1,43 +1,59 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
-import { NoteStorage } from "./data/note-storage.js";
 import { Note } from "./note.js";
+import { SETTINGS, saveSettings } from "./data/settings_storage.js";
 
 export class NoteService {
   constructor() {
     this.notes = []; // noteService.notes will have all the notes
-    this.settings = { // and all the settings, initially instanciated with these values:
-      nextID: 0,
-      locale: "en",
-      theme: "dark",
-      sort: "creationdate",
-      showDone: true,
-    };
   }
 
-  loadData() {
-    this.notes.push(new Note(0, "Titel", "A Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam quidem qui fugiat unde quam temporibus quis, aspernatur reprehenderit sunt vel sed, illo, autem neque nesciunt?Architecto harum necessitatibus dolor suscipit.", 0, "2021-05-26", 16, false, "2021-05-24"));
-    this.notes.push(new Note(1, "Titel2", "Z Aspernatur reprehenderit sunt vel sed, illo, autem neque nesciunt?Architecto harum necessitatibus dolor suscipit.", 2, "", 17, false, ""));
-    this.settings.nextID = this.notes.length;
+  loadNotes() {
+    this.notes = JSON.parse(localStorage.getItem("DoNotes_data"));
+    console.log("localData: ");
+    console.log(this.notes);
+
+    // if no datastorage - we get 'null' back - take these values instead:
+    if (!this.notes) {
+      this.notes = [];
+      this.notes.push(new Note(0, "Titel", "A Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam quidem qui fugiat unde quam temporibus quis, aspernatur reprehenderit sunt vel sed, illo, autem neque nesciunt?Architecto harum necessitatibus dolor suscipit.", 0, "2021-05-26", 16, false, "2021-05-24"));
+      this.notes.push(new Note(1, "Titel2", "Z Aspernatur reprehenderit sunt vel sed, illo, autem neque nesciunt?Architecto harum necessitatibus dolor suscipit.", 2, "", 17, false, ""));
+      SETTINGS.nextID = this.notes.length;
+    }
     return this.notes;
+  }
+
+  saveAll() {
+    // saves all this.notes
+    // and all SETTINGS
+    // to local storage
+    localStorage.setItem("DoNotes_data", JSON.stringify(this.notes));
+    saveSettings();
   }
 
   getFilteredNotes(orderBy, showDone) {
     let filteredNotes = this.notes;
+    console.log("getFilteredNotes: this.notes");
+    console.log(filteredNotes);
     if (!showDone) {
       // copy of this.notes filter
       filteredNotes = filteredNotes.filter((current) => {
         return current.donedate === "";
       });
       // settings object update
-      this.settings.showDone = showDone;
+      SETTINGS.showDone = showDone;
     }
     // sort needs to happen all the time, as filteredNotes is always new
-    return this.sortArrayOfObjects(filteredNotes, orderBy);
+    // return this.sortArrayOfObjects(filteredNotes, orderBy);
+    const temp = this.sortArrayOfObjects(filteredNotes, orderBy);
+    console.log("result of sortArray");
+    console.log(temp);
+    return temp;
   }
 
   sortArrayOfObjects(myArray, sortKey = "title") {
     // returns a sorted array of objects
+    console.log(`sortkey: ${sortKey}`);
     if (myArray.length > 0) {
       const sortFunction = {
         // sortKey can be
@@ -67,7 +83,7 @@ export class NoteService {
         return compareFunction(firstItem[sortKey], secondItem[sortKey]);
       }); // z.B. firstItem["title"], secondItem["title"]
     } // if (myArray)
-    // if myArray has no length property, give an array back
+    // if myArray has no length property, give an empty array back
     return [];
   }
 
@@ -77,17 +93,19 @@ export class NoteService {
     let doneValue;
     this.notes[idInNotes].donedate ? (doneValue = "") : (doneValue = this.getTodayUS());
     this.notes[idInNotes].donedate = doneValue;
+    this.saveAll();
   }
 
   addNote(note) {
     // save to notes Object
     this.notes.push(note);
     // increment nextID
-    this.settings.nextID++;
+    SETTINGS.nextID++;
+    this.saveAll();
   }
 
   updateNote(note) {
-    const { id } = note;
+    this.saveAll();
     // console.log(`updateNote_id:${id}`);
     // console.log(this.notes);
     // const idInNotes = this.notes.findIndex((cur) => { return cur.id === id; });

@@ -1,11 +1,12 @@
+/* eslint-disable camelcase */
 /* eslint-disable max-len */
+import { SETTINGS, loadSettings, saveSettings } from "../services/data/settings_storage.js";
 import { noteService } from "../services/note-service.js";
 import { listView, editView } from "../services/view-service.js";
 import { Note } from "../services/note.js";
 
 let tempNotes; // temp variable to relay notes between model and view
 let theNote; // temp variable to relay a note between model and view
-const SETTINGS = noteService.settings;
 
 /**
 * declare DOM elements
@@ -87,6 +88,7 @@ function initEventHandler() {
   settingsMenu.addEventListener("change", (e) => {
     SETTINGS.theme = e.target.value;
     document.body.setAttribute("theme", SETTINGS.theme);
+    saveSettings();
   });
 
   // FILTER toggle done
@@ -96,6 +98,7 @@ function initEventHandler() {
     checkBox.toggleAttribute("checked");
     !SETTINGS.showDone;
 
+    saveSettings();
     tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
     listView.renderNotesList(tempNotes, articleList);
     listView.renderAppTitle(tempNotes.length, countElem, dateElem);
@@ -104,6 +107,7 @@ function initEventHandler() {
   // SORTING of tempNotes
   orderBy_btn.addEventListener("change", (e) => {
     SETTINGS.sort = e.target.value;
+    saveSettings();
 
     tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
     listView.renderNotesList(tempNotes, articleList);
@@ -199,7 +203,10 @@ function initEventHandler() {
 function initApp() {
   getDOMElements();
   initEventHandler();
-  tempNotes = noteService.loadData();
+  loadSettings();
+  listView.renderSettings(filterBy_btn, orderBy_btn, settingsInp);
+  tempNotes = noteService.loadNotes();
+  tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
   listView.renderNotesList(tempNotes, articleList);
   listView.renderAppTitle(tempNotes.length, countElem, dateElem);
 }

@@ -17,6 +17,7 @@ body[theme="dark"] {
 	--c-signal-icon-contrast: #19191a;
 	--c-signal-trash: #a4090a;
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
+	--c-listwrapper-bgrd: #29292b;
 	--c-card-text: #fbfbfb;
 	--c-btn-border: #ffffff80;
 	--c-placeholder: #4e4e4e;;
@@ -27,7 +28,7 @@ body[theme="dark"] {
 }
 body[theme="light"] {
 	--c-text: #fbfbfb;
-	--c-app-bgrd: #19191a30;
+	--c-app-bgrd: #19191a2a;
 	--c-input-bgrd: #ffffff94;
 	--c-input-contrast: #161616;
 	--c-outline: #ff9765cc;
@@ -35,6 +36,7 @@ body[theme="light"] {
 	--c-signal-icon-contrast: #161616;
 	--c-signal-trash: #a4090a;
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
+	--c-listwrapper-bgrd: #053680;
 	--c-card-text: #fbfbfb;
 	--c-btn-border: rgba(255, 255, 255, 0.5);
 	--c-placeholder: #4e4e4e;
@@ -347,7 +349,7 @@ Settings
 .settingsMenu {
 	display: inline-block;
 	position: absolute;
-	z-index: 1;
+	z-index: 20;
 	right: 0;
 	top: 50px;
 	width: 10.1rem;
@@ -385,8 +387,8 @@ Filter
 .filterRow {
 	background: linear-gradient(
 		0deg,
-		rgba(var(--c-card-bgrd), 0.05) 0%,
-		rgba(var(--c-card-bgrd), 0.05) 50%,
+		var(--c-listwrapper-bgrd) 0%,
+		var(--c-listwrapper-bgrd) 50%,
 		rgba(var(--c-card-bgrd), 0.16) 50%,
 		rgba(var(--c-card-bgrd), 0.16) 53%,
 		transparent 53%,
@@ -416,7 +418,7 @@ Article List
 */
 .articleList_wrapper {
 	/* iOS elastic band background */
-	background-color: rgba(var(--c-card-bgrd), 0.05);
+	background-color: var(--c-listwrapper-bgrd);
 	flex: 1;
 	display: flex;
 }
@@ -464,11 +466,11 @@ Article List
 }
 
 .articleList_item:hover {
-	background-color: rgba(var(--c-card-bgrd), 0.4);
+	background-color: rgba(var(--c-card-bgrd), 0.3);
 	border: 1px solid var(--c-btn-border);
 	transform: scale(1.03);
 	position: relative;
-	z-index: 10;
+	z-index: 1;
 }
 
 .articleList_item input:checked ~ label {

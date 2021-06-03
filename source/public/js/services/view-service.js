@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 
 // to get access to the settings Object:
-import { noteService } from "./note-service.js";
+import { SETTINGS } from "./data/settings_storage.js";
 
 export class ListView {
   renderNotesList(notes, htmlParent) {
@@ -28,7 +28,7 @@ export class ListView {
             ? currentNote.duedate
             : "sometime"; // neither donedate nor duedate = sometime
         // if done notes should not be shown and current note is done, return empty template:
-        if (!noteService.settings.showDone && currentNote.donedate) {
+        if (!SETTINGS.showDone && currentNote.donedate) {
           return;
         }
         return `<li class="articleList_item" data-id="${currentNote.id}">
@@ -51,7 +51,7 @@ export class ListView {
   renderAppTitle(listLen, countElem, dateElem) {
     countElem.textContent = ` (${listLen})`;
     const d = new Date();
-    dateElem.textContent = d.toLocaleDateString(noteService.settings.locale, {
+    dateElem.textContent = d.toLocaleDateString(SETTINGS.locale, {
       weekday: "long",
       day: "numeric",
       month: "long",
@@ -60,6 +60,40 @@ export class ListView {
       minute: "numeric",
       second: "numeric",
     });
+  }
+
+  renderSettings(filterBy_btn, orderBy_btn, settingsInp) {
+    // set the orderBy_btn
+    console.log(orderBy_btn);
+    console.log(orderBy_btn.children);
+    console.log(SETTINGS.sort);
+    switch (SETTINGS.sort) {
+      case "priority":
+        orderBy_btn.children[2].toggleAttribute("selected");
+        break;
+      case "duedate":
+        orderBy_btn.children[1].toggleAttribute("selected");
+        break;
+      default:
+        orderBy_btn.children[0].toggleAttribute("selected");
+        break;
+    }
+
+    // set the filterBy_btn
+    filterBy_btn.checked = SETTINGS.showDone;
+
+    // set theme
+    document.body.setAttribute("theme", SETTINGS.theme);
+    // set the correct radio box check
+    switch (SETTINGS.theme) {
+      case "light":
+        settingsInp[1].checked = "checked";
+        break;
+
+      default:
+        settingsInp[0].checked = "checked";
+        break;
+    }
   }
 }
 

@@ -64,6 +64,9 @@ export class ListView {
 
   renderSettings(filterBy_btn, orderBy_btn, settingsInp) {
     // set the orderBy_btn
+    console.log(orderBy_btn);
+    console.log(orderBy_btn.children);
+    console.log(SETTINGS.sort);
     switch (SETTINGS.sort) {
       case "priority":
         orderBy_btn.children[2].toggleAttribute("selected");

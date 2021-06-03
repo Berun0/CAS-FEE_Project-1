@@ -19,7 +19,7 @@ body[theme="dark"] {
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
 	--c-card-text: #fbfbfb;
 	--c-btn-border: #ffffff80;
-	--c-placeholder: #fbfbfb;
+	--c-placeholder: #4e4e4e;;
 	--c-browser-window-grad: transparent
 		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
 		no-repeat padding-box;
@@ -37,7 +37,7 @@ body[theme="light"] {
 	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
 	--c-card-text: #fbfbfb;
 	--c-btn-border: rgba(255, 255, 255, 0.5);
-	--c-placeholder: #333333;
+	--c-placeholder: #4e4e4e;
 	--c-browser-window-grad: transparent
 		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
 		no-repeat padding-box;
@@ -129,7 +129,7 @@ textarea {
 	border-radius: var(--large);
 	padding: 0.5em 1em;
 	border: 1px solid var(--c-btn-border);
-	color: var(--c-placeholder);
+	color: var(--c-text);
 }
 
 input[type="date"] {

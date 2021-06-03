@@ -8,7 +8,6 @@
 	<meta property=“og:image” content=“https://brunobuergi.com/images/og_home.jpg” />
 	<title>DoNote App</title>
 
-	<script src="js/utils.js" defer></script>
 	<script src="js/controllers/app-controller.js" type="module"></script>
 
 	<link rel="stylesheet" href="styles/index.css" />
@@ -91,7 +90,7 @@
 		</footer>
 	</main>
 	<aside class="main modal container">
-		<form action="" class="holygrail container">
+		<div class="holygrail container">
 			<div class="formContent scrollable hideScrollbars">
 				<label class="title"><span class="sr-only">Title</span>
 					<input type="text" aria-required="true" placeholder="Title" tabindex="2" data-js="modaltitle" required />
@@ -104,8 +103,7 @@
 				<p class="priority_lbl">Priority</p>
 				<div class="priority_select">
 					<label><span class="sr-only">0</span>
-						<input type="radio" name="prio" aria-required="false" aria-checked="false" tabindex="4" value="0"
-							data-js-radio="0" />
+						<input type="radio" name="prio" aria-required="false" tabindex="4" value="0" data-js-radio="0" />
 					</label>
 					<label><span class="sr-only">1</span>
 						<input type="radio" name="prio" aria-required="false" tabindex="4" value="1" data-js-radio="1" />
@@ -128,7 +126,7 @@
 					Save
 				</button>
 			</div>
-		</form>
+		</div>
 	</aside>
 </body>
 

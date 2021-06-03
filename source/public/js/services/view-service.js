@@ -18,7 +18,7 @@ export class ListView {
     // OBJ -> HTML-String
     if (notes) {
       notes = notes.map((currentNote) => {
-        let check = ""; // if note is unchecked, [checked] will not be rendered
+        let check = ""; // = checked attribute if note is unchecked
         if (currentNote.donedate) {
           check = "checked";
         }
@@ -70,10 +70,10 @@ export class EditView {
       modalTitle.value = theNote.title;
       modalDescription.value = theNote.description;
       const { priority } = theNote;
+      // set the checkbox in the radio-btn array
       modalRadio[priority].checked = true;
       modalDatepicker.value = theNote.duedate;
       modalParent.dataset.id = theNote.id;
-      return theNote;
     }
   }
 

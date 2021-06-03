@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
 import { NoteStorage } from "./data/note-storage.js";
@@ -39,9 +38,9 @@ export class NoteService {
 
   sortArrayOfObjects(myArray, sortKey = "title") {
     // returns a sorted array of objects
-    // sortKey can be
     if (myArray.length > 0) {
       const sortFunction = {
+        // sortKey can be
         string: (a, b) => {
           console.log("sorting strings");
           // do not consider uppercase
@@ -61,12 +60,12 @@ export class NoteService {
           return b - a;
         },
       };
-      // ermittle typeof v. key-value anhand des ersten arrayelementes
+      // ermittle typeof v. key anhand des ersten arrayelementes
       // -> fn for "string" or "number"
       const compareFunction = sortFunction[typeof myArray[0][sortKey]];
-      return myArray.sort((firstItem, secondItem) => {
+      return [...myArray].sort((firstItem, secondItem) => {
         return compareFunction(firstItem[sortKey], secondItem[sortKey]);
-      }); // z.B. firstItem["price"], secondItem["price"]
+      }); // z.B. firstItem["title"], secondItem["title"]
     } // if (myArray)
     // if myArray has no length property, give an array back
     return [];
@@ -110,6 +109,8 @@ export class NoteService {
     const currentDate = new Date();
 
     const year = currentDate.getFullYear();
+    // make sure single digits are preceded by "0"
+    // add a "0" then take the last 2 chars in the string
     const month = (`0${currentDate.getMonth() + 1}`).slice(-2);
     const day = (`0${currentDate.getDate()}`).slice(-2);
 

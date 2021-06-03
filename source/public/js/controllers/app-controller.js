@@ -3,19 +3,22 @@ import { noteService } from "../services/note-service.js";
 import { listView, editView } from "../services/view-service.js";
 import { Note } from "../services/note.js";
 
-let notes; // temp variable to relay notes between model and view
+let tempNotes; // temp variable to relay notes between model and view
 let theNote; // temp variable to relay a note between model and view
+const SETTINGS = noteService.settings;
 
 /**
-* init DOM elements
+* declare DOM elements
 */
 let countElem; let dateElem;
 let settings_btn; let settingsMenu; let settingsInp; let filterBy_btn; let orderBy_btn;
 let articleList;
 let main;
-let MODALOBJ; let modalParent; let modalTitle; let modalDescription; const modalRadio = new Array(4);
+let modalParent; let modalTitle; let modalDescription; const modalRadio = new Array(4);
 let modalDatepicker; let modalCancelBtn; let modalSaveBtn;
-let addItemForm;
+// object to send DOM elements to edit view
+let NOTE_ELEMS = { modalParent, modalTitle, modalDescription, modalRadio, modalDatepicker };
+let newNoteInput;
 
 /**
 * define   DOM elements
@@ -30,7 +33,7 @@ function getDOMElements() {
   settingsMenu = document.querySelector(".settingsMenu");
   settingsInp = settingsMenu.querySelectorAll("input");
 
-  // filterout done
+  // filter done
   filterBy_btn = document.querySelector("#chkCompleted");
 
   // sort dropdown
@@ -40,15 +43,18 @@ function getDOMElements() {
   // get to the stuff inside via bubbling
   articleList = document.querySelector("#ArticleList");
 
-  // modalParent
+  // listing view
   main = document.querySelector("main"); // to set invisible, when modalParent open
+
+  // edit view = modalParent
   modalParent = document.querySelector("aside");
   modalTitle = modalParent.querySelector("[data-js='modaltitle']");
   modalDescription = modalParent.querySelector("[data-js='modaldescription']");
-  modalRadio[0] = modalParent.querySelector("[data-js-radio='0']");
-  modalRadio[1] = modalParent.querySelector("[data-js-radio='1']");
-  modalRadio[2] = modalParent.querySelector("[data-js-radio='2']");
-  modalRadio[3] = modalParent.querySelector("[data-js-radio='3']");
+
+  for (let i = 0; i < modalRadio.length; i++) {
+    modalRadio[i] = modalParent.querySelector(`[data-js-radio='${i}']`);
+  }
+
   modalDatepicker = modalParent.querySelector("#datepicker");
   // trying to overwrite todays date in safari
   // modalDatepicker.value = null;
@@ -56,10 +62,10 @@ function getDOMElements() {
   modalCancelBtn = modalParent.querySelector(".btn_cancel");
   modalSaveBtn = modalParent.querySelector("button[type='submit']");
 
-  MODALOBJ = { modalParent, modalTitle, modalDescription, modalRadio, modalDatepicker };
+  NOTE_ELEMS = { modalParent, modalTitle, modalDescription, modalRadio, modalDatepicker };
 
   // addItem below list
-  addItemForm = document.querySelector("[js-submitAddItem]");
+  newNoteInput = document.querySelector("[js-submitAddItem]");
 }
 
 /**
@@ -79,53 +85,65 @@ function initEventHandler() {
 
   // THEME toggle
   settingsMenu.addEventListener("change", (e) => {
-    noteService.settings.theme = e.target.value;
-    document.body.setAttribute("theme", noteService.settings.theme);
+    SETTINGS.theme = e.target.value;
+    document.body.setAttribute("theme", SETTINGS.theme);
   });
 
   // FILTER toggle done
   filterBy_btn.addEventListener("change", (e) => {
     const checkBox = e.target;
-    noteService.settings.showDone = checkBox.checked;
+    SETTINGS.showDone = checkBox.checked;
     checkBox.toggleAttribute("checked");
-    !noteService.settings.showDone;
+    !SETTINGS.showDone;
 
-    notes = noteService.getFilteredNotes(noteService.settings.sort, noteService.settings.showDone);
-    listView.renderNotesList(notes, articleList);
-    listView.renderAppTitle(notes.length, countElem, dateElem);
+    tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
+    listView.renderNotesList(tempNotes, articleList);
+    listView.renderAppTitle(tempNotes.length, countElem, dateElem);
   });
 
-  // SORTING of notes
+  // SORTING of tempNotes
   orderBy_btn.addEventListener("change", (e) => {
-    noteService.settings.sort = e.target.value;
+    SETTINGS.sort = e.target.value;
 
-    notes = noteService.getFilteredNotes(noteService.settings.sort, noteService.settings.showDone);
-    listView.renderNotesList(notes, articleList);
-    listView.renderAppTitle(notes.length, countElem, dateElem);
+    tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
+    listView.renderNotesList(tempNotes, articleList);
+    listView.renderAppTitle(tempNotes.length, countElem, dateElem);
   });
 
   // ADD note
-  addItemForm.addEventListener("submit", (e) => {
+  newNoteInput.addEventListener("submit", (e) => {
     e.preventDefault(); // do not reload page from form
     // initialize default listItem
-    const input = addItemForm.querySelector("input").value;
+    const input = newNoteInput.querySelector("input").value;
     // set the title to empty or a regex filtered value of the input-field:
     const title = input ? input.match(/[a-z, 0-9]/gi).join("") : "";
-
-    theNote = editView.renderEditView(new Note(noteService.settings.nextID, title), MODALOBJ);
+    // create a new note, to save it later when modalSaveBtn pressed
+    theNote = new Note(SETTINGS.nextID, title);
+    editView.renderEditView(theNote, NOTE_ELEMS);
     editView.openEditView(main, modalParent);
   });
 
-  // CANCEL ADD note
+  // ESC the EDIT note modal
+  modalParent.addEventListener("keydown", (e) => {
+    console.log(e);
+    if (e.key === "Escape") {
+      editView.closeEditView(main, modalParent, newNoteInput.querySelector("input"));
+    }
+  });
+
+  // CANCEL EDIT/ADD note
   modalCancelBtn.addEventListener("click", (e) => {
-    e.preventDefault();
     console.log("CancelBtn was clicked");
-    editView.closeEditView(main, modalParent, addItemForm.querySelector("input"));
+    editView.closeEditView(main, modalParent, newNoteInput.querySelector("input"));
   });
 
   // SAVE a note
   modalSaveBtn.addEventListener("click", (e) => {
-    e.preventDefault();
+    // grab the values in the modal
+    console.log("tempNotes");
+    console.log(tempNotes);
+    console.log("noteService.notes");
+    console.log(noteService.notes);
     theNote.title = modalTitle.value;
     theNote.description = modalDescription.value;
     theNote.priority = +modalRadio.filter((c) => {
@@ -141,14 +159,13 @@ function initEventHandler() {
       noteService.addNote(theNote);
     } else {
       // UPDATE an existing note
-      console.log(noteService.notes);
       noteService.updateNote(theNote);
     }
 
-    editView.closeEditView(main, modalParent, addItemForm.querySelector("input"));
-    notes = noteService.getFilteredNotes(noteService.settings.sort, noteService.settings.showDone);
-    listView.renderNotesList(notes, articleList);
-    listView.renderAppTitle(notes.length, countElem, dateElem);
+    editView.closeEditView(main, modalParent, newNoteInput.querySelector("input"));
+    tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
+    listView.renderNotesList(tempNotes, articleList);
+    listView.renderAppTitle(tempNotes.length, countElem, dateElem);
   });
 
   // EDIT a note
@@ -158,7 +175,8 @@ function initEventHandler() {
     if (hotArea) {
       const currentID = +e.target.closest(".articleList_item").dataset.id;
       theNote = noteService.getNote(currentID);
-      theNote = editView.renderEditView(theNote, MODALOBJ);
+
+      editView.renderEditView(theNote, NOTE_ELEMS);
       editView.openEditView(main, modalParent);
     }
   });
@@ -172,9 +190,9 @@ function initEventHandler() {
 
       noteService.checkNote(currentID);
 
-      notes = noteService.getFilteredNotes(noteService.settings.sort, noteService.settings.showDone);
-      listView.renderNotesList(notes, articleList);
-      listView.renderAppTitle(notes.length, countElem, dateElem);
+      tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
+      listView.renderNotesList(tempNotes, articleList);
+      listView.renderAppTitle(tempNotes.length, countElem, dateElem);
     }
   });
 }
@@ -182,9 +200,9 @@ function initEventHandler() {
 function initApp() {
   getDOMElements();
   initEventHandler();
-  notes = noteService.loadData();
-  listView.renderNotesList(notes, articleList);
-  listView.renderAppTitle(notes.length, countElem, dateElem);
+  tempNotes = noteService.loadData();
+  listView.renderNotesList(tempNotes, articleList);
+  listView.renderAppTitle(tempNotes.length, countElem, dateElem);
 }
 
 initApp();

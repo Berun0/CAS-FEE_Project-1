@@ -125,7 +125,6 @@ function initEventHandler() {
 
   // ESC the EDIT note modal
   document.addEventListener("keydown", (e) => {
-    console.log(e);
     if (e.key === "Escape") {
       editView.closeEditView(main, modalParent, newNoteInput.querySelector("input"));
     }

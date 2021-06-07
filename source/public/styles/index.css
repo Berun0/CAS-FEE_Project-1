@@ -8,42 +8,45 @@
 
 /* Themeing Variables */
 body[theme="dark"] {
-	--c-text: #fbfbfb;
-	--c-app-bgrd: #19191a;
+	--c-app-bgrd: #19191a56;
+	--c-app-border: #fdfdff0e;
+	--c-browser-window-grad: transparent radial-gradient(closest-side at 23% 40%, #213742, #010916) 0% 0% no-repeat padding-box;
+	--c-btn-border: #ffffff20;
+	--c-card-bgrd: 245, 245, 244; /* rgba value created at hover */
+	--c-input-text: #cacaca;
+	--c-cta-row: #141921;
 	--c-input-bgrd: #ffffff79;
 	--c-input-contrast: #161616;
+	--c-listwrapper-bgrd: #29292b56;
 	--c-outline: #ff9765cc;
-	--c-signal-icon: #6ddab5;
-	--c-signal-icon-contrast: #19191a;
-	--c-signal-trash: #a4090a;
-	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
-	--c-listwrapper-bgrd: #29292b;
-	--c-card-text: #fbfbfb;
-	--c-btn-border: #ffffff80;
 	--c-placeholder: #4e4e4e;;
-	--c-browser-window-grad: transparent
-		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
-		no-repeat padding-box;
-	--c-cta-row: #19191a;
+	--c-signal-icon-contrast: #19191a;
+	--c-signal-icon: #51a187;
+	--c-signal-trash: #a4090a;
+	--c-text: #c9c6c6;
 }
 body[theme="light"] {
-	--c-text: #fbfbfb;
 	--c-app-bgrd: #19191a2a;
-	--c-input-bgrd: #ffffff94;
-	--c-input-contrast: #161616;
-	--c-outline: #ff9765cc;
-	--c-signal-icon: #ffd600;
-	--c-signal-icon-contrast: #161616;
-	--c-signal-trash: #a4090a;
-	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
-	--c-listwrapper-bgrd: #053680;
-	--c-card-text: #fbfbfb;
-	--c-btn-border: rgba(255, 255, 255, 0.5);
-	--c-placeholder: #4e4e4e;
+	--c-app-border: #515cf34d;
 	--c-browser-window-grad: transparent
 		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
 		no-repeat padding-box;
+	/* --c-browser-window-grad: transparent
+		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
+		no-repeat padding-box; */
+	--c-btn-border: rgba(255, 255, 255, 0.356);
+	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
+	--c-input-text: #fbfbfb;
 	--c-cta-row: #053680;
+	--c-input-bgrd: #ffffff94;
+	--c-input-contrast: #161616;
+	--c-listwrapper-bgrd: #053680bf;
+	--c-outline: #ff9765cc;
+	--c-placeholder: #4e4e4e;
+	--c-signal-icon-contrast: #161616;
+	--c-signal-icon: #ffd600;
+	--c-signal-trash: #a4090a;
+	--c-text: #fbfbfb;
 }
 
 /* RESETS */
@@ -131,7 +134,7 @@ textarea {
 	border-radius: var(--large);
 	padding: 0.5em 1em;
 	border: 1px solid var(--c-btn-border);
-	color: var(--c-text);
+	color: var(--c-input-text);
 }
 
 input[type="date"] {
@@ -200,7 +203,10 @@ ol {
 
 /* APP SCAFFOLDING */
 body {
+	background: black;
 	background: var(--c-browser-window-grad);
+
+	/* background-image: linear-gradient(50deg, #04152f9e, #0214291c), radial-gradient(circle, #00000062 0%, #070529 80%); */
 	height: 100vh;
 	max-height: -webkit-fill-available; /* iOS 100vh viewport bug fix */
 	overflow: hidden; /* to maybe ease-in the modal */
@@ -210,6 +216,8 @@ body {
 .main {
 	background-color: var(--c-app-bgrd);
 	color: var(--c-text);
+	border-left: 1px solid var(--c-app-border);
+	border-right: 1px solid var(--c-app-border);
 }
 
 .holygrail {
@@ -303,6 +311,22 @@ button,
 	background-color: var(--c-signal-icon);
 	color: var(--c-cta-row);
 	margin: 0 2px;
+}
+
+.btn_del {
+	grid-area: 1 / 3 / span 2 / 3;
+	text-align: left;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	border-radius: 0;
+	opacity: 0.55;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.btn_del:hover {
+	transform: scale(1.1);
+	opacity: 1;
 }
 
 .btn_filter {
@@ -432,19 +456,18 @@ Article List
 }
 
 .articleList_item {
-	padding: var(--large);
-	padding-left: var(--med);
+	padding: var(--large) 0;
 	background-color: rgba(var(--c-card-bgrd), 0.16);
+	border: 1px solid var(--c-btn-border);
 	transition: transform 0.3s;
 	border-radius: var(--med);
 	margin: 0 0 calc(var(--med) * 2);
 	width: 100%; /* fill the surrounding ol flex */
 	display: grid;
-	grid-template-columns: 8em 1fr;
+	grid-template-columns: 8em 1fr 40px;
 	gap: 0.5em 1em;
-	grid-template-areas:
-		"Checkbox Title"
-		"Date Text";
+	grid-template-areas: "Checkbox Title Del"
+	"Date Text Del";
 }
 
 .articleList input {
@@ -500,7 +523,7 @@ Add Item Bar
 */
 .ctaRow {
 	background-color: var(--c-cta-row);
-	padding: 0.35em var(--padding); /* l/r same as .app */
+	padding: 0.75em var(--padding) 1.5em; /* l/r same as .app */
 	display: flex;
 	justify-content: center;
 	align-items: center;

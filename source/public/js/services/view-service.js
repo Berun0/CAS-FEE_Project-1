@@ -40,6 +40,16 @@ export class ListView {
     <p class="articleList_itemText">
     ${currentNote.description}
     </p>
+      <button class="btn_del" aria-label="Delete this note.">
+        <svg class="btn_del_img" xmlns="http://www.w3.org/2000/svg" width="19.092" height="19.092" viewBox="0 0 19.092 19.092">
+          <g transform="translate(-122.454 -45.954)">
+            <rect width="26" height="1" transform="translate(123.161 45.954) rotate(45)"
+              fill="var(--c-signal-icon)" />
+            <rect width="26" height="1" transform="translate(122.454 64.339) rotate(-45)"
+              fill="var(--c-signal-icon)" />
+          </g>
+        </svg>
+      </button>
     </li>`;
       })
         .join("");

@@ -331,6 +331,13 @@ button,
 	opacity: 1;
 }
 
+.btn_del_img{
+	transition: transform 0.7s;
+}
+.btn_del_img:hover{
+	transform: rotate(180deg);
+}
+
 .btn_filter {
 	background-color: var(--c-cta-row);
 	border: 1px solid var(--c-btn-border);

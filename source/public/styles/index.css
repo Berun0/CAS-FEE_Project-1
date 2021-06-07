@@ -135,6 +135,7 @@ textarea {
 	padding: 0.5em 1em;
 	border: 1px solid var(--c-btn-border);
 	color: var(--c-input-text);
+	cursor: pointer;
 }
 
 input[type="date"] {
@@ -294,6 +295,7 @@ button,
 	border-radius: var(--large);
 	padding: 0 1em;
 	height: 2em;
+	cursor: pointer;
 }
 
 .btn_cancel {
@@ -435,6 +437,7 @@ Filter
 .select,
 .select option {
 	font: 300 1em/1.2 "nunito sans", sans-serif;
+	cursor: pointer;
 }
 
 /*
@@ -456,7 +459,7 @@ Article List
 }
 
 .articleList_item {
-	padding: var(--large) 0;
+	padding: 1em 0;
 	background-color: rgba(var(--c-card-bgrd), 0.16);
 	border: 1px solid var(--c-btn-border);
 	transition: transform 0.3s;
@@ -465,7 +468,7 @@ Article List
 	width: 100%; /* fill the surrounding ol flex */
 	display: grid;
 	grid-template-columns: 8em 1fr 40px;
-	gap: 0.5em 1em;
+	gap: 0.25em 0.66em;
 	grid-template-areas: "Checkbox Title Del"
 	"Date Text Del";
 }
@@ -473,6 +476,7 @@ Article List
 .articleList input {
 	grid-area: Checkbox;
 	place-self: center;
+	cursor: pointer;
 }
 
 .articleList_itemTitle {

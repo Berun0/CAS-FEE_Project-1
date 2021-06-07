@@ -34,9 +34,9 @@ export class ListView {
         return `<li class="articleList_item" data-id="${currentNote.id}">
     <input type="checkbox" ${check} aria-checked="${Boolean(check)}"/>
     <label>${dateLabel}</label>
-    <h2 class="articleList_itemTitle">
+    <a href="#"><h2 class="articleList_itemTitle">
     ${currentNote.title}
-    </h2>
+    </h2></a>
     <p class="articleList_itemText">
     ${currentNote.description}
     </p>
@@ -121,9 +121,10 @@ export class EditView {
     }
   }
 
-  openEditView(main, modal) {
+  openEditView(main, modal, focusElem) {
     main.classList.add("hidden");
     modal.classList.add("open");
+    focusElem.focus();
   }
 
   closeEditView(main, modal, inputfield) {

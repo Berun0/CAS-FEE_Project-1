@@ -124,7 +124,7 @@ function initEventHandler() {
     // create a new note, to save it later when modalSaveBtn pressed
     theNote = new Note(SETTINGS.nextID, title);
     editView.renderEditView(theNote, NOTE_ELEMS);
-    editView.openEditView(main, modalParent);
+    editView.openEditView(main, modalParent, modalSaveBtn);
   });
 
   // ESC the EDIT note modal
@@ -180,7 +180,7 @@ function initEventHandler() {
       theNote = noteService.getNote(currentID);
 
       editView.renderEditView(theNote, NOTE_ELEMS);
-      editView.openEditView(main, modalParent);
+      editView.openEditView(main, modalParent, modalTitle);
     }
 
     // DELETE

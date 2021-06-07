@@ -121,9 +121,10 @@ export class EditView {
     }
   }
 
-  openEditView(main, modal) {
+  openEditView(main, modal, focusElem) {
     main.classList.add("hidden");
     modal.classList.add("open");
+    focusElem.focus();
   }
 
   closeEditView(main, modal, inputfield) {

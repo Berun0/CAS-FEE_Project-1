@@ -456,7 +456,7 @@ Article List
 }
 
 .articleList_item {
-	padding: var(--large) 0;
+	padding: 1em 0;
 	background-color: rgba(var(--c-card-bgrd), 0.16);
 	border: 1px solid var(--c-btn-border);
 	transition: transform 0.3s;
@@ -465,7 +465,7 @@ Article List
 	width: 100%; /* fill the surrounding ol flex */
 	display: grid;
 	grid-template-columns: 8em 1fr 40px;
-	gap: 0.5em 1em;
+	gap: 0.25em 0.66em;
 	grid-template-areas: "Checkbox Title Del"
 	"Date Text Del";
 }

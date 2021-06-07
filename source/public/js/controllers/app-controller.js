@@ -171,16 +171,26 @@ function initEventHandler() {
     listView.renderAppTitle(tempNotes.length, countElem, dateElem);
   });
 
-  // EDIT a note
+  // EDIT or DELETE a note
   articleList.addEventListener("click", (e) => {
-    const hotArea = e.target.classList.contains("articleList_itemTitle")
-      || e.target.classList.contains("articleList_itemText");
-    if (hotArea) {
+    // EDIT
+    if (e.target.classList.contains("articleList_itemTitle")
+      || e.target.classList.contains("articleList_itemText")) {
       const currentID = +e.target.closest(".articleList_item").dataset.id;
       theNote = noteService.getNote(currentID);
 
       editView.renderEditView(theNote, NOTE_ELEMS);
       editView.openEditView(main, modalParent);
+    }
+
+    // DELETE
+    if (e.target.classList.contains("btn_del")
+      || e.target.classList.contains("btn_del_img")) {
+      const currentID = +e.target.closest(".articleList_item").dataset.id;
+      noteService.deleteNote(currentID);
+      tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
+      listView.renderNotesList(tempNotes, articleList);
+      listView.renderAppTitle(tempNotes.length, countElem, dateElem);
     }
   });
 

@@ -292,7 +292,6 @@ body {
 
 /***** APP COMPONENTS *****/
 
-
 /*
 Buttons
 */
@@ -337,10 +336,11 @@ button,
 	opacity: 1;
 }
 
-.btn_del_img{
+.btn_del_img {
 	transition: transform 0.45s;
 }
-.btn_del_img:hover{
+
+.btn_del_img:hover {
 	transform: rotate(180deg);
 }
 
@@ -391,8 +391,6 @@ body[theme="dark"] .heroTitle {
 	opacity: 0.25;
 	display: none;
 }
-
-
 
 /*
 Settings
@@ -720,7 +718,6 @@ MEDIA QUERIES
 	.formContent {
 		margin: var(--large) auto 0 auto;
 	}
-
 }
 
 /* small landscape devices */

@@ -41,7 +41,6 @@ body[theme="light"] {
 	--c-btn-border: rgba(255, 255, 255, 0.356);
 	--c-card-bgrd: #f3f5f4;
 	--c-card-bgrd-hover: #fff;
-	--c-cta-row: #bdbdbd;
 	--c-checkbox-shadow: 3px 1px 7px 0rem rgb(0 0 0 / 15%);
 	--c-filerrow-dash: #e4e2e2;
 	--c-input-bgrd: #F6FBFB;
@@ -97,7 +96,7 @@ button {
 	background-color: transparent;
 	border-radius: 0;
 	color: inherit;
-	font-size: inherit;	/* prohibit input zoom in iOS */
+	font-size: inherit;	/* prohibit input zoom in iOS, only works when html fontsize is 16px or more */
 }
 
 /* BASE STYLES */
@@ -124,7 +123,7 @@ button {
 }
 
 html {
-	font: 300 14px/1.2 "nunito sans", sans-serif;
+	font: 300 16px/1.2 "nunito sans", sans-serif;
 }
 
 h1,
@@ -235,6 +234,7 @@ body {
 	border-left: 1px solid var(--c-app-border);
 	border-right: 1px solid var(--c-app-border);
 	backdrop-filter: var(--s-app-blur);
+	-webkit-backdrop-filter: var(--s-app-blur);
 }
 
 .holygrail {
@@ -375,7 +375,6 @@ Titel area
 
 .status {
 	margin-top: -4px;
-	margin-bottom: 10px;
 	font-size: 0.66em;
 	opacity: 0.25;
 	display: none;
@@ -392,7 +391,7 @@ Settings
 	justify-content: space-between;
 	width: 100%;
 	padding: 0 var(--padding);
-	margin-bottom: var(--small);
+	margin-bottom: var(--med);
 }
 
 .settings {
@@ -709,9 +708,6 @@ MEDIA QUERIES
 		margin: var(--large) auto 0 auto;
 	}
 
-	.settingsRow {
-		margin-bottom: 0;
-	}
 }
 
 /* small landscape devices */

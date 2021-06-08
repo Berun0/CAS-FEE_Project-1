@@ -8,45 +8,56 @@
 
 /* Themeing Variables */
 body[theme="dark"] {
-	--c-app-bgrd: #19191a56;
-	--c-app-border: #fdfdff0e;
-	--c-browser-window-grad: transparent radial-gradient(closest-side at 23% 40%, #213742, #010916) 0% 0% no-repeat padding-box;
+	--c-app-bgrd: #11191a81;
+	--s-app-blur: blur(6px);
+	--c-app-border: #fdfdff23;
+	--s-app-pos: 0 auto;
+	--s-app-maxwidth: 768px;
 	--c-btn-border: #ffffff20;
-	--c-card-bgrd: 245, 245, 244; /* rgba value created at hover */
-	--c-input-text: #cacaca;
-	--c-cta-row: #141921;
-	--c-input-bgrd: #ffffff79;
+	--c-card-bgrd: #f5f5f429;
+	--c-card-bgrd-hover: #f5f5f44d;
+	--c-cta-row: #13181b;
+	--c-filerrow-dash: #f5f5f429;;
+	--c-input-bgrd: #878B8C;
 	--c-input-contrast: #161616;
+	--c-input-shadow: 0;
+	--c-input-text: #cacaca;
 	--c-listwrapper-bgrd: #29292b56;
+	--c-note-title: #c9c6c6;
 	--c-outline: #ff9765cc;
 	--c-placeholder: #4e4e4e;;
-	--c-signal-icon-contrast: #19191a;
 	--c-signal-icon: #51a187;
+	--c-signal-icon-contrast: #19191a;
 	--c-signal-trash: #a4090a;
 	--c-text: #c9c6c6;
+	--c-window-bgrd: url(../imgs/bg_dark.jpg);
+	--s-window-pos: cover;
 }
 body[theme="light"] {
-	--c-app-bgrd: #19191a2a;
-	--c-app-border: #515cf34d;
-	--c-browser-window-grad: transparent
-		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
-		no-repeat padding-box;
-	/* --c-browser-window-grad: transparent
-		radial-gradient(closest-side at 23% 40%, #0d9be4 0%, #003d99 100%) 0% 0%
-		no-repeat padding-box; */
+	--c-app-bgrd: #f5f5f5ed;
+	--s-app-blur: blur(30px);
+	--s-app-pos: 0 0;
+	--s-app-maxwidth: 640px;
 	--c-btn-border: rgba(255, 255, 255, 0.356);
-	--c-card-bgrd: 255, 255, 254; /* rgba value created at hover */
-	--c-input-text: #fbfbfb;
-	--c-cta-row: #053680;
-	--c-input-bgrd: #ffffff94;
+	--c-card-bgrd: #f3f5f4;
+	--c-card-bgrd-hover: #fff;
+	--c-cta-row: #bdbdbd;
+	--c-checkbox-shadow: 3px 1px 7px 0rem rgb(0 0 0 / 15%);
+	--c-filerrow-dash: #e4e2e2;
+	--c-input-bgrd: #F6FBFB;
 	--c-input-contrast: #161616;
-	--c-listwrapper-bgrd: #053680bf;
-	--c-outline: #ff9765cc;
+	--c-input-shadow: rgb(0 0 0 / 25%) 0px 14px 9px -15px;
+	--c-input-text: #292929;
+	--c-listwrapper-bgrd: transparent;
+	--c-note-title: #292929ce;
+	--c-outline: #70EDB9cc;
 	--c-placeholder: #4e4e4e;
+	--c-signal-icon: #70EDB9;
 	--c-signal-icon-contrast: #161616;
-	--c-signal-icon: #ffd600;
 	--c-signal-trash: #a4090a;
-	--c-text: #fbfbfb;
+	--c-text: #292929;
+	--c-window-bgrd: url(../imgs/bg-light.svg);
+	--s-window-pos: contain;
 }
 
 /* RESETS */
@@ -73,7 +84,7 @@ html {
 
 textarea,
 input,
-select,
+select, select:focus,
 option,
 label,
 button {
@@ -86,6 +97,7 @@ button {
 	background-color: transparent;
 	border-radius: 0;
 	color: inherit;
+	font-size: inherit;	/* prohibit input zoom in iOS */
 }
 
 /* BASE STYLES */
@@ -116,15 +128,15 @@ html {
 }
 
 h1,
-h2 {
+h2, .h2 {
 	margin-left: -0.03em;
 }
 h1 {
 	font-size: 1.4em;
 	font-weight: 300;
 }
-h2 {
-	font-size: 1.2em;
+h2, .h2 {
+	font-size: 1.05em;
 	font-weight: 700;
 }
 
@@ -136,6 +148,7 @@ textarea {
 	border: 1px solid var(--c-btn-border);
 	color: var(--c-input-text);
 	cursor: pointer;
+	box-shadow: var(--c-input-shadow);
 }
 
 input[type="date"] {
@@ -148,6 +161,7 @@ input[type="date"] {
 input[type="checkbox"],
 input[type="radio"] {
 	padding: 0.6em;
+	box-shadow: var(--c-checkbox-shadow);
 }
 
 input[type="checkbox"]:checked,
@@ -204,8 +218,9 @@ ol {
 
 /* APP SCAFFOLDING */
 body {
-	background: black;
-	background: var(--c-browser-window-grad);
+	background-color: black;
+	background-size: var(--s-window-pos);
+	background-image: var(--c-window-bgrd);
 
 	/* background-image: linear-gradient(50deg, #04152f9e, #0214291c), radial-gradient(circle, #00000062 0%, #070529 80%); */
 	height: 100vh;
@@ -219,6 +234,7 @@ body {
 	color: var(--c-text);
 	border-left: 1px solid var(--c-app-border);
 	border-right: 1px solid var(--c-app-border);
+	backdrop-filter: var(--s-app-blur);
 }
 
 .holygrail {
@@ -237,8 +253,8 @@ body {
 
 .container {
 	width: 100%;
-	max-width: 800px;
-	margin: 0 auto;
+	max-width: var(--s-app-maxwidth);
+	margin: var(--s-app-pos);
 }
 
 /* HELPERs */
@@ -279,10 +295,6 @@ body {
 
 /***** APP COMPONENTS *****/
 
-.status {
-	font-size: 0.75em;
-	opacity: 0.75;
-}
 
 /*
 Buttons
@@ -303,15 +315,13 @@ button,
 	color: var(--c-input-contrast);
 }
 
-.btn_save {
+.btn_save,
+.btn_add {
 	background-color: var(--c-signal-icon);
 	color: var(--c-signal-icon-contrast);
-	border: 1px solid var(--c-placeholder);
 }
 
 .btn_add {
-	background-color: var(--c-signal-icon);
-	color: var(--c-cta-row);
 	margin: 0 2px;
 }
 
@@ -322,7 +332,6 @@ button,
 	height: 100%;
 	width: 100%;
 	border-radius: 0;
-	opacity: 0.55;
 	transition: transform 0.3s, opacity 0.3s;
 }
 
@@ -332,16 +341,17 @@ button,
 }
 
 .btn_del_img{
-	transition: transform 0.7s;
+	transition: transform 0.45s;
 }
 .btn_del_img:hover{
 	transform: rotate(180deg);
 }
 
 .btn_filter {
-	background-color: var(--c-cta-row);
+	background-color: var(--c-input-bgrd);
 	border: 1px solid var(--c-btn-border);
 	border-radius: var(--large);
+	box-shadow: var(--c-input-shadow);
 	transition: transform 0.3s;
 	display: flex;
 	align-items: center;
@@ -350,6 +360,28 @@ button,
 .btn_filter:hover {
 	transform: scale(1.1);
 }
+
+/*
+Titel area
+*/
+.appTitle {
+	font-weight: 800;
+	opacity: 0.7;
+}
+
+.appTitle_visItemsCount {
+	font-weight: 300;
+}
+
+.status {
+	margin-top: -4px;
+	margin-bottom: 10px;
+	font-size: 0.66em;
+	opacity: 0.25;
+	display: none;
+}
+
+
 
 /*
 Settings
@@ -385,7 +417,7 @@ Settings
 	z-index: 20;
 	right: 0;
 	top: 50px;
-	width: 10.1rem;
+	width: 11rem;
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.4s cubic-bezier(0.392, -0.547, 0.07, 4.535);
@@ -422,8 +454,8 @@ Filter
 		0deg,
 		var(--c-listwrapper-bgrd) 0%,
 		var(--c-listwrapper-bgrd) 50%,
-		rgba(var(--c-card-bgrd), 0.16) 50%,
-		rgba(var(--c-card-bgrd), 0.16) 53%,
+		var(--c-filerrow-dash) 50%,
+		var(--c-filerrow-dash) 53%,
 		transparent 53%,
 		transparent 100%
 	);
@@ -437,7 +469,7 @@ Filter
 
 /* awkward solution to a themeable (=svg or font in html) custom caret down icon in the sort option list: */
 .dropdownIcon {
-	color: var(--c-input-bgrd);
+	color: var(--c-text);
 	margin-right: calc(var(--med) - 2px);
 }
 
@@ -445,6 +477,7 @@ Filter
 .select option {
 	font: 300 1em/1.2 "nunito sans", sans-serif;
 	cursor: pointer;
+	color: var(--c-text)
 }
 
 /*
@@ -467,10 +500,11 @@ Article List
 
 .articleList_item {
 	padding: 1em 0;
-	background-color: rgba(var(--c-card-bgrd), 0.16);
+	background-color: var(--c-card-bgrd);
 	border: 1px solid var(--c-btn-border);
 	transition: transform 0.3s;
 	border-radius: var(--med);
+	box-shadow: var(--c-input-shadow);
 	margin: 0 0 calc(var(--med) * 2);
 	width: 100%; /* fill the surrounding ol flex */
 	display: grid;
@@ -493,14 +527,16 @@ Article List
 .articleList label {
 	grid-area: Date;
 	justify-self: center;
+	opacity: 0.6;
 }
 
 .articleList_itemText {
 	grid-area: Text;
+	opacity: 0.6;
 }
 
 .articleList_item:hover {
-	background-color: rgba(var(--c-card-bgrd), 0.3);
+	background-color: var(--c-card-bgrd-hover);
 	border: 1px solid var(--c-btn-border);
 	transform: scale(1.03);
 	position: relative;
@@ -509,6 +545,8 @@ Article List
 
 .articleList_item input:checked ~ label {
 	color: var(--c-signal-icon);
+	filter: contrast(0.7);
+	font-weight: 400;
 }
 
 .articleList_item input:checked ~ .articleList_itemText {
@@ -525,8 +563,7 @@ Article List
 }
 
 .articleList_itemTitle {
-	color: var(--c-signal-icon);
-	filter: grayscale(0.5);
+	color: var(--c-note-title);
 }
 
 /*
@@ -534,7 +571,8 @@ Add Item Bar
 */
 .ctaRow {
 	background-color: var(--c-cta-row);
-	padding: 0.75em var(--padding) 1.5em; /* l/r same as .app */
+	border-top: 1px solid var(--c-app-border);
+	padding: 1.5em var(--padding); /* l/r same as .app */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -571,7 +609,7 @@ MODAL
 		"empty priority_lbl priority_select"
 		"empty Datepicker_lbl Datepicker_select";
 	padding: var(--large) var(--padding);
-	background-color: rgba(var(--c-card-bgrd), 0.05);
+	background-color: var(--c-card-bgrd);
 	border-radius: calc(var(--small));
 }
 
@@ -645,8 +683,14 @@ MODAL
 MEDIA QUERIES
 */
 
-/* rem size */
+@media screen and (min-width: 340px) {
+	.status {
+		display: block;
+	}
+}
+
 @media screen and (min-width: 401px) {
+	/* rem size */
 	html {
 		font-size: 4vw;
 	}

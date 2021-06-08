@@ -34,9 +34,9 @@ export class ListView {
         return `<li class="articleList_item" data-id="${currentNote.id}">
     <input type="checkbox" ${check} aria-checked="${Boolean(check)}"/>
     <label>${dateLabel}</label>
-    <a href="#"><h2 class="articleList_itemTitle">
+    <a href="#" class="articleList_itemTitle h2">
     ${currentNote.title}
-    </h2></a>
+    </a>
     <p class="articleList_itemText">
     ${currentNote.description}
     </p>
@@ -59,7 +59,7 @@ export class ListView {
   }
 
   renderAppTitle(listLen, countElem, dateElem) {
-    countElem.textContent = ` (${listLen})`;
+    countElem.textContent = `(${listLen})`;
     const d = new Date();
     dateElem.textContent = d.toLocaleDateString(SETTINGS.locale, {
       weekday: "long",

@@ -166,10 +166,11 @@ function initEventHandler() {
       noteService.updateNote(theNote);
     }
 
-    editView.closeEditView(main, modalParent, newNoteInput.querySelector("input"));
     tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
     listView.renderNotesList(tempNotes, articleList);
     listView.renderAppTitle(tempNotes.length, countElem, dateElem);
+    editView.closeEditView(main, modalParent, newNoteInput.querySelector("input"));
+    newNoteInput.querySelector("input").focus();
   });
 
   // EDIT or DELETE a note

@@ -30,7 +30,7 @@ body[theme="dark"] {
 	--c-signal-icon-contrast: #19191a;
 	--c-signal-trash: #a4090a;
 	--c-text: #c9c6c6;
-	--c-window-bgrd: url(./imgs/bg_dark.jpg);
+	--c-window-bgrd: url(../imgs/bg_dark.jpg);
 	--s-window-pos: cover;
 }
 body[theme="light"] {
@@ -56,7 +56,7 @@ body[theme="light"] {
 	--c-signal-icon-contrast: #161616;
 	--c-signal-trash: #a4090a;
 	--c-text: #292929;
-	--c-window-bgrd: url(./imgs/bg-light.svg);
+	--c-window-bgrd: url(../imgs/bg-light.svg);
 	--s-window-pos: contain;
 }
 

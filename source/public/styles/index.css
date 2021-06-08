@@ -41,7 +41,6 @@ body[theme="light"] {
 	--c-btn-border: rgba(255, 255, 255, 0.356);
 	--c-card-bgrd: #f3f5f4;
 	--c-card-bgrd-hover: #fff;
-	--c-cta-row: #bdbdbd;
 	--c-checkbox-shadow: 3px 1px 7px 0rem rgb(0 0 0 / 15%);
 	--c-filerrow-dash: #e4e2e2;
 	--c-input-bgrd: #F6FBFB;
@@ -375,7 +374,6 @@ Titel area
 
 .status {
 	margin-top: -4px;
-	margin-bottom: 10px;
 	font-size: 0.66em;
 	opacity: 0.25;
 	display: none;
@@ -392,7 +390,7 @@ Settings
 	justify-content: space-between;
 	width: 100%;
 	padding: 0 var(--padding);
-	margin-bottom: var(--small);
+	margin-bottom: var(--med);
 }
 
 .settings {
@@ -709,9 +707,6 @@ MEDIA QUERIES
 		margin: var(--large) auto 0 auto;
 	}
 
-	.settingsRow {
-		margin-bottom: 0;
-	}
 }
 
 /* small landscape devices */

@@ -218,11 +218,19 @@ ol {
 /* APP SCAFFOLDING */
 body {
 	background-size: var(--s-window-pos);
-	background-image: var(--c-window-bgrd);
 	height: 100vh;
 	max-height: -webkit-fill-available; /* iOS 100vh viewport bug fix */
 	display: flex;
 	overflow-x: hidden;
+}
+
+/* background-image url is noth themeable in safari */
+body[theme="light"] {
+	background-image: url('../imgs/bg_light.svg');
+}
+
+body[theme="dark"] {
+	background-image: url('../imgs/bg_dark.jpg');
 }
 
 .main {
@@ -520,8 +528,9 @@ Article List
 	display: grid;
 	grid-template-columns: 8em 1fr 40px;
 	gap: 0.25em 0.66em;
-	grid-template-areas: "Checkbox Title Del"
-	"Date Text Del";
+	grid-template-areas:
+		"Checkbox Title Del"
+		"Date Text Del";
 }
 
 .articleList input {

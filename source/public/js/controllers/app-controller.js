@@ -89,6 +89,7 @@ function initEventHandler() {
     SETTINGS.theme = e.target.value;
     document.body.setAttribute("theme", SETTINGS.theme);
     saveSettings();
+    settingsMenu.classList.toggle("open");
   });
 
   // FILTER toggle done

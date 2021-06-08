@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3166" height="2375" viewBox="0 0 3166 2375">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#14d9e5"/>
+      <stop offset="1" stop-color="#adf4f9"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#faaa90"/>
+      <stop offset="1" stop-color="#ffe8e1"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#b1922a"/>
+      <stop offset="1" stop-color="#fcbde4"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-6" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff3175"/>
+      <stop offset="1" stop-color="#fe6f5e"/>
+    </linearGradient>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="3166" height="2375"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <rect width="3166" height="2375" fill="#fff"/>
+    <circle id="Ellipse_1" data-name="Ellipse 1" cx="458" cy="458" r="458" transform="translate(524 142)" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_5" data-name="Ellipse 5" cx="173" cy="173" r="173" transform="matrix(0.848, -0.53, 0.53, 0.848, 1824.027, 481.964)" fill="url(#linear-gradient-2)"/>
+    <circle id="Ellipse_6" data-name="Ellipse 6" cx="228" cy="228" r="228" transform="translate(-228 1274)" fill="url(#linear-gradient-2)"/>
+    <circle id="Ellipse_8" data-name="Ellipse 8" cx="228" cy="228" r="228" transform="translate(2938 1274)" fill="url(#linear-gradient-2)"/>
+    <circle id="Ellipse_7" data-name="Ellipse 7" cx="315" cy="315" r="315" transform="translate(400 1744)" fill="url(#linear-gradient-5)"/>
+    <circle id="Ellipse_3" data-name="Ellipse 3" cx="474" cy="474" r="474" transform="translate(1020 1054)" fill="url(#linear-gradient-6)"/>
+    <circle id="Ellipse_4" data-name="Ellipse 4" cx="370" cy="370" r="370" transform="translate(2426)" fill="url(#linear-gradient-6)"/>
+    <circle id="Ellipse_2" data-name="Ellipse 2" cx="276.639" cy="276.639" r="276.639" transform="translate(2213.519 1852.151) rotate(-30)" fill="url(#linear-gradient)"/>
+    <g id="checkcircle" transform="translate(2131.598 1054)" fill="none" stroke="#c5c5c5" stroke-width="10">
+      <circle cx="27.817" cy="27.817" r="27.817" stroke="none"/>
+      <circle cx="27.817" cy="27.817" r="22.817" fill="none"/>
+    </g>
+    <g id="checkcircle-2" data-name="checkcircle" transform="translate(2131.598 1238.095)" fill="none" stroke="#c5c5c5" stroke-width="10">
+      <circle cx="27.817" cy="27.817" r="27.817" stroke="none"/>
+      <circle cx="27.817" cy="27.817" r="22.817" fill="none"/>
+    </g>
+    <g id="checkcircle-3" data-name="checkcircle" transform="translate(2131.598 881.095)" fill="none" stroke="#c5c5c5" stroke-width="10">
+      <circle cx="27.817" cy="27.817" r="27.817" stroke="none"/>
+      <circle cx="27.817" cy="27.817" r="22.817" fill="none"/>
+    </g>
+    <path id="wave" d="M-1.343-97.814C21.768-119.766,40.1-64.859,58.907-64.859s37.6-37.641,56.407-37.641,37.6,37.641,56.407,37.641,37.6-37.641,56.407-37.641,36.549,50.333,56.407,35.641" transform="translate(2232.964 992.495)" fill="none" stroke="#c5c5c5" stroke-linecap="square" stroke-width="10"/>
+    <path id="wave-2" data-name="wave" d="M-1.343-97.814C21.768-119.766,40.1-64.859,58.907-64.859s37.6-37.641,56.407-37.641,37.6,37.641,56.407,37.641,37.6-37.641,56.407-37.641,36.549,50.333,56.407,35.641" transform="translate(2232.964 1349.495)" fill="none" stroke="#c5c5c5" stroke-linecap="square" stroke-width="10"/>
+    <path id="wave-3" data-name="wave" d="M-1.343-97.814C21.768-119.766,40.1-64.859,58.907-64.859s37.6-37.641,56.407-37.641,37.6,37.641,56.407,37.641,37.6-37.641,56.407-37.641c10.116,0,20.231,10.895,30.524,21.138" transform="translate(2232.964 1112.495)" fill="none" stroke="#c5c5c5" stroke-linecap="square" stroke-width="10"/>
+    <path id="wave-4" data-name="wave" d="M-1.343-97.814C21.768-119.766,40.1-64.859,58.907-64.859s37.6-37.641,56.407-37.641,37.6,37.641,56.407,37.641" transform="translate(2232.964 1230.495)" fill="none" stroke="#c5c5c5" stroke-linecap="square" stroke-width="10"/>
+  </g>
+</svg>

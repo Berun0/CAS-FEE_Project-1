@@ -1,7 +1,7 @@
 export let SETTINGS = {
   nextID: 0,
   locale: "en",
-  theme: "dark",
+  theme: "light",
   sort: "creationdate",
   showDone: true,
 };

@@ -2,7 +2,7 @@
 	--small: 0.25em;
 	--med: 0.625em;
 	--large: 1.5em;
-	--padding: 2vw;
+	--padding: 1rem;
 }
 /* stylelint-disable */
 
@@ -10,28 +10,27 @@
 body[theme="dark"] {
 	--c-app-bgrd: #11191a81;
 	--s-app-blur: blur(6px);
-	--c-app-border: #fdfdff23;
+	--c-app-border: #fdfdff14;
 	--s-app-pos: 0 auto;
 	--s-app-maxwidth: 768px;
 	--c-btn-border: #ffffff20;
 	--c-card-bgrd: #f5f5f429;
 	--c-card-bgrd-hover: #f5f5f44d;
-	--c-cta-row: #13181b;
+	/* --c-cta-row: #13181b; */
 	--c-filter-bgrd: #979a9b;
 	--c-filterrow-dash: #f5f5f429;;
 	--c-input-bgrd: #a0a4a5;
 	--c-input-contrast: #161616;
 	--c-input-shadow: 0;
-	--c-input-text: #cacaca;
-	--c-listwrapper-bgrd: #29292b56;
-	--c-note-title: #c9c6c6;
+	--c-input-text: #292929;
+	--c-listwrapper-bgrd: #2f2f3156;
+	--c-note-title: #b3b0b0;
 	--c-outline: #ff9765cc;
 	--c-placeholder: #4e4e4e;;
 	--c-signal-icon: #51a187;
 	--c-signal-icon-contrast: #19191a;
 	--c-signal-trash: #a4090a;
 	--c-text: #c9c6c6;
-	--c-window-bgrd: url(../imgs/bg_dark.jpg);
 	--s-window-pos: cover;
 }
 body[theme="light"] {
@@ -57,7 +56,6 @@ body[theme="light"] {
 	--c-signal-icon-contrast: #161616;
 	--c-signal-trash: #a4090a;
 	--c-text: #292929;
-	--c-window-bgrd: url(../imgs/bg-light.svg);
 	--s-window-pos: contain;
 }
 
@@ -67,7 +65,7 @@ body[theme="light"] {
 }
 
 body[theme="dark"] {
-	background-image: url('../imgs/bg_dark.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url('../imgs/bg_dark.jpg');
 }
 
 /* RESETS */
@@ -106,7 +104,6 @@ button {
 	text-decoration: none;
 	background-color: transparent;
 	border-radius: 0;
-	color: inherit;
 	font-size: inherit;	/* prohibit input zoom in iOS, only works when html fontsize is 16px or more */
 }
 
@@ -134,7 +131,7 @@ button {
 }
 
 html {
-	font: 300 16px/1.2 "nunito sans", sans-serif;
+	font: 300 16px/1.1 "nunito sans", sans-serif;
 }
 
 h1,
@@ -142,12 +139,12 @@ h2, .h2 {
 	margin-left: -0.03em;
 }
 h1 {
-	font-size: 1.4em;
+	font-size: 1.45em;
 	font-weight: 300;
 }
 h2, .h2 {
 	font-size: 1.05em;
-	font-weight: 700;
+	font-weight: 800;
 }
 
 input,
@@ -262,6 +259,7 @@ body {
 	width: 100%;
 	max-width: var(--s-app-maxwidth);
 	margin: var(--s-app-pos);
+	padding: var(--padding);
 }
 
 /* HELPERs */
@@ -397,7 +395,7 @@ body[theme="dark"] .heroTitle {
 
 .status {
 	margin-top: -4px;
-	font-size: 0.66em;
+	font-size: 0.7em;
 	opacity: 0.25;
 	display: none;
 }
@@ -488,7 +486,7 @@ Filter
 
 /* awkward solution to a themeable (=svg or font in html) custom caret down icon in the sort option list: */
 .dropdownIcon {
-	color: var(--c-text);
+	color: var(--c-input-text);
 	margin-right: calc(var(--med) - 2px);
 }
 
@@ -496,7 +494,7 @@ Filter
 .select option {
 	font: 300 1em/1.2 "nunito sans", sans-serif;
 	cursor: pointer;
-	color: var(--c-text)
+	color: var(--c-input-text)
 }
 
 /*
@@ -507,14 +505,15 @@ Article List
 	background-color: var(--c-listwrapper-bgrd);
 	flex: 1;
 	display: flex;
+	justify-content: center;
 }
 
 .articleList {
-	padding: 0 var(--padding);
-	padding-top: var(--med); /* allow for card hover */
+	padding: var(--padding);
 	border-radius: calc(var(--small));
 	margin: 0 auto;
 	width: 100%;
+	min-width: 300px;
 	position: relative;
 }
 
@@ -529,7 +528,7 @@ Article List
 	width: 100%; /* fill the surrounding ol flex */
 	display: grid;
 	grid-template-columns: 8em 1fr 40px;
-	gap: 0.25em 0.66em;
+	/* gap: 0.25em 0.66em; */
 	grid-template-areas:
 		"Checkbox Title Del"
 		"Date Text Del";
@@ -593,7 +592,7 @@ Add Item Bar
 .ctaRow {
 	background-color: var(--c-cta-row);
 	border-top: 1px solid var(--c-app-border);
-	padding: 1.5em var(--padding); /* l/r same as .app */
+	padding: var(--padding) var(--padding) 0; /* l/r same as .app */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -607,6 +606,7 @@ MODAL
 	/* transition: transform 0.3s ease;
 	transform: translateY(300px); */
 	display: none;
+	padding: 0;
 }
 
 .modal.open {
@@ -622,7 +622,7 @@ MODAL
 	max-width: 640px;
 	display: grid;
 	align-content: start;
-	grid-template-columns: 1fr 6.125rem 13.125rem;
+	grid-template-columns: 1fr 4.125rem 12.125rem;
 	gap: var(--large) 0;
 	grid-template-areas:
 		"Title Title Title"
@@ -705,25 +705,24 @@ MEDIA QUERIES
 */
 
 @media screen and (min-width: 340px) {
+	:root {
+		--padding: 4.7vw;
+	}
+
 	.status {
 		display: block;
 	}
 }
 
 @media screen and (min-width: 401px) {
-	/* rem size */
-	html {
-		font-size: 4vw;
-	}
-
 	.modal {
 		padding-top: var(--large);
 	}
 }
 
 @media screen and (min-width: 501px) {
-	html {
-		font-size: 20px;
+	:root {
+		--padding: 2.5rem;
 	}
 
 	.formContent {

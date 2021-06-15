@@ -51,7 +51,7 @@ export class NoteService {
     return temp;
   }
 
-  sortArrayOfObjects(myArray, sortKey = "title") {
+  static sortArrayOfObjects(myArray, sortKey = "title") {
     // returns a sorted array of objects
     console.log(`sortkey: ${sortKey}`);
     if (myArray.length > 0) {
@@ -125,7 +125,7 @@ export class NoteService {
     return this.notes[idInNotes];
   }
 
-  getTodayUS() {
+  static getTodayUS() {
     // returns current date in YYYY-MM-DD
     const currentDate = new Date();
 

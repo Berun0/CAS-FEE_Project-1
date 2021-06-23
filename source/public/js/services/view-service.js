@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable max-classes-per-file */
 /* eslint-disable class-methods-use-this */
 
@@ -7,8 +8,9 @@ import { SETTINGS } from "./data/settings-storage.js";
 export class ListView {
   renderNotesList(notes, htmlParent) {
     // empty the DOM element where the Note-Listing will be residing
-    htmlParent.innerHTML = "";
-    htmlParent.insertAdjacentHTML(
+    const htmlElem = htmlParent;
+    htmlElem.innerHTML = "";
+    htmlElem.insertAdjacentHTML(
       "beforeend",
       this.createNotesHTML(notes),
     );
@@ -16,8 +18,9 @@ export class ListView {
 
   createNotesHTML(notes) {
     // OBJ -> HTML-String
+    let notesHTML; // initialize at top to be accessible in all scopes within this function
     if (notes) {
-      notes = notes.map((currentNote) => {
+      notesHTML = notes.map((currentNote) => {
         let check = ""; // = checked attribute if note is unchecked
         if (currentNote.donedate) {
           check = "checked";
@@ -31,6 +34,7 @@ export class ListView {
         if (!SETTINGS.showDone && currentNote.donedate) {
           return;
         }
+        // eslint-disable-next-line consistent-return
         return `<li class="articleList_item" data-id="${currentNote.id}">
     <input type="checkbox" ${check} aria-checked="${Boolean(check)}"/>
     <label>${dateLabel}</label>
@@ -54,14 +58,16 @@ export class ListView {
       })
         .join("");
     }
-    // notes could be empty if all are done. and done notes should not be shown
-    return notes || "<p class='emptyApp'>This list is empty.<br>Time to hammer-in some Topics:</p>";
+    // notes could be empty if all are done and done notes should not be shown
+    return notesHTML || "<p class='emptyApp'>This list is empty.<br>Time to hammer-in some Topics:</p>";
   }
 
   renderAppTitle(listLen, countElem, dateElem) {
-    countElem.textContent = `(${listLen})`;
+    const appCount = countElem;
+    const appDate = dateElem;
+    appCount.textContent = `(${listLen})`;
     const d = new Date();
-    dateElem.textContent = d.toLocaleDateString(SETTINGS.locale, {
+    appDate.textContent = d.toLocaleDateString(SETTINGS.locale, {
       weekday: "long",
       day: "numeric",
       month: "long",

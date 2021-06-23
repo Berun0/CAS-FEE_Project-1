@@ -97,7 +97,6 @@ function initEventHandler() {
     const checkBox = e.target;
     SETTINGS.showDone = checkBox.checked;
     checkBox.toggleAttribute("checked");
-    !SETTINGS.showDone;
 
     saveSettings();
     tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);

@@ -1,5 +1,7 @@
-{"id":5,"title":"Marmor","description":"Stein","priority":0,"duedate":"2021-07-09","creationdate":1624282589655,"isnew":false,"donedate":"","_id":"89Ero7M0FuXEwLnI"}
+{"id":1,"title":"Zwetschgen","description":"","priority":0,"duedate":"","creationdate":1624442368116,"isnew":false,"donedate":"","_id":"4eDBWs7CskiyB1of"}
+{"id":0,"title":"Heubeeri","description":"Kuchen","priority":2,"duedate":"2021-07-03","creationdate":1624441437765,"isnew":false,"donedate":"","_id":"TsOiNmHaw33nCvs1"}
+{"id":7,"title":"Kirschen","description":"","priority":0,"duedate":"","creationdate":1624439583018,"isnew":false,"donedate":"","_id":"cgOQQlaJBrhKGgeP"}
 {"id":4,"title":"Pferdekuchen","description":"1 Pferdeapfel","priority":1,"duedate":"2021-06-22","creationdate":1624282527866,"isnew":false,"donedate":"","_id":"cnMADg1JT3OrrNz1"}
 {"id":2,"title":"Apfel","description":"","priority":3,"duedate":"","creationdate":1624282322709,"isnew":false,"donedate":"","_id":"hxQa0W2XucfTJIzo"}
-{"id":3,"title":"Birnen","description":"","priority":0,"duedate":"","creationdate":1624282486234,"isnew":false,"donedate":"","_id":"v6N59VplkcfoZd3X"}
+{"id":3,"title":"Birnen","description":"","priority":0,"duedate":"","creationdate":1624282486234,"isnew":false,"donedate":"2021-06-23","_id":"v6N59VplkcfoZd3X"}
 {"id":6,"title":"Pralinenkuchen","description":"","priority":0,"duedate":"","creationdate":1624286756997,"isnew":false,"donedate":"","_id":"vD6YcV9iUa3UXIOS"}

@@ -67,7 +67,7 @@ function getDOMElements() {
   NOTE_ELEMS = { modalParent, modalTitle, modalDescription, modalRadio, modalDatepicker };
 
   // addItem below list
-  newNoteInput = document.querySelector("[js-submitAddItem]");
+  newNoteInput = document.querySelector("[data-js='submitAddItem']");
 }
 
 /**

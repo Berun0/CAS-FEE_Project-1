@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="favicon.png" rel="shortcut icon" type="image/x-icon">
 	<link href="webclip.png" rel="apple-touch-icon">
-	<meta property=“og:image” content=“https://brunobuergi.com/images/og_home.jpg” />
+	<meta property="og:image" content="https://brunobuergi.com/images/og_home.jpg" />
 	<title>DoNote App</title>
 
 	<script src="js/controllers/app-controller.js" type="module"></script>
@@ -31,7 +31,7 @@
 				<div class="settings" aria-hidden="true">
 					<button class="btn_settings" aria-haspopup="true" aria-expanded="false" tabindex="0"
 						aria-label="Settings Menu.">
-						<svg xmlns=" http://www.w3.org/2000/svg" width="7" height="27" viewBox="0 0 7 27">
+						<svg xmlns="http://www.w3.org/2000/svg" width="7" height="27" viewBox="0 0 7 27">
 							<path
 								d="M-1418,1399.5a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1399.5Zm0-10a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1389.5Zm0-10a3.5,3.5,0,0,1,3.5-3.5,3.5,3.5,0,0,1,3.5,3.5,3.5,3.5,0,0,1-3.5,3.5A3.5,3.5,0,0,1-1418,1379.5Z"
 								transform="translate(1418 -1376)" fill="var(--c-signal-icon)" />
@@ -89,9 +89,9 @@
 			</ol>
 		</section>
 		<footer>
-			<form class="ctaRow container" js-submitAddItem>
+			<form class="ctaRow container" data-js="submitAddItem">
 				<input type="text" id="newnote" placeholder="Topic" aria-label="Input Title of new Note." autocomplete="off"
-					aria-required="true" required /><button type="submit" class="btn btn_add">Add</button>
+					required /><button type="submit" class="btn btn_add">Add</button>
 			</form>
 		</footer>
 	</main>
@@ -99,7 +99,7 @@
 		<div class="holygrail container">
 			<div class="formContent scrollable hideScrollbars">
 				<label class="title"><span class="sr-only">Title</span>
-					<input type="text" aria-required="true" placeholder="Title" tabindex="2" data-js="modaltitle" required />
+					<input type="text" placeholder="Title" tabindex="2" data-js="modaltitle" required />
 				</label>
 				<label class="description"><span class="sr-only">Description</span>
 					<textarea name="description" rows="10" cols="33" wrap="hard" aria-required="false" placeholder="Description"

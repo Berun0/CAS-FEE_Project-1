@@ -54,11 +54,10 @@ export function relativeWeekday(dateText) {
   const today = new Date(getTodayUS());
   const noteDay = new Date(dateText);
   const dayGap = (noteDay - today) / 86400000;
-  console.log(dayGap); // >0 future days, <0 past days
+  // console.log(dayGap); // >0 future days, <0 past days
 
   if (dayGap < 7 && dayGap > -7) {
     const thisWeekday = new Date().getDay();
-    console.log(thisWeekday);
     const weekday = new Array(7);
     weekday[0] = "Sunday";
     weekday[1] = "Monday";

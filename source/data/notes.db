@@ -1,8 +1,11 @@
-{"id":1569363936019,"title":"Apfel","description":"24.6.2021","priority":3,"duedate":"2021-06-24","creationdate":1624454428324,"isnew":false,"donedate":"","_id":"h5JSAREIXbNaTIOc"}
-{"$$deleted":true,"_id":"h5JSAREIXbNaTIOc"}
-{"id":1569363936019,"title":"Apfel","description":"24.6.2021","priority":3,"duedate":"2021-06-24","creationdate":1624454428324,"isnew":false,"donedate":"","_id":"E38op9mL2AnRK5Ln"}
+{"id":1569363936019,"title":"Apfel","description":"26.6.2021","priority":3,"duedate":"2021-06-26","creationdate":1624454428324,"isnew":false,"donedate":"","_id":"E38op9mL2AnRK5Ln"}
 {"id":445092973181,"title":"Birnen","description":"22.6.2021","priority":0,"duedate":"2021-06-22","creationdate":1624454479092,"isnew":false,"donedate":"","_id":"RjsmFsAnXNLAd5bH"}
 {"$$deleted":true,"_id":"E38op9mL2AnRK5Ln"}
 {"$$deleted":true,"_id":"RjsmFsAnXNLAd5bH"}
 {"id":1569363936019,"title":"Apfel","description":"26.6.2021","priority":3,"duedate":"2021-06-26","creationdate":1624454428324,"isnew":false,"donedate":"","_id":"E38op9mL2AnRK5Ln"}
-{"id":445092973181,"title":"Birnen","description":"22.6.2021","priority":0,"duedate":"2021-06-22","creationdate":1624454479092,"isnew":false,"donedate":"","_id":"RjsmFsAnXNLAd5bH"}
+{"id":445092973181,"title":"Birnen","description":"25.6.2021","priority":0,"duedate":"2021-06-25","creationdate":1624454479092,"isnew":false,"donedate":"","_id":"RjsmFsAnXNLAd5bH"}
+{"$$deleted":true,"_id":"E38op9mL2AnRK5Ln"}
+{"$$deleted":true,"_id":"RjsmFsAnXNLAd5bH"}
+{"id":1569363936019,"title":"Apfel","description":"26.6.2021","priority":3,"duedate":"2021-06-26","creationdate":1624454428324,"isnew":false,"donedate":"","_id":"E38op9mL2AnRK5Ln"}
+{"id":445092973181,"title":"Birnen","description":"25.6.2021","priority":0,"duedate":"2021-06-25","creationdate":1624454479092,"isnew":false,"donedate":"","_id":"RjsmFsAnXNLAd5bH"}
+{"id":536264367361,"title":"Kuchen","description":"1 Apfel\n3 Birnen\netwas gemahlene Haselnüsse","priority":0,"duedate":"2021-06-17","creationdate":1624459573615,"isnew":false,"donedate":"","_id":"Vg9MqxzpJn9PGwvW"}

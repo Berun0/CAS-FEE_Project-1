@@ -4,6 +4,7 @@
 
 // to get access to the settings Object:
 import { SETTINGS } from "./data/settings-storage.js";
+import { relativeWeekday } from "./utils.js";
 
 export class ListView {
   renderNotesList(notes, htmlParent) {
@@ -25,11 +26,15 @@ export class ListView {
         if (currentNote.donedate) {
           check = "checked";
         }
-        const dateLabel = currentNote.donedate
+        let dateLabel = currentNote.donedate
           ? currentNote.donedate
           : currentNote.duedate
             ? currentNote.duedate
             : "sometime"; // neither donedate nor duedate = sometime
+        if (dateLabel !== "sometime") {
+          dateLabel = relativeWeekday(dateLabel);
+        }
+
         // if done notes should not be shown and current note is done, return empty template:
         if (!SETTINGS.showDone && currentNote.donedate) {
           return;

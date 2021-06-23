@@ -46,3 +46,78 @@ export function getTodayUS() {
 
   return `${year}-${month}-${day}`;
 }
+
+// creates a relative date within past or coming week
+// dateText has to be in YYYY-MM-DD
+export function relativeWeekday(dateText) {
+  let res = dateText;
+  const today = new Date(getTodayUS());
+  const noteDay = new Date(dateText);
+  const dayGap = (noteDay - today) / 86400000;
+  console.log(dayGap); // >0 future days, <0 past days
+
+  if (dayGap < 7 && dayGap > -7) {
+    const thisWeekday = new Date().getDay();
+    console.log(thisWeekday);
+    const weekday = new Array(7);
+    weekday[0] = "Sunday";
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
+
+    switch (dayGap) {
+      // past week
+      case -1:
+        res = "yesterday";
+        break;
+      case -2:
+        res = `last ${weekday[(7 + (thisWeekday - 2)) % 7]}`;
+        break;
+      case -3:
+        res = `last ${weekday[(7 + (thisWeekday - 3)) % 7]}`;
+        break;
+      case -4:
+        res = `last ${weekday[(7 + (thisWeekday - 4)) % 7]}`;
+        break;
+      case -5:
+        res = `last ${weekday[(7 + (thisWeekday - 5)) % 7]}`;
+        break;
+      case -6:
+        res = `last ${weekday[(7 + (thisWeekday - 6)) % 7]}`;
+        break;
+
+      // coming week
+      case 1:
+        res = "tomorrow";
+        break;
+      case 2:
+        res = `coming ${weekday[(thisWeekday + 2) % 7]}`;
+        break;
+      case 3:
+        res = `coming ${weekday[(thisWeekday + 3) % 7]}`;
+        break;
+      case 4:
+        res = `coming ${weekday[(thisWeekday + 4) % 7]}`;
+        break;
+      case 5:
+        res = `coming ${weekday[(thisWeekday + 5) % 7]}`;
+        break;
+      case 6:
+        res = `coming ${weekday[(thisWeekday + 6) % 7]}`;
+        break;
+
+      default:
+        res = "today";
+        break;
+    }
+  }
+
+  return res;
+}
+
+function uniqueID() {
+
+}

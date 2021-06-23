@@ -1,3 +1,20 @@
+============
+START SERVER:
+npm start
+(start via nodemon)
+
+
+
+LOCALSTORAGE Version:
+https://brunobuergi.com/hsr/project_1/
+
+
+
+
+============
+Orig:
+
+
 Die Vorlage beinhaltet CSS/HTML/JS-Linter. Diese sind konfiguriert. 
 
 Getting Started

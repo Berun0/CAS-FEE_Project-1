@@ -528,7 +528,7 @@ Article List
 	width: 100%; /* fill the surrounding ol flex */
 	display: grid;
 	grid-template-columns: 8em 1fr 40px;
-	/* gap: 0.25em 0.66em; */
+	gap: 0.2em 0;
 	grid-template-areas:
 		"Checkbox Title Del"
 		"Date Text Del";
@@ -542,11 +542,12 @@ Article List
 
 .articleList_itemTitle {
 	grid-area: Title;
+	align-self: center;
 }
 
 .articleList label {
 	grid-area: Date;
-	justify-self: center;
+	text-align: center;
 	opacity: 0.6;
 }
 

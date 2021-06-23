@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 
 // to get access to the settings Object:
-import { SETTINGS } from "./data/settings_storage.js";
+import { SETTINGS } from "./data/settings-storage.js";
 
 export class ListView {
   renderNotesList(notes, htmlParent) {

@@ -1,16 +1,17 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
 import { Note } from "./note.js";
-import { SETTINGS, saveSettings } from "./data/settings_storage.js";
+import { SETTINGS, saveSettings } from "./data/settings-storage.js";
+import { getNotes, saveNotes } from "./data/notes-storage.js";
 
 export class NoteService {
   constructor() {
     this.notes = []; // noteService.notes will have all the notes
   }
 
-  loadNotes() {
-    this.notes = JSON.parse(localStorage.getItem("DoNotes_data"));
-    console.log("localData: ");
+  async loadNotes() {
+    this.notes = await getNotes();
+    console.log("serverData loaded: ");
     console.log(this.notes);
 
     // if no datastorage - we get 'null' back - take these values instead:
@@ -23,11 +24,11 @@ export class NoteService {
     return this.notes;
   }
 
-  saveAll() {
+  async saveAll() {
     // saves all this.notes
     // and all SETTINGS
     // to local storage
-    localStorage.setItem("DoNotes_data", JSON.stringify(this.notes));
+    await saveNotes(this.notes);
     saveSettings();
   }
 
@@ -51,7 +52,7 @@ export class NoteService {
     return temp;
   }
 
-  static sortArrayOfObjects(myArray, sortKey = "title") {
+  sortArrayOfObjects(myArray, sortKey = "title") {
     // returns a sorted array of objects
     console.log(`sortkey: ${sortKey}`);
     if (myArray.length > 0) {
@@ -125,7 +126,7 @@ export class NoteService {
     return this.notes[idInNotes];
   }
 
-  static getTodayUS() {
+  getTodayUS() {
     // returns current date in YYYY-MM-DD
     const currentDate = new Date();
 

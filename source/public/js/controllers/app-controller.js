@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
-import { SETTINGS, loadSettings, saveSettings } from "../services/data/settings_storage.js";
+import { SETTINGS, loadSettings, saveSettings } from "../services/data/settings-storage.js";
 import { noteService } from "../services/note-service.js";
 import { listView, editView } from "../services/view-service.js";
 import { Note } from "../services/note.js";
@@ -136,13 +136,13 @@ function initEventHandler() {
   });
 
   // CANCEL EDIT/ADD note
-  modalCancelBtn.addEventListener("click", (e) => {
+  modalCancelBtn.addEventListener("click", () => {
     console.log("CancelBtn was clicked");
     editView.closeEditView(main, modalParent, newNoteInput.querySelector("input"));
   });
 
   // SAVE a note
-  modalSaveBtn.addEventListener("click", (e) => {
+  modalSaveBtn.addEventListener("click", () => {
     // grab the values in the modal
     console.log("tempNotes");
     console.log(tempNotes);
@@ -212,12 +212,12 @@ function initEventHandler() {
   });
 }
 
-function initApp() {
+async function initApp() {
   getDOMElements();
   initEventHandler();
   loadSettings();
   listView.renderSettings(filterBy_btn, orderBy_btn, settingsInp);
-  tempNotes = noteService.loadNotes();
+  tempNotes = await noteService.loadNotes();
   tempNotes = noteService.getFilteredNotes(SETTINGS.sort, SETTINGS.showDone);
   listView.renderNotesList(tempNotes, articleList);
   listView.renderAppTitle(tempNotes.length, countElem, dateElem);

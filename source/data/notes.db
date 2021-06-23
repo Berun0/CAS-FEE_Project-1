@@ -1,6 +1,8 @@
-{"id":8,"title":"Tomaten","description":"","priority":0,"duedate":"2021-06-17","creationdate":1624452630868,"isnew":false,"donedate":"","_id":"IxAw84kVD8dj0dUP"}
-{"id":0,"title":"Heubeeri","description":"Kuchen","priority":2,"duedate":"2021-07-03","creationdate":1624441437765,"isnew":false,"donedate":"","_id":"TsOiNmHaw33nCvs1"}
-{"id":3,"title":"Cantadou","description":"","priority":0,"duedate":"2021-06-25","creationdate":1624451441202,"isnew":false,"donedate":"","_id":"VqHdEITxz7UZFrfm"}
-{"id":4,"title":"Pferdekuchen","description":"1 Pferdeapfel","priority":1,"duedate":"2021-06-22","creationdate":1624282527866,"isnew":false,"donedate":"","_id":"cnMADg1JT3OrrNz1"}
-{"id":3,"title":"Birnen","description":"","priority":0,"duedate":"","creationdate":1624282486234,"isnew":false,"donedate":"","_id":"v6N59VplkcfoZd3X"}
-{"id":6,"title":"Pralinenkuchen","description":"","priority":0,"duedate":"","creationdate":1624286756997,"isnew":false,"donedate":"","_id":"vD6YcV9iUa3UXIOS"}
+{"id":1569363936019,"title":"Apfel","description":"24.6.2021","priority":3,"duedate":"2021-06-24","creationdate":1624454428324,"isnew":false,"donedate":"","_id":"h5JSAREIXbNaTIOc"}
+{"$$deleted":true,"_id":"h5JSAREIXbNaTIOc"}
+{"id":1569363936019,"title":"Apfel","description":"24.6.2021","priority":3,"duedate":"2021-06-24","creationdate":1624454428324,"isnew":false,"donedate":"","_id":"E38op9mL2AnRK5Ln"}
+{"id":445092973181,"title":"Birnen","description":"22.6.2021","priority":0,"duedate":"2021-06-22","creationdate":1624454479092,"isnew":false,"donedate":"","_id":"RjsmFsAnXNLAd5bH"}
+{"$$deleted":true,"_id":"E38op9mL2AnRK5Ln"}
+{"$$deleted":true,"_id":"RjsmFsAnXNLAd5bH"}
+{"id":1569363936019,"title":"Apfel","description":"26.6.2021","priority":3,"duedate":"2021-06-26","creationdate":1624454428324,"isnew":false,"donedate":"","_id":"E38op9mL2AnRK5Ln"}
+{"id":445092973181,"title":"Birnen","description":"22.6.2021","priority":0,"duedate":"2021-06-22","creationdate":1624454479092,"isnew":false,"donedate":"","_id":"RjsmFsAnXNLAd5bH"}

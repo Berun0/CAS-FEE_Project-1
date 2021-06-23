@@ -21,7 +21,7 @@ export class NoteService {
       this.notes.push(new Note(0, "Titel 00", "Prio: 0\nDuedate: 2021-05-26\nCreationdate: 16\nDonedate: 2021-05-24", 0, "2021-05-26", 16, false, "2021-05-24"));
       this.notes.push(new Note(1, "Titel 01", "Prio: 2\nDuedate: \"\"\nCreationdate: 17\nDonedate: \"\"", 2, "", 17, false, ""));
     }
-    SETTINGS.nextID = this.notes.length;
+    // SETTINGS.nextID = this.notes.length;
     saveSettings();
     return this.notes;
   }
@@ -67,7 +67,7 @@ export class NoteService {
     // save to notes Object
     this.notes.push(note);
     // increment nextID
-    SETTINGS.nextID++;
+    // SETTINGS.nextID++;
     this.saveAll();
   }
 

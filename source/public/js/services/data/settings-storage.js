@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-mutable-exports
 export let SETTINGS = {
-  nextID: 0,
+  // nextID: 0,
   locale: "en",
   theme: "light",
   sort: "creationdate",

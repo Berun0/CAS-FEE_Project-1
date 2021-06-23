@@ -4,6 +4,7 @@ import { SETTINGS, loadSettings, saveSettings } from "../services/data/settings-
 import { noteService } from "../services/note-service.js";
 import { listView, editView } from "../services/view-service.js";
 import { Note } from "../services/note.js";
+import { uniqueID } from "../services/utils.js";
 
 let tempNotes; // temp variable to relay notes between model and view
 let theNote; // temp variable to relay a note between model and view
@@ -122,7 +123,8 @@ function initEventHandler() {
     // set the title to empty or a regex filtered value of the input-field:
     const title = input ? input.match(/[a-z, 0-9]/gi).join("") : "";
     // create a new note, to save it later when modalSaveBtn pressed
-    theNote = new Note(SETTINGS.nextID, title);
+    theNote = new Note(uniqueID(), title);
+    // theNote = new Note(SETTINGS.nextID, title);
     editView.renderEditView(theNote, NOTE_ELEMS);
     editView.openEditView(main, modalParent, modalSaveBtn);
   });

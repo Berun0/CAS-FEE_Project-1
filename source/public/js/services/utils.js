@@ -118,6 +118,6 @@ export function relativeWeekday(dateText) {
   return res;
 }
 
-function uniqueID() {
-
+export function uniqueID() {
+  return Math.floor(Date.now() * Math.random());
 }

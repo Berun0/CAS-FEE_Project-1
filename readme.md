@@ -3,6 +3,9 @@ START SERVER:
 npm start
 (start via nodemon)
 
+START APP
+localhost:5001
+
 
 
 LOCALSTORAGE Version:
